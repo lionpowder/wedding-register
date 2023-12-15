@@ -1,4 +1,5 @@
 import * as React from "react";
+import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -6,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./titleBar";
-import { getFullGuestList, callFirebaseFunction } from "../api/api";
+import { getFullGuestList, addGuestData } from "../db/api";
 
 // function preventDefault(event) {
 //   event.preventDefault();
@@ -17,15 +18,18 @@ function GuestRawTable() {
   const [guestData, setGuestData] = React.useState([]);
   React.useEffect(() => {
     // load guest data
-    setGuestData(getFullGuestList());
+    getFullGuestList().then((data) => {
+      setGuestData(data);
+    });
 
-    const output = callFirebaseFunction();
-    console.log(output);
+    // const output = fetchPost();
+    // console.log(output);
   }, []);
 
   return (
     <>
       <Title>Recent Orders</Title>
+      <Button onClick={addGuestData}>Add Guest Data</Button>
       <Table size="small">
         <TableHead>
           <TableRow>

@@ -8,7 +8,6 @@ import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { initializeApp } from "firebase/app";
 
 import Copyright from "./component/copyRight";
 import AppBar from "./component/appBar";
@@ -22,12 +21,6 @@ import "./App.css";
 function App() {
   const [open, setOpen] = React.useState(true);
   const [currentPageName, setCurrentPageName] = React.useState("Main");
-
-  // const app = initializeApp({
-  //   projectId: "### CLOUD FUNCTIONS PROJECT ID ###",
-  //   apiKey: "### FIREBASE API KEY ###",
-  //   authDomain: "### FIREBASE AUTH DOMAIN ###",
-  // });
 
   const toggleDrawer = () => {
     setOpen(!open);
