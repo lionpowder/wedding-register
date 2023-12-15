@@ -7,10 +7,13 @@ export const PageContext = React.createContect({
 
 export const PageProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = React.useState(null);
+  const [app, setApp] = React.useState(null);
 
   const value = {
     currentPage,
     setCurrentPage,
+    app,
+    setApp,
   };
 
   return <PageContext.Provider value={value}>{children}</PageContext.Provider>;

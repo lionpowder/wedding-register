@@ -6,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./titleBar";
-import { getFullGuestList } from "../api/api";
+import { getFullGuestList, callFirebaseFunction } from "../api/api";
 
 // function preventDefault(event) {
 //   event.preventDefault();
@@ -18,6 +18,9 @@ function GuestRawTable() {
   React.useEffect(() => {
     // load guest data
     setGuestData(getFullGuestList());
+
+    const output = callFirebaseFunction();
+    console.log(output);
   }, []);
 
   return (
