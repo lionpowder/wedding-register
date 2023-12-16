@@ -1,20 +1,30 @@
 import React from "react";
+import { GuestDataProvider } from "./guestDataContext";
 
-export const PageContext = React.createContect({
+const entryPage = "Main";
+
+export const PageContext = React.createContext({
   // eslint-disable-next-line no-undef
-  currentPage,
+  currentPageName: entryPage,
+  setCurrentPageName: null,
+  app: null,
+  setApp: null,
 });
 
 export const PageProvider = ({ children }) => {
-  const [currentPage, setCurrentPage] = React.useState(null);
+  const [currentPageName, setCurrentPageName] = React.useState(entryPage);
   const [app, setApp] = React.useState(null);
 
   const value = {
-    currentPage,
-    setCurrentPage,
+    currentPageName,
+    setCurrentPageName,
     app,
     setApp,
   };
 
-  return <PageContext.Provider value={value}>{children}</PageContext.Provider>;
+  return (
+    <PageContext.Provider value={value}>
+      <GuestDataProvider>{children}</GuestDataProvider>
+    </PageContext.Provider>
+  );
 };

@@ -13,6 +13,7 @@ import Copyright from "./component/copyRight";
 import AppBar from "./component/appBar";
 import AppBarContent from "./component/appBarContent";
 import Drawer from "./component/drawer";
+import { PageContext } from "./context/pageContext";
 import { getCurrentPage } from "./utils/pageUtil";
 import { mainListItems, backendListItems } from "./utils/listItems";
 
@@ -20,15 +21,13 @@ import "./App.css";
 
 function App() {
   const [open, setOpen] = React.useState(true);
-  const [currentPageName, setCurrentPageName] = React.useState("Main");
+  const { currentPageName, setCurrentPageName } = React.useContext(PageContext);
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   const onMenuChange = (event, pageName) => {
-    event.preventDefault();
-
     if (currentPageName !== pageName) {
       setCurrentPageName(pageName);
     }
@@ -79,7 +78,7 @@ function App() {
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}></Grid>
-          {getCurrentPage(currentPageName)}
+          {getCurrentPage(currentPageName)?.content}
           <Copyright sx={{ pt: 4 }} />
         </Container>
       </Box>

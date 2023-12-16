@@ -15,7 +15,7 @@ const firebaseConfig = {
   appId: "1:217985993407:web:bdfb2fc9b141ce6eefd40a",
 };
 // Initialize Firebase
-
+// TODO: should only need to initialize Firebase once (double check)
 const app = initializeApp(firebaseConfig);
 // Export firestore database
 // It will be imported into your react app whenever it is needed

@@ -2,8 +2,11 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import GuestRawTable from "../component/guestRawTable";
+import { GuestDataContext } from "../context/guestDataContext";
 
 function MainPage() {
+  const { lastCheckinGuest } = React.useContext(GuestDataContext);
+
   return (
     <>
       {/* Current Guest */}
@@ -16,7 +19,8 @@ function MainPage() {
             height: 240,
           }}
         >
-          Current Guest is: XXX (use localStorage)
+          Current Guest is:
+          <p>{lastCheckinGuest?.Name}</p>
         </Paper>
       </Grid>
       {/* Recent Orders */}

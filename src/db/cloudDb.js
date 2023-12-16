@@ -11,7 +11,6 @@ import { db } from "./firebase";
 const GUEST_DATA_DB_NAME = "GuestData";
 
 export const getFullGuestList = async () => {
-  // return GuestData;
   const fullGuestData = await getDocs(collection(db, GUEST_DATA_DB_NAME)).then(
     (querySnapshot) => {
       const newData = querySnapshot.docs.map((doc) => ({
@@ -22,7 +21,7 @@ export const getFullGuestList = async () => {
       return newData;
     }
   );
-
+  // console.log(fullGuestData);
   return fullGuestData;
 };
 
@@ -49,13 +48,21 @@ export const addGuestData = async (e, guestData) => {
   }
 };
 
-export const updateGuestData = async (e, guestData) => {
+/**
+ *
+ * @param {*} e
+ * @param {*} partialGuestData must contain id
+ */
+export const updateGuestData = async (e, partialGuestData) => {
   e.preventDefault();
 
   try {
-    const docRef = await updateDoc(doc(db, GUEST_DATA_DB_NAME, guestData.id), {
-      guestData,
-    });
+    const docRef = await updateDoc(
+      doc(db, GUEST_DATA_DB_NAME, partialGuestData.id),
+      {
+        partialGuestData,
+      }
+    );
     console.log("Document update with ID: ", docRef.id);
   } catch (e) {
     console.error("Error updating document: ", e);

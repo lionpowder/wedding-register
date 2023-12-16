@@ -3,68 +3,36 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PeopleIcon from "@mui/icons-material/People";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import { pages } from "./pageUtil";
+import { pages, getCurrentPage } from "./pageUtil";
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 export const mainListItems = (onClickHandler) => {
   return (
     <>
-      {Object.keys(pages).map((page) => {
+      {Object.keys(pages).map((pageName) => {
+        const page = getCurrentPage(pageName);
         return (
           <ListItemButton
-            key={page}
+            key={pageName}
             onClick={(event) => {
-              onClickHandler(event, page);
+              event.preventDefault();
+
+              onClickHandler(event, pageName);
             }}
           >
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary={page} />
+            <ListItemIcon>{page.icon}</ListItemIcon>
+            <ListItemText primary={page.title} />
           </ListItemButton>
         );
       })}
     </>
   );
 };
-// export const mainListItems = React.useMemo((onClickHandler) => {
-//   console.log(onClickHandler);
-//   return (
-//     <React.Fragment>
-//       <ListItemButton onClick={onClickHandler("Main")}>
-//         <ListItemIcon>
-//           <DashboardIcon />
-//         </ListItemIcon>
-//         <ListItemText primary="Main" />
-//       </ListItemButton>
-//       <ListItemButton onClick={onClickHandler("Checkin")}>
-//         <ListItemIcon>
-//           <DashboardIcon />
-//         </ListItemIcon>
-//         <ListItemText primary="Guest List" />
-//       </ListItemButton>
-//       <ListItemButton onClick={onClickHandler("Table")}>
-//         <ListItemIcon>
-//           <ShoppingCartIcon />
-//         </ListItemIcon>
-//         <ListItemText primary="Guest Table" />
-//       </ListItemButton>
-//       <ListItemButton onClick={onClickHandler("Cake")}>
-//         <ListItemIcon>
-//           <PeopleIcon />
-//         </ListItemIcon>
-//         <ListItemText primary="Bride Cake" />
-//       </ListItemButton>
-//     </React.Fragment>
-//   );
-// }, []);
 
+// TODO: Backend management
 export const backendListItems = (
-  <React.Fragment>
+  <>
     <ListSubheader component="div" inset>
       Backend Management
     </ListSubheader>
@@ -86,5 +54,5 @@ export const backendListItems = (
       </ListItemIcon>
       <ListItemText primary="Statistic" />
     </ListItemButton>
-  </React.Fragment>
+  </>
 );
