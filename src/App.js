@@ -40,7 +40,7 @@ function App() {
         <AppBarContent
           toggleDrawer={toggleDrawer}
           open={open}
-          currentPageTitle={currentPageName}
+          currentPageTitle={getCurrentPage(currentPageName)?.title}
         ></AppBarContent>
       </AppBar>
       <Drawer variant="permanent" open={open}>

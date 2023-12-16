@@ -1,4 +1,4 @@
-import GuestData from "../mockData/GuestData.json";
+import GuestData from "./mockData/GuestData.json";
 import {
   collection,
   doc,
