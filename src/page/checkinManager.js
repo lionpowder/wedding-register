@@ -11,41 +11,18 @@ import { GuestDataContext } from "../context/guestDataContext";
 import { combineNames } from "../utils/stringUtil";
 
 /*
-Input fields
-  Name entry (Search, if not found, add new)
-    Auto completion by names, or aliases
-    (Green mark if already checked in)
-  People count entry
-    Prefilled with saved value (0 if not exists)
-    Upon edit, show popup
-      Modify number of the same table
-        Show target table numbers (regular, children, vegetarian)
-        Show number of each (regular, children, vegetarian) in the party currently checking in and allow modifying the number
-      Add new party
-        Open Table management page in new tab & open add new party modal (prefill with data of current party)
-  Gift received checkbox (auto ID assignment when gift received A1, A2…)
-  Is substituted checkbox
-    If checked, show substitute (代包) name entry field
-    Substitute will take bride cake (check box)
-  Check in notes
-Display fields
-  Side (Warning when side is different from what’s checked)
-  General notes
-  Table #
-  Relationships
-Side checkboxes (to filter below data by side)
 List of past checked in parties
 (額外按鈕新增人)
 */
 
 function CheckInManager() {
-  // TODO: need to be able to select which Side
+  // TODO: need to be able to save side selection
   const { guestData } = React.useContext(GuestDataContext);
-  const [selectedGuest, setSelectedGuest] = React.useState(null);
+  const [selectedGuest, setSelectedGuest] = React.useState({});
 
   const guestNameChangeHandler = (e, value) => {
-    // console.log(value?.id, value);
-    setSelectedGuest(value);
+    console.log(value?.id, value);
+    setSelectedGuest(value ?? {});
   };
 
   return (
@@ -56,7 +33,7 @@ function CheckInManager() {
             p: 2,
             display: "flex",
             flexDirection: "column",
-            height: 240,
+            height: 60,
           }}
         >
           {/* TODO: If not found should add new (save filtered value and when click "add new", directly take the name here and add new record) */}
@@ -64,12 +41,19 @@ function CheckInManager() {
             id="combo-checkin-search"
             options={guestData}
             getOptionLabel={(option) =>
-              combineNames(option.Name) +
-              (option.Alias && "(" + option.Alias + ")")
+              Object.keys(option).length !== 0
+                ? combineNames(option.Name) +
+                  (option.Alias && "(" + option.Alias + ")")
+                : ""
             }
             renderInput={(params) => (
-              <TextField {...params} label="Search for Guest"></TextField>
+              <TextField {...params} label="搜尋賓客"></TextField>
             )}
+            isOptionEqualToValue={(option, value) =>
+              value === option ||
+              value === null ||
+              Object.keys(value).length === 0
+            }
             renderOption={(props, option) => (
               <Box
                 component="li"
@@ -81,7 +65,7 @@ function CheckInManager() {
                   (option.Alias && "(" + option.Alias + ")") +
                   " "}
                 - {option.Side}
-                {option.IsCheckedin && (
+                {option.IsCheckedIn && (
                   <CheckCircleOutlinedIcon
                     color={"success"}
                   ></CheckCircleOutlinedIcon>
@@ -91,10 +75,19 @@ function CheckInManager() {
             value={selectedGuest}
             onChange={guestNameChangeHandler}
           />
-          <GuestDetail guest={selectedGuest}></GuestDetail>
+        </Paper>
+        <Paper
+          sx={{
+            p: 2,
+            display: "flex",
+            flexDirection: "column",
+            height: 300,
+          }}
+        >
+          <GuestDetail guest={selectedGuest} sides={["共同"]}></GuestDetail>
         </Paper>
       </Grid>
-      {/* Recent Orders */}
+      {/* Guest Data */}
       <Grid item xs={12}>
         <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
           <GuestRawTable />

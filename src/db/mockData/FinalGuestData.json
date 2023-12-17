@@ -3,18 +3,18 @@
     "Id": 1,
     "Name": ["Henry", "Chelsea"],
     "Alias": ["nullable"],
-    "Number of Regular": 1,
-    "Number of Vegetarian": 1,
-    "Number of Children": 0,
+    "NoOfRegular": 1,
+    "NoOfVegetarian": 1,
+    "NoOfChildren": 0,
     "Relationship": ["男女方共同友人", "multiple"],
     "Table": 2,
     "Side": "共同",
     "Need Cake": true,
-    "isCheckedin": false,
-    "isCakeGiven": false,
-    "Envelop Id": "A1",
-    "General Note": "一開始就有了，例如: 不收禮金",
-    "Checkin Note": "簽到人員的紀錄",
-    "Cake Note": "發餅人員的紀錄"
+    "IsCheckedIn": false,
+    "IsCakeGiven": false,
+    "EnvelopId": "A1",
+    "GeneralNote": "一開始就有了，例如: 不收禮金",
+    "CheckinNote": "簽到人員的紀錄",
+    "CakeNote": "發餅人員的紀錄"
   }
 ]

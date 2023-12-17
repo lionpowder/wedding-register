@@ -17,13 +17,13 @@ import Title from "./titleBar";
 // }
 
 function GuestRawTable() {
-  // TODO: display different data based on the selection
+  // TODO: display different data based on the side selection
   const { guestData } = React.useContext(GuestDataContext);
 
   return (
     <>
-      <Title>Guest Data</Title>
-      <Button onClick={addGuestData}>Add Guest Data</Button>
+      <Title>賓客名單</Title>
+      <Button onClick={addGuestData}>新增賓客</Button>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -46,7 +46,7 @@ function GuestRawTable() {
                 <TableCell>{row.Side}</TableCell>
                 <TableCell>{row.Table}</TableCell>
                 <TableCell>
-                  {row.IsCheckedin && (
+                  {row.IsCheckedIn && (
                     <CheckBoxOutlinedIcon></CheckBoxOutlinedIcon>
                   )}
                 </TableCell>

@@ -1,3 +1,7 @@
+/***
+ * Util for generate components of menu list on the left
+ */
+
 import * as React from "react";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -6,7 +10,6 @@ import ListSubheader from "@mui/material/ListSubheader";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import { pages, getCurrentPage } from "./pageUtil";
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
 export const mainListItems = (onClickHandler) => {
   return (
     <>

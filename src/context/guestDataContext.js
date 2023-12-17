@@ -18,12 +18,11 @@ export const GuestDataProvider = ({ children }) => {
     // load guest data
     getFullGuestList().then((data) => {
       setGuestData(data);
-      console.log(data);
     });
   }, []);
 
   // TODO: Need to refresh guest data from DB once every 5 min
-  // TODO: update localStorage data every time there's update
+  // TODO: update localStorage data every time there's an update
   const updateGuestData = (guestData) => {
     setGuestData(guestData);
   };
