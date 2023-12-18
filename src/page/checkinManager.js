@@ -49,7 +49,7 @@ function CheckInManager() {
               <TextField {...params} label="搜尋賓客"></TextField>
             )}
             isOptionEqualToValue={(option, value) =>
-              value === option ||
+              value.Id === option.Id ||
               value === null ||
               Object.keys(value).length === 0
             }

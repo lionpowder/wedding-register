@@ -1,6 +1,9 @@
 import React from "react";
 import { defaultGuestData } from "../data/guestData";
-import { getFullGuestList } from "../db/cloudDb";
+import {
+  getFullGuestList,
+  updateGuestData as updateGuestCloudData,
+} from "../db/cloudDb";
 
 export const GuestDataContext = React.createContext({
   guestData: [defaultGuestData],
@@ -15,26 +18,33 @@ export const GuestDataProvider = ({ children }) => {
     React.useState(defaultGuestData); // TODO: Get from local storage, assign default if empty
 
   React.useEffect(() => {
-    // load guest data
+    // load guest data from cloud DB when first hit the site
     getFullGuestList().then((data) => {
       setGuestDataList(data);
     });
   }, []);
 
+  // TODO: need to refresh guest data from DB once every 5 min
+  // TODO: need to listen to localStorage data for updating guestDataList list
+
   /**
-   * Update Guest data in context
+   * Update Guest data in context, localStorage, & cloud
    * This guest data is used throughout the website within single tab
    * @param {*} guestData
    */
-  // TODO: Need to refresh guest data from DB once every 5 min
   // TODO: update localStorage data every time there's an update
   const updateGuestData = (guestData) => {
-    // Updating context data
-    const updatedGuestDataList = guestDataList.map((data) => {
-      return data.Id === guestData.Id ? { ...data, ...guestData } : data;
-    });
+    let updatedGuestDataList = [...guestDataList];
+    const updatedDataIdx = updatedGuestDataList.findIndex(
+      (data) => data.Id === guestData.Id
+    );
 
+    // Update data context
+    updatedGuestDataList[updatedDataIdx] = guestData;
     setGuestDataList(updatedGuestDataList);
+
+    // Update to cloud
+    updateGuestCloudData(guestData);
   };
 
   // const guestDataGroomList = () => {

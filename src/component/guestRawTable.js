@@ -11,6 +11,7 @@ import { GuestDataContext } from "../context/guestDataContext";
 import { addGuestData } from "../db/cloudDb";
 import { combineNames } from "../utils/stringUtil";
 import Title from "./titleBar";
+import { defaultGuestData } from "../data/guestData";
 
 // function preventDefault(event) {
 //   event.preventDefault();
@@ -20,10 +21,15 @@ function GuestRawTable() {
   // TODO: display different data based on the side selection
   const { guestData } = React.useContext(GuestDataContext);
 
+  const addClickHandler = (e) => {
+    // TODO: use generateNewGuestData to generate new data
+    addGuestData(defaultGuestData);
+  };
+
   return (
     <>
       <Title>賓客名單</Title>
-      <Button onClick={addGuestData}>新增賓客</Button>
+      <Button onClick={addClickHandler}>新增賓客</Button>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -45,7 +51,7 @@ function GuestRawTable() {
                   {row.NoOfRegular + row.NoOfVegetarian + row.NoOfChildren}
                 </TableCell>
                 <TableCell>{row.Side}</TableCell>
-                <TableCell>{row.Table}</TableCell>
+                <TableCell>{row.TableNo}</TableCell>
                 <TableCell>{row.EnvelopId}</TableCell>
                 <TableCell>
                   {row.IsCheckedIn && (
