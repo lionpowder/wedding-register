@@ -40,7 +40,7 @@ export const getFullGuestList = async () => {
  */
 export const addGuestData = async (guestData) => {
   try {
-    let { Status: _, ...saveGuestData } = guestData;
+    let { Status: _, Id: __, ...saveGuestData } = guestData;
     const docRef = await addDoc(
       collection(db, GUEST_DATA_DB_NAME),
       saveGuestData
@@ -60,7 +60,7 @@ export const addGuestData = async (guestData) => {
  * @param {*} partialGuestData must contain Id
  */
 export const updateGuestData = async (partialGuestData) => {
-  let { Status: _, ...saveGuestData } = partialGuestData;
+  let { Status: _, Id: __, ...saveGuestData } = partialGuestData;
   try {
     await updateDoc(
       doc(db, GUEST_DATA_DB_NAME, partialGuestData.Id),
