@@ -31,6 +31,7 @@ function GuestRawTable() {
             <TableCell>人數</TableCell>
             <TableCell>關係</TableCell>
             <TableCell>桌次</TableCell>
+            <TableCell>紅包</TableCell>
             <TableCell>已報到</TableCell>
             <TableCell align="right">已領餅</TableCell>
           </TableRow>
@@ -45,6 +46,7 @@ function GuestRawTable() {
                 </TableCell>
                 <TableCell>{row.Side}</TableCell>
                 <TableCell>{row.Table}</TableCell>
+                <TableCell>{row.EnvelopId}</TableCell>
                 <TableCell>
                   {row.IsCheckedIn && (
                     <CheckBoxOutlinedIcon></CheckBoxOutlinedIcon>

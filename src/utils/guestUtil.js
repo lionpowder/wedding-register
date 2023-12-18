@@ -21,11 +21,11 @@ export const determineNeedCake = (side) => {
  */
 export const generateEnvelopId = (side, guestDataList) => {
   const sidePrefix = generateEnvelopIdPrefix(side);
-  const currentEnvIdList = guestDataList.filter((data) => {
-    if (data.Side === side) return data.EnvelopId.replace(sidePrefix, "");
-    return undefined;
-  });
-  console.log("currentEnvIdList: ", currentEnvIdList);
+  const currentEnvIdList = guestDataList
+    .filter((data) => data.Side === side)
+    .map((data) => {
+      return data.EnvelopId.replace(sidePrefix, "");
+    });
 
   const maxCurrentId = currentEnvIdList ? Math.max(...currentEnvIdList) : 0;
 

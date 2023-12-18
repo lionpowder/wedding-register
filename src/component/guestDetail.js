@@ -5,7 +5,7 @@ import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
 import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
 import { GuestDataContext } from "../context/guestDataContext";
-import { assignGuestIfEmpty } from "../utils/guestUtil";
+import { assignGuestIfEmpty, generateEnvelopId } from "../utils/guestUtil";
 import { combineNames } from "../utils/stringUtil";
 import Title from "./titleBar";
 import GuestNumber from "./guestNumber";
@@ -33,7 +33,7 @@ Display fields
   Table #
   Relationships*/
 function GuestDetail(props) {
-  const { updateGuestData } = React.useContext(GuestDataContext);
+  const { updateGuestData, guestData } = React.useContext(GuestDataContext);
   const [selectedGuest, setSelectedGuest] = React.useState(
     assignGuestIfEmpty(props.guest)
   );
@@ -51,8 +51,14 @@ function GuestDetail(props) {
    * Saving data to local storage or DB
    */
   const onSaveClick = () => {
-    // TODO: need make sure the ID is correct and only update 1 guest record
-    updateGuestData(selectedGuest);
+    // Generate envelope Id
+    // TODO: should only generate Id if gift received checkbox is checked
+    const envelopeId = generateEnvelopId(selectedGuest.Side, guestData);
+
+    const modifiedGuest = { ...selectedGuest, EnvelopId: envelopeId };
+    setSelectedGuest(modifiedGuest);
+
+    updateGuestData(modifiedGuest);
   };
 
   /**

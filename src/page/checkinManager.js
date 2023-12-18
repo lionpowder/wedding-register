@@ -21,7 +21,6 @@ function CheckInManager() {
   const [selectedGuest, setSelectedGuest] = React.useState({});
 
   const guestNameChangeHandler = (e, value) => {
-    console.log(value?.id, value);
     setSelectedGuest(value ?? {});
   };
 

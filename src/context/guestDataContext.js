@@ -10,25 +10,45 @@ export const GuestDataContext = React.createContext({
 });
 
 export const GuestDataProvider = ({ children }) => {
-  const [guestData, setGuestData] = React.useState([defaultGuestData]);
+  const [guestDataList, setGuestDataList] = React.useState([defaultGuestData]);
   const [lastCheckinGuest, setLastCheckinGuest] =
-    React.useState(defaultGuestData);
+    React.useState(defaultGuestData); // TODO: Get from local storage, assign default if empty
 
   React.useEffect(() => {
     // load guest data
     getFullGuestList().then((data) => {
-      setGuestData(data);
+      setGuestDataList(data);
     });
   }, []);
 
+  /**
+   * Update Guest data in context
+   * This guest data is used throughout the website within single tab
+   * @param {*} guestData
+   */
   // TODO: Need to refresh guest data from DB once every 5 min
   // TODO: update localStorage data every time there's an update
   const updateGuestData = (guestData) => {
-    setGuestData(guestData);
+    // Updating context data
+    const updatedGuestDataList = guestDataList.map((data) => {
+      return data.Id === guestData.Id ? { ...data, ...guestData } : data;
+    });
+
+    setGuestDataList(updatedGuestDataList);
   };
 
+  // const guestDataGroomList = () => {
+  //   return guestData.filter((data) => data.Side === "男方");
+  // };
+
+  // const guestDataBrideList = () => {
+  //   return guestData.filter(
+  //     (data) => data.Side === "共同" || data.Side === "女方"
+  //   );
+  // };
+
   const value = {
-    guestData,
+    guestData: guestDataList,
     updateGuestData,
     lastCheckinGuest,
     setLastCheckinGuest,

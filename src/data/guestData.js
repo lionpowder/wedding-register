@@ -1,6 +1,7 @@
 import { determineNeedCake } from "../utils/guestUtil";
 
 export const defaultGuestData = {
+  Id: 0,
   Name: ["TBD"],
   Alias: [""],
   NoOfRegular: 1,

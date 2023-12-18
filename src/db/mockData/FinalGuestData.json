@@ -9,7 +9,7 @@
     "Relationship": ["男女方共同友人", "multiple"],
     "Table": 2,
     "Side": "共同",
-    "Need Cake": true,
+    "NeedCake": true,
     "IsCheckedIn": false,
     "IsCakeGiven": false,
     "EnvelopId": "A1",
