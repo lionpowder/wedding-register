@@ -48,16 +48,24 @@ function GuestDetail(props) {
   }, [props.guest]);
 
   /**
-   * Saving data to local storage or DB
+   * Generate necessary values for the guest and save data
    */
   const onSaveClick = () => {
-    // Generate envelope Id
-    // TODO: should only generate Id if gift received checkbox is checked
-    const envelopeId = generateEnvelopId(selectedGuest.Side, guestData);
+    // Should not save/update if the guest data doesn't include any Id
+    if (!selectedGuest.Id) return;
 
-    const modifiedGuest = { ...selectedGuest, EnvelopId: envelopeId };
+    let modifiedGuest = { ...selectedGuest };
+
+    // Generate envelope Id if the guest checked in
+    if (!selectedGuest.EnvelopId && selectedGuest.IsCheckedIn) {
+      const envelopeId = generateEnvelopId(selectedGuest.Side, guestData);
+      modifiedGuest.EnvelopId = envelopeId;
+    }
+
+    // Update local state
     setSelectedGuest(modifiedGuest);
 
+    // Update data
     updateGuestData(modifiedGuest);
   };
 
@@ -76,6 +84,7 @@ function GuestDetail(props) {
         label="已報到"
         control={
           <Checkbox
+            id="checkbox-checkin"
             color={selectedGuest.IsCheckedIn ? "success" : "warning"}
             checked={selectedGuest.IsCheckedIn}
             onChange={onCheckedinChange}
@@ -86,7 +95,9 @@ function GuestDetail(props) {
         selectedGuest={selectedGuest}
         setSelectedGuest={setSelectedGuest}
       />
-      <Button onClick={onSaveClick}>Save</Button>
+      <Button id="button-update-guest" onClick={onSaveClick}>
+        Save
+      </Button>
     </>
   );
 }

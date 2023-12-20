@@ -16,7 +16,6 @@ List of past checked in parties
 */
 
 function CheckInManager() {
-  // TODO: need to be able to save side selection
   const { guestData } = React.useContext(GuestDataContext);
   const [selectedGuest, setSelectedGuest] = React.useState({});
 
@@ -42,7 +41,8 @@ function CheckInManager() {
             getOptionLabel={(option) =>
               Object.keys(option).length !== 0
                 ? combineNames(option.Name) +
-                  (option.Alias && "(" + option.Alias + ")")
+                  (option.Alias?.length > 0 &&
+                    "(" + combineNames(option.Alias) + ")")
                 : ""
             }
             renderInput={(params) => (
@@ -61,7 +61,8 @@ function CheckInManager() {
               >
                 {combineNames(option.Name) +
                   " " +
-                  (option.Alias && "(" + option.Alias + ")") +
+                  (option.Alias?.length > 0 &&
+                    "(" + combineNames(option.Alias) + ")") +
                   " "}
                 - {option.Side}
                 {option.IsCheckedIn && (
