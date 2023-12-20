@@ -61,7 +61,7 @@ function App() {
         <SideSelectionBar open={open} />
         <Divider sx={{ my: 1 }} />
         <List component="nav">
-          {mainListItems(onMenuChange)}
+          {mainListItems(currentPageName, onMenuChange)}
           <Divider sx={{ my: 1 }} />
           {backendListItems}
         </List>

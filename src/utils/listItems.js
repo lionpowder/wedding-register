@@ -10,7 +10,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import { pages, getCurrentPage } from "./pageUtil";
 
-export const mainListItems = (onClickHandler) => {
+export const mainListItems = (currentPageName, onClickHandler) => {
   return (
     <>
       {Object.keys(pages).map((pageName) => {
@@ -23,6 +23,7 @@ export const mainListItems = (onClickHandler) => {
 
               onClickHandler(event, pageName);
             }}
+            selected={currentPageName === pageName}
           >
             <ListItemIcon>{page.icon}</ListItemIcon>
             <ListItemText primary={page.title} />
