@@ -6,6 +6,7 @@ import { sides } from "../data/sideData";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
+import { GuestDataContext } from "../context/guestDataContext";
 
 // A custom theme for this app
 const theme = createTheme({
@@ -27,7 +28,10 @@ const theme = createTheme({
 });
 
 function SideSelectionBar(props) {
-  // TODO: add selected side to context and update guest data accordingly
+  const { sideFilter, setSideFilter } = React.useContext(GuestDataContext);
+  const handleChange = (e, value) => {
+    setSideFilter(value);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -42,7 +46,8 @@ function SideSelectionBar(props) {
           id="multi-select-filter-side"
           options={sides}
           // getOptionLabel={(option) => option.title}
-          defaultValue={[...sides]}
+          value={sideFilter}
+          onChange={handleChange}
           sx={{
             "& .MuiFormLabel-root": {
               color: "#ffffff !important",
@@ -59,7 +64,6 @@ function SideSelectionBar(props) {
                 color: "#000000",
                 "& .MuiAutocomplete-option.Mui-focused": {
                   backgroundColor: "rgba(136, 0, 0, 0.24)",
-                  // backgroundColor: "red",
                 },
               },
             },
