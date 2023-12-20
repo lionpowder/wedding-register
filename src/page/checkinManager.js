@@ -23,6 +23,12 @@ function CheckInManager() {
     setSelectedGuest(value ?? {});
   };
 
+  React.useEffect(() => {
+    if (!guestData.find((guest) => selectedGuest.Id === guest.Id)) {
+      setSelectedGuest({});
+    }
+  }, [guestData]);
+
   return (
     <>
       <Grid item xs={12}>
@@ -76,20 +82,22 @@ function CheckInManager() {
             onChange={guestNameChangeHandler}
           />
         </Paper>
-        <Paper
-          sx={{
-            p: 2,
-            display: "flex",
-            flexDirection: "column",
-            height: 300,
-          }}
-        >
-          <GuestDetail guest={selectedGuest} sides={["共同"]}></GuestDetail>
-        </Paper>
+        {selectedGuest.Id && (
+          <Paper
+            sx={{
+              p: 2,
+              display: "flex",
+              flexDirection: "column",
+              height: 300,
+            }}
+          >
+            <GuestDetail guest={selectedGuest}></GuestDetail>
+          </Paper>
+        )}
       </Grid>
       {/* Guest Data */}
       <Grid item xs={12}>
-        <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+        <Paper sx={{ p: 2, pt: 5, display: "flex", flexDirection: "column" }}>
           <GuestRawTable />
         </Paper>
       </Grid>

@@ -38,8 +38,6 @@ function GuestDetail(props) {
     assignGuestIfEmpty(props.guest)
   );
 
-  const currentSides = props.sides; // current filtered side(s)
-
   /**
    * Reassign guest to state if prop changes
    */

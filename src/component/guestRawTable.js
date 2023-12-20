@@ -18,7 +18,6 @@ import { defaultGuestData } from "../data/guestData";
 // }
 
 function GuestRawTable() {
-  // TODO: display different data based on the side selection
   const { guestData } = React.useContext(GuestDataContext);
 
   const addClickHandler = (e) => {
