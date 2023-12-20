@@ -5,6 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import SideSelectionBar from "./sideSelectionBar";
 
 // props type: open, toggleDrawer, currentPageTitle
 function AppBarContent(props) {
@@ -35,6 +36,7 @@ function AppBarContent(props) {
       >
         {props.currentPageTitle ?? "Title"}
       </Typography>
+      <SideSelectionBar />
       <IconButton color="inherit">
         <Badge badgeContent={4} color="secondary">
           <NotificationsIcon />

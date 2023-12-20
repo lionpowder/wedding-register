@@ -57,9 +57,6 @@ function App() {
             <ChevronLeftIcon />
           </IconButton>
         </Toolbar>
-        <Divider sx={{ marginBottom: 1 }} />
-        <SideSelectionBar open={open} />
-        <Divider sx={{ my: 1 }} />
         <List component="nav">
           {mainListItems(currentPageName, onMenuChange)}
           <Divider sx={{ my: 1 }} />
@@ -78,6 +75,7 @@ function App() {
           overflow: "auto",
         }}
       >
+        {/* dummy toolbar for top padding */}
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}></Grid>
