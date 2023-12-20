@@ -1,4 +1,4 @@
-import GuestData from "./mockData/GuestData.json";
+import GuestData from "./mockData/MockGuestData.json";
 import {
   collection,
   doc,
@@ -9,12 +9,17 @@ import {
 import { db } from "./firebase";
 
 const GUEST_DATA_DB_NAME = "GuestData";
+const isUseMock = true;
 
 /**
  *
  * @returns
  */
 export const getFullGuestList = async () => {
+  if (isUseMock) {
+    return GuestData;
+  }
+
   try {
     const fullGuestData = await getDocs(
       collection(db, GUEST_DATA_DB_NAME)
