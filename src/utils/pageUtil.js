@@ -8,7 +8,9 @@ import PeopleIcon from "@mui/icons-material/People";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
 import MainPage from "../page/main";
+import CakeManager from "../page/cakeManager";
 import CheckInManager from "../page/checkinManager";
+import GuestTableManager from "../page/guestTableManager";
 
 /**
  * Definition of pages
@@ -26,12 +28,12 @@ export const pages = {
     title: "報到管理",
   },
   Table: {
-    content: null, // Table Management
+    content: <GuestTableManager></GuestTableManager>, // Table Management
     icon: <PeopleIcon></PeopleIcon>,
     title: "桌次管理",
   },
   Cake: {
-    content: null, // Cake Management
+    content: <CakeManager></CakeManager>, // Cake Management
     icon: <AssignmentIcon></AssignmentIcon>,
     title: "領餅管理",
   },

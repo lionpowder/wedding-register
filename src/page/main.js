@@ -5,6 +5,7 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import GuestRawTable from "../component/guestRawTable";
+import GuestDetail from "../component/guestDetail";
 import { GuestDataContext } from "../context/guestDataContext";
 import { combineNames } from "../utils/stringUtil";
 
@@ -20,11 +21,11 @@ function MainPage() {
             p: 2,
             display: "flex",
             flexDirection: "column",
-            height: 240,
+            height: 350,
           }}
         >
           目前報到賓客:
-          <p>{combineNames(lastCheckinGuest?.Name)}</p>
+          <GuestDetail guest={lastCheckinGuest} readOnly={true}></GuestDetail>
         </Paper>
       </Grid>
       {/* Recent Orders */}

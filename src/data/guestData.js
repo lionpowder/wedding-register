@@ -1,12 +1,12 @@
 import { determineNeedCake } from "../utils/guestUtil";
 
 export const defaultGuestData = {
-  Name: ["TBD"],
+  Name: [""],
   Alias: [""],
   NoOfRegular: 1,
   NoOfVegetarian: 0,
   NoOfChildren: 0,
-  Relationship: ["男女方共同友人"],
+  Relationship: [],
   TableNo: 2,
   Side: "共同", // "女方", "男方"
   NeedCake: true,

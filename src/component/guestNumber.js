@@ -16,7 +16,7 @@ import { defaultGuestData } from "../data/guestData";
         Show number of each (regular, children, vegetarian) in the party currently checking in and allow modifying the number
       Add new party
         Open Table management page in new tab & open add new party modal (prefill with data of current party)*/
-function GuestNumber({ selectedGuest, setSelectedGuest }) {
+function GuestNumber({ selectedGuest, setSelectedGuest, isReadOnly }) {
   // TODO: show target table number (?)
   const originalGuestNumbers = {
     NoOfRegular: selectedGuest.NoOfRegular || 0,
@@ -45,6 +45,7 @@ function GuestNumber({ selectedGuest, setSelectedGuest }) {
       </div>
       <div>
         <TextField
+          disabled={isReadOnly}
           id="no-of-regular-guest"
           label="一般"
           type="number"
@@ -57,6 +58,7 @@ function GuestNumber({ selectedGuest, setSelectedGuest }) {
         />
         {" 原本: " + originalGuestNumbers.NoOfRegular}
         <TextField
+          disabled={isReadOnly}
           id="no-of-vegetarian-guest"
           label="素食"
           type="number"
@@ -69,6 +71,7 @@ function GuestNumber({ selectedGuest, setSelectedGuest }) {
         />
         {" 原本: " + originalGuestNumbers.NoOfVegetarian}
         <TextField
+          disabled={isReadOnly}
           id="no-of-children-guest"
           label="小孩"
           type="number"

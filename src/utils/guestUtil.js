@@ -1,8 +1,8 @@
 import { defaultGuestData } from "../data/guestData";
 
 export const assignGuestIfEmpty = (guest) => {
-  const isEmptyNotGuest = !!guest && Object.keys(guest).length > 0;
-  return isEmptyNotGuest ? guest : defaultGuestData;
+  const isNotEmptyGuest = !!guest && Object.keys(guest).length > 0;
+  return isNotEmptyGuest ? guest : defaultGuestData;
 };
 
 /**
