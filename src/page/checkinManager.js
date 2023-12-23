@@ -27,7 +27,7 @@ function CheckInManager() {
     if (!guestData.find((guest) => selectedGuest.Id === guest.Id)) {
       setSelectedGuest({});
     }
-  }, [guestData]);
+  }, [guestData, selectedGuest.Id]);
 
   return (
     <>

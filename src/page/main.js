@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import GuestRawTable from "../component/guestRawTable";
 import { GuestDataContext } from "../context/guestDataContext";
+import { combineNames } from "../utils/stringUtil";
 
 function MainPage() {
   const { lastCheckinGuest } = React.useContext(GuestDataContext);
@@ -22,8 +23,8 @@ function MainPage() {
             height: 240,
           }}
         >
-          Current Guest is:
-          <p>{lastCheckinGuest?.Name}</p>
+          目前報到賓客:
+          <p>{combineNames(lastCheckinGuest?.Name)}</p>
         </Paper>
       </Grid>
       {/* Recent Orders */}

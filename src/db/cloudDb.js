@@ -9,14 +9,14 @@ import {
 import { db } from "./firebase";
 
 const GUEST_DATA_DB_NAME = "GuestData";
-const isUseMock = true;
+const isUseMock = false;
 
 /**
  *
  * @returns
  */
 export const getFullGuestList = async () => {
-  if (isUseMock) {
+  if (isUseMock || process.env.REACT_APP_ENVIRONMENT === "Mock") {
     return GuestData;
   }
 
@@ -75,7 +75,6 @@ export const updateGuestData = async (partialGuestData) => {
   } catch (e) {
     console.error("Error updating document: ", e);
 
-    // TODO: if there's error, set flag to retry updating localStorage to DB every 5 min.
     return { ...partialGuestData, Status: "Retry" };
   }
 };

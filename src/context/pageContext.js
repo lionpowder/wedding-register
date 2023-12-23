@@ -13,7 +13,7 @@ export const PageContext = React.createContext({
 
 export const PageProvider = ({ children }) => {
   const [currentPageName, setCurrentPageName] = React.useState(entryPage);
-  const [app, setApp] = React.useState(null);
+  const [app, setApp] = React.useState(null); // TODO: what is set app....
 
   const value = {
     currentPageName,
