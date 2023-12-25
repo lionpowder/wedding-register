@@ -15,7 +15,7 @@ function GuestSelect(props) {
   return (
     <Autocomplete
       sx={props.sx}
-      id="combo-checkin-search"
+      id="combo-guestselect-search"
       options={props.guestData}
       getOptionLabel={(option) =>
         Object.keys(option).length !== 0

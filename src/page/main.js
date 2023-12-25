@@ -7,7 +7,6 @@ import Paper from "@mui/material/Paper";
 import GuestRawTable from "../component/guestRawTable";
 import GuestDetail from "../component/guestDetail";
 import { GuestDataContext } from "../context/guestDataContext";
-import { combineNames } from "../utils/stringUtil";
 
 function MainPage() {
   const { lastCheckinGuest } = React.useContext(GuestDataContext);

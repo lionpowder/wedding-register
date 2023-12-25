@@ -1,6 +1,7 @@
 import React from "react";
 import { defaultGuestData } from "../data/guestData";
 import {
+  useCloudDB,
   getFullGuestList,
   updateGuestData as updateGuestCloudData,
 } from "../db/cloudDb";
@@ -17,34 +18,38 @@ export const GuestDataContext = React.createContext({
 });
 
 export const GuestDataProvider = ({ children }) => {
+  const guestCloud = useCloudDB();
   const [guestStore, setGuestDataStore] = useGuestDataStore();
   // last guest data stored in local storage
   const [lastGuestStore, setLastGuestStore] =
     useLastGuestStore(defaultGuestData);
   // Full list of data based on cloud db, local storage, & current state
-  const [fullGuestDataList, setFullGuestDataList] = React.useState([
-    defaultGuestData,
-  ]);
-  // Guest data used to show on every page
+  const [fullGuestDataList, setFullGuestDataList] = React.useState(
+    guestCloud || [defaultGuestData]
+  );
+  // Filtered guest data used to show on every page
   const [guestDataList, setGuestDataList] = React.useState([defaultGuestData]);
   // Guest's side filtering criteria
   const [sideFilter, setSideFilter] = React.useState(sides);
 
   /**
+   * This function will trigger every time there's an update in Local Storage
+   */
+  React.useEffect(() => {
+    console.log("Changes in guestStore: ", guestStore);
+  }, [guestStore]);
+
+  /**
+   * This function will trigger every time there's an update in cloudDB
    * Fetch the full list of data on page load from cloudDB
    */
-  // TODO: need to refresh guest data from DB once every 5 min
-  // TODO: need to listen to localStorage data for updating guestDataList list (?)
+  // TODO: need to combine list from both cloud & localStorage
   React.useEffect(() => {
-    // load guest data from cloud DB when first hit the site
-    getFullGuestList().then((data) => {
-      setFullGuestDataList(data);
+    console.log("Changes in guestCloud: ", guestCloud);
+    guestCloud && setFullGuestDataList(guestCloud);
 
-      // Update to LocalStorage
-      // TODO: should minimize local storage data and save the "changed" data only
-      if (!guestStore) setGuestDataStore(data);
-    });
-  }, []);
+    if (!guestStore) setGuestDataStore(guestCloud);
+  }, [guestCloud, guestStore]);
 
   /**
    * Filtered data based on guest's side
@@ -81,7 +86,7 @@ export const GuestDataProvider = ({ children }) => {
     const updatedGuestDataFromCloud = updateGuestCloudData(partialGuestData);
 
     // Update to LocalStorage
-    setGuestDataStore(updatedGuestDataFromCloud);
+    setGuestDataStore(updatedGuestDataList);
     setLastGuestStore(partialGuestData); // TODO: should only save the last guest if checked in is change from false to true (?)
   };
 

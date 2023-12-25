@@ -17,6 +17,7 @@ export const defaultGuestData = {
   CheckinNote: "",
   CakeNote: "",
   Status: "", // "", "New", "Update", "Retry"
+  IsSubstituteFor: [],
 };
 
 export const generateNewGuestData = (

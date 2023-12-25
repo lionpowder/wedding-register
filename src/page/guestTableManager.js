@@ -11,7 +11,6 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import GuestRawTable from "../component/guestRawTable";
-import GuestDetail from "../component/guestDetail";
 import GuestSelect from "../component/guestSelect";
 import { GuestDataContext } from "../context/guestDataContext";
 
@@ -33,7 +32,6 @@ function GuestTableManager() {
   return (
     <>
       <Grid item xs={12}>
-        {/* TODO: If not found should add new (save filtered value and when click "add new", directly take the name here and add new record) */}
         <GuestSelect
           guestData={guestData}
           selectedGuest={selectedGuest}
@@ -47,7 +45,7 @@ function GuestTableManager() {
             height: 400,
           }}
         >
-          <GuestDetail guest={selectedGuest}></GuestDetail>
+          {/* <GuestDetail guest={selectedGuest}></GuestDetail> */}
         </Paper>
       </Grid>
       {/* Guest Data */}

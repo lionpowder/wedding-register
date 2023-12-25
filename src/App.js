@@ -13,7 +13,6 @@ import Copyright from "./component/copyRight";
 import AppBar from "./component/appBar";
 import AppBarContent from "./component/appBarContent";
 import Drawer from "./component/drawer";
-import SideSelectionBar from "./component/sideSelectionBar";
 import { PageContext } from "./context/pageContext";
 import { getCurrentPage } from "./utils/pageUtil";
 import { mainListItems, backendListItems } from "./utils/listItems";

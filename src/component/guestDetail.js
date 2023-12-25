@@ -113,7 +113,7 @@ function GuestDetail(props) {
         control={
           <Checkbox
             disabled={isReadOnly}
-            id="checkbox-checkin"
+            id="checkbox-guest-checkin"
             sx={{
               "&.Mui-checked": {
                 color: green[600],
@@ -127,7 +127,7 @@ function GuestDetail(props) {
       <GuestNumber
         selectedGuest={selectedGuest}
         setSelectedGuest={setSelectedGuest}
-        isReadOnly
+        isReadOnly={isReadOnly}
       />
       {!isReadOnly && (
         <>
