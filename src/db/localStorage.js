@@ -40,7 +40,7 @@ export const useGuestDataStore = (fallbackState) => {
     fallbackState
   );
 
-  return [JSON.parse(guestStore || {}), setGuestDataStore];
+  return [JSON.parse(guestStore || "{}"), setGuestDataStore];
 };
 
 export const useLastGuestStore = (fallbackState) => {
@@ -49,5 +49,5 @@ export const useLastGuestStore = (fallbackState) => {
     fallbackState
   );
 
-  return [JSON.parse(lastGuestStore || {}), setLastGuestStore];
+  return [JSON.parse(lastGuestStore || "{}"), setLastGuestStore];
 };
