@@ -7,7 +7,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import GuestSelect from "./guestSelect";
-import SubstituteGuestDetail from "./substituteGuestDetail";
+import SubstituteDetail from "./substituteDetail";
 
 /**
  *
@@ -20,6 +20,7 @@ function SubstituteGuest({
   guestData,
   substituteFor,
   guestSubstituteChangeHandler,
+  isGuestCake,
 }) {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const [selectedSubstitute, setSelectedSubstitute] = React.useState(null);
@@ -40,8 +41,10 @@ function SubstituteGuest({
     if (id !== selectedSubstitute) setSelectedSubstitute(id);
 
     const newSubstittueFor = [...substituteFor]; // this is a simple array of id, shallow clone is fine
-    if (!newSubstittueFor.includes(id)) newSubstittueFor.push(id);
-    guestSubstituteChangeHandler(newSubstittueFor);
+    if (!newSubstittueFor.includes(id)) {
+      newSubstittueFor.push(id);
+      guestSubstituteChangeHandler(newSubstittueFor);
+    }
   };
 
   const onClose = () => {
@@ -115,13 +118,14 @@ function SubstituteGuest({
           >
             新增
           </Button>
-          <SubstituteGuestDetail
+          <SubstituteDetail
             open={isDialogOpen}
             selectedSubstitute={selectedSubstitute}
             onChange={substituteOnChange}
             onClose={onClose}
             guestData={guestData}
-          ></SubstituteGuestDetail>
+            isGuestCake={isGuestCake}
+          ></SubstituteDetail>
         </AccordionDetails>
       </Accordion>
     </>

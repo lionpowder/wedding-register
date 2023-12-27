@@ -7,18 +7,16 @@ import Chip from "@mui/material/Chip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import { GuestDataContext } from "../context/guestDataContext";
-import { assignGuestIfEmpty, generateEnvelopId } from "../utils/guestUtil";
-import { combineNames } from "../utils/stringUtil";
 import Title from "./titleBar";
 import GuestNumber from "./guestNumber";
 import SubstituteGuest from "./substituteGuest";
+import { GuestDataContext } from "../context/guestDataContext";
+import { assignGuestIfEmpty, generateEnvelopId } from "../utils/guestUtil";
+import { combineNames } from "../utils/stringUtil";
 
 /*Input fields
   Gift received checkbox (auto ID assignment when gift received A1, A2…)
-  Is substituted checkbox
-    If checked, show substitute (代包) name entry field
-    Substitute will take bride cake (check box)*/
+  Substitute will take bride cake (check box) ??*/
 function GuestDetail({
   id = "guest",
   isReadOnly = false,
@@ -77,7 +75,6 @@ function GuestDetail({
   };
 
   const onSubstituteChange = (value) => {
-    console.log("onSubstituteChange", value);
     const modifiedGuest = { ...selectedGuest, SubstituteFor: value };
     setSelectedGuest(modifiedGuest);
   };

@@ -12,17 +12,19 @@ import { useTheme } from "@mui/material/styles";
 import { assignGuestIfEmpty, findGuestById } from "../utils/guestUtil";
 import GuestDetail from "./guestDetail";
 import GuestSelect from "./guestSelect";
+import GuestCakeDetail from "./guestCakeDetail";
 
 /**
  *
  * @returns
  */
-function SubstituteGuestDetail({
+function SubstituteDetail({
   open,
   guestData,
   selectedSubstitute,
   onChange,
   onClose,
+  isGuestCake = false,
 }) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -35,6 +37,7 @@ function SubstituteGuestDetail({
   }, [guestData, selectedSubstitute]);
 
   const handleSave = (id) => {
+    // TODO: 自動將代領人員名字加入備註
     onChange(id);
     onClose();
   };
@@ -57,14 +60,22 @@ function SubstituteGuestDetail({
             }}
           />
         )}
-        {substituteData && (
-          <GuestDetail
-            id="substitute-guest-detail"
-            guest={substituteData}
-            isSubstitute={true}
-            onSaveChange={handleSave}
-          />
-        )}
+        {substituteData &&
+          (!isGuestCake ? (
+            <GuestDetail
+              id="substitute-guest-detail"
+              guest={substituteData}
+              isSubstitute={true}
+              onSaveChange={handleSave}
+            />
+          ) : (
+            <GuestCakeDetail
+              id="substitute-guest-cake-detail"
+              guest={substituteData}
+              isSubstitute={true}
+              onSaveChange={handleSave}
+            ></GuestCakeDetail>
+          ))}
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>取消</Button>
@@ -73,4 +84,4 @@ function SubstituteGuestDetail({
   );
 }
 
-export default SubstituteGuestDetail;
+export default SubstituteDetail;
