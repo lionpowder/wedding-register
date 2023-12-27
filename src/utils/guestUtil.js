@@ -1,5 +1,9 @@
 import { defaultGuestData } from "../data/guestData";
 
+export const findGuestById = (guestDataList, id) => {
+  return guestDataList.find((data) => data.Id === id);
+};
+
 export const assignGuestIfEmpty = (guest) => {
   const isNotEmptyGuest = !!guest && Object.keys(guest).length > 0;
   return isNotEmptyGuest ? guest : defaultGuestData;

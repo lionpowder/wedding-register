@@ -44,7 +44,6 @@ function CheckInManager() {
             p: 2,
             display: "flex",
             flexDirection: "column",
-            height: 400,
           }}
         >
           <GuestDetail guest={selectedGuest}></GuestDetail>

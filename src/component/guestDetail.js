@@ -12,25 +12,31 @@ import { assignGuestIfEmpty, generateEnvelopId } from "../utils/guestUtil";
 import { combineNames } from "../utils/stringUtil";
 import Title from "./titleBar";
 import GuestNumber from "./guestNumber";
+import SubstituteGuest from "./substituteGuest";
 
 /*Input fields
   Gift received checkbox (auto ID assignment when gift received A1, A2…)
   Is substituted checkbox
     If checked, show substitute (代包) name entry field
     Substitute will take bride cake (check box)*/
-function GuestDetail(props) {
-  const isReadOnly = !!props.readOnly;
+function GuestDetail({
+  id = "guest",
+  isReadOnly = false,
+  guest,
+  isSubstitute = false,
+  onSaveChange,
+}) {
   const { updateGuestData, guestData } = React.useContext(GuestDataContext);
   const [selectedGuest, setSelectedGuest] = React.useState(
-    assignGuestIfEmpty(props.guest)
+    assignGuestIfEmpty(guest)
   );
 
   /**
    * Reassign guest to state if prop changes
    */
   React.useEffect(() => {
-    setSelectedGuest(assignGuestIfEmpty(props.guest));
-  }, [props.guest]);
+    setSelectedGuest(assignGuestIfEmpty(guest));
+  }, [guest]);
 
   /**
    * Generate necessary values for the guest and save data
@@ -53,6 +59,8 @@ function GuestDetail(props) {
 
     // Update data
     updateGuestData(modifiedGuest);
+
+    onSaveChange && onSaveChange(selectedGuest.Id);
   };
 
   /**
@@ -65,6 +73,12 @@ function GuestDetail(props) {
 
   const onNoteChange = (e) => {
     const modifiedGuest = { ...selectedGuest, CheckinNote: e.target.value };
+    setSelectedGuest(modifiedGuest);
+  };
+
+  const onSubstituteChange = (value) => {
+    console.log("onSubstituteChange", value);
+    const modifiedGuest = { ...selectedGuest, SubstituteFor: value };
     setSelectedGuest(modifiedGuest);
   };
 
@@ -81,14 +95,14 @@ function GuestDetail(props) {
       >
         <Title isSub={true}>{combineNames(selectedGuest.Name)}</Title>
         <Chip
-          id={"chip-checkin-side"}
+          id={id + "-chip-checkin-side"}
           label={selectedGuest.Side}
           variant="filled"
         />
         {selectedGuest.Relationship.map((relationship) => {
           return (
             <Chip
-              key={"chip-side-" + relationship}
+              key={id + "-chip-side-" + relationship}
               label={relationship}
               variant="outlined"
             />
@@ -113,7 +127,7 @@ function GuestDetail(props) {
         control={
           <Checkbox
             disabled={isReadOnly}
-            id="checkbox-guest-checkin"
+            id={id + "-checkbox-has-checkin"}
             sx={{
               "&.Mui-checked": {
                 color: green[600],
@@ -125,6 +139,7 @@ function GuestDetail(props) {
         }
       />
       <GuestNumber
+        id={id + "-number"}
         selectedGuest={selectedGuest}
         setSelectedGuest={setSelectedGuest}
         isReadOnly={isReadOnly}
@@ -132,7 +147,7 @@ function GuestDetail(props) {
       {!isReadOnly && (
         <>
           <TextField
-            id="multiline-checkin-note"
+            id={id + "multiline-checkin-note"}
             label="報到備註"
             multiline
             rows={3}
@@ -140,8 +155,24 @@ function GuestDetail(props) {
             onChange={onNoteChange}
           />
 
-          <Button id="button-checkin-guest-save" onClick={onSaveClick}>
-            Save
+          {!isSubstitute && (
+            <SubstituteGuest
+              guest={selectedGuest}
+              guestData={guestData}
+              substituteFor={selectedGuest.SubstituteFor}
+              guestSubstituteChangeHandler={onSubstituteChange}
+            ></SubstituteGuest>
+          )}
+
+          <Button
+            id={id + "-button-checkin-guest-save"}
+            onClick={onSaveClick}
+            variant="outlined"
+            sx={{
+              mt: "8px",
+            }}
+          >
+            儲存
           </Button>
         </>
       )}

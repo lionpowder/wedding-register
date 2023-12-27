@@ -24,7 +24,7 @@ function MainPage() {
           }}
         >
           目前報到賓客:
-          <GuestDetail guest={lastCheckinGuest} readOnly={true}></GuestDetail>
+          <GuestDetail guest={lastCheckinGuest} isReadOnly={true}></GuestDetail>
         </Paper>
       </Grid>
       {/* Recent Orders */}

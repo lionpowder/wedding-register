@@ -1,5 +1,5 @@
 import * as React from "react";
-import { green, red } from "@mui/material/colors";
+import { green } from "@mui/material/colors";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
@@ -89,7 +89,6 @@ TODO: also show substitutes in need of a cake
               "&.MuiAutocomplete-root": {
                 flexGrow: 1,
               },
-              color: red,
             }}
             guestData={getUnprocessedList}
             selectedGuest={selectedGuest}
