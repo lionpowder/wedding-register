@@ -5,6 +5,8 @@ import reportWebVitals from "./reportWebVitals";
 import { PageProvider } from "./context/pageContext";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ConfirmScreen from "./confirmScreen";
 
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";

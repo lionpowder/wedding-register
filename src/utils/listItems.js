@@ -8,22 +8,26 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import { pages, getCurrentPage } from "./pageUtil";
+import { pages } from "./pageUtil";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export const mainListItems = (currentPageName, onClickHandler) => {
+export const MainListItems = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <>
-      {Object.keys(pages).map((pageName) => {
-        const page = getCurrentPage(pageName);
+      {pages.map((page) => {
         return (
           <ListItemButton
-            key={pageName}
+            key={page.title}
             onClick={(event) => {
               event.preventDefault();
-
-              onClickHandler(event, pageName);
+              if (location.pathname !== page.path) {
+                navigate(page.path);
+              }
             }}
-            selected={currentPageName === pageName}
+            selected={location.pathname === page.path}
           >
             <ListItemIcon>{page.icon}</ListItemIcon>
             <ListItemText primary={page.title} />

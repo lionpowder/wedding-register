@@ -16,7 +16,7 @@
         "NoOfVegetarian": 1,
         "NoOfChildren": 0,
         "CheckinNote": "Check in note",
-        "IsCheckedIn": true,
+        "IsCheckedIn": false,
         "EnvelopId": "C1",
         "CakeNote": "Cake note",
         "NoOfRegular": 1,

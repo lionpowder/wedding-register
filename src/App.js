@@ -13,77 +13,32 @@ import Copyright from "./component/copyRight";
 import AppBar from "./component/appBar";
 import AppBarContent from "./component/appBarContent";
 import Drawer from "./component/drawer";
-import SideSelectionBar from "./component/sideSelectionBar";
-import { PageContext } from "./context/pageContext";
-import { getCurrentPage } from "./utils/pageUtil";
-import { mainListItems, backendListItems } from "./utils/listItems";
+import { pages } from "./utils/pageUtil";
+import { MainListItems, backendListItems } from "./utils/listItems";
+import {
+  BrowserRouter,
+  Outlet,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 
 import "./App.css";
+import ConfirmScreen from "./confirmScreen";
+import MainApp from "./mainApp";
 
 function App() {
-  const [open, setOpen] = React.useState(true);
-  const { currentPageName, setCurrentPageName } = React.useContext(PageContext);
-
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
-
-  const onMenuChange = (event, pageName) => {
-    if (currentPageName !== pageName) {
-      setCurrentPageName(pageName);
-    }
-  };
-
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar position="absolute" open={open}>
-        <AppBarContent
-          toggleDrawer={toggleDrawer}
-          open={open}
-          currentPageTitle={getCurrentPage(currentPageName)?.title}
-        ></AppBarContent>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <Toolbar
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            px: [1],
-          }}
-        >
-          <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </Toolbar>
-        <List component="nav">
-          {mainListItems(currentPageName, onMenuChange)}
-          <Divider sx={{ my: 1 }} />
-          {backendListItems}
-        </List>
-      </Drawer>
-      <Box
-        component="main"
-        sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
-          flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
-        }}
-      >
-        {/* dummy toolbar for top padding */}
-        <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}></Grid>
-          {getCurrentPage(currentPageName)?.content}
-          <Copyright sx={{ pt: 4 }} />
-        </Container>
-      </Box>
-    </Box>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainApp />}>
+          {pages.map((page) => (
+            <Route key={page.title} path={page.path} element={page.content} />
+          ))}
+        </Route>
+        <Route path="/confirm" element={<ConfirmScreen />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -14,34 +14,29 @@ import CheckInManager from "../page/checkinManager";
  * Definition of pages
  * Each page object should contain: content element, icon element, & page title
  */
-export const pages = {
-  Main: {
+export const pages = [
+  {
     content: <MainPage></MainPage>,
     icon: <DashboardIcon></DashboardIcon>,
     title: "首頁",
+    path: "/",
   },
-  Checkin: {
+  {
     content: <CheckInManager></CheckInManager>,
     icon: <ShoppingCartIcon></ShoppingCartIcon>,
     title: "報到管理",
+    path: "/checkin",
   },
-  Table: {
+  {
     content: null, // Table Management
     icon: <PeopleIcon></PeopleIcon>,
     title: "桌次管理",
+    path: "/table",
   },
-  Cake: {
+  {
     content: null, // Cake Management
     icon: <AssignmentIcon></AssignmentIcon>,
     title: "領餅管理",
+    path: "/cake",
   },
-};
-
-/**
- * get the page object based on page's key
- * @param {*} pageName page's key
- * @returns page object
- */
-export const getCurrentPage = (pageName) => {
-  return pages[pageName] || pages["Main"];
-};
+];
