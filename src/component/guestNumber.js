@@ -2,10 +2,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { GuestDataContext } from "../context/guestDataContext";
-import { addGuestData } from "../db/cloudDb";
-import { combineNames } from "../utils/stringUtil";
-import { defaultGuestData } from "../data/guestData";
 
 /*Input fields
   People count entry
@@ -16,13 +12,22 @@ import { defaultGuestData } from "../data/guestData";
         Show number of each (regular, children, vegetarian) in the party currently checking in and allow modifying the number
       Add new party
         Open Table management page in new tab & open add new party modal (prefill with data of current party)*/
-function GuestNumber({ selectedGuest, setSelectedGuest }) {
+function GuestNumber({
+  id = "guest-number",
+  selectedGuest,
+  setSelectedGuest,
+  isReadOnly,
+}) {
   // TODO: show target table number (?)
-  const originalGuestNumbers = {
-    NoOfRegular: selectedGuest.NoOfRegular || 0,
-    NoOfVegetarian: selectedGuest.NoOfVegetarian || 0,
-    NoOfChildren: selectedGuest.NoOfChildren || 0,
-  };
+
+  // Use memo to preserve previous value
+  const originalGuestNumbers = React.useMemo(() => {
+    return {
+      NoOfRegular: selectedGuest.NoOfRegular || 0,
+      NoOfVegetarian: selectedGuest.NoOfVegetarian || 0,
+      NoOfChildren: selectedGuest.NoOfChildren || 0,
+    };
+  }, []);
 
   const onChangeHandler = (e, type) => {
     const modifiedGuest = { ...selectedGuest, [type]: Number(e.target.value) };
@@ -45,7 +50,8 @@ function GuestNumber({ selectedGuest, setSelectedGuest }) {
       </div>
       <div>
         <TextField
-          id="no-of-regular-guest"
+          disabled={isReadOnly}
+          id={id + "-no-of-regular-guest"}
           label="一般"
           type="number"
           InputLabelProps={{
@@ -57,7 +63,8 @@ function GuestNumber({ selectedGuest, setSelectedGuest }) {
         />
         {" 原本: " + originalGuestNumbers.NoOfRegular}
         <TextField
-          id="no-of-vegetarian-guest"
+          disabled={isReadOnly}
+          id={id + "-no-of-vegetarian-guest"}
           label="素食"
           type="number"
           InputLabelProps={{
@@ -69,7 +76,8 @@ function GuestNumber({ selectedGuest, setSelectedGuest }) {
         />
         {" 原本: " + originalGuestNumbers.NoOfVegetarian}
         <TextField
-          id="no-of-children-guest"
+          disabled={isReadOnly}
+          id={id + "-no-of-children-guest"}
           label="小孩"
           type="number"
           InputLabelProps={{

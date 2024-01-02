@@ -5,6 +5,7 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import GuestRawTable from "../component/guestRawTable";
+import GuestDetail from "../component/guestDetail";
 import { GuestDataContext } from "../context/guestDataContext";
 
 function MainPage() {
@@ -19,11 +20,11 @@ function MainPage() {
             p: 2,
             display: "flex",
             flexDirection: "column",
-            height: 240,
+            height: 350,
           }}
         >
-          Current Guest is:
-          <p>{lastCheckinGuest?.Name}</p>
+          目前報到賓客:
+          <GuestDetail guest={lastCheckinGuest} isReadOnly={true}></GuestDetail>
         </Paper>
       </Grid>
       {/* Recent Orders */}

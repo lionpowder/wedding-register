@@ -38,7 +38,7 @@ function GuestRawTable() {
             <TableCell>桌次</TableCell>
             <TableCell>紅包</TableCell>
             <TableCell>已報到</TableCell>
-            <TableCell align="right">已領餅</TableCell>
+            <TableCell>已領餅</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

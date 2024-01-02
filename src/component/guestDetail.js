@@ -1,49 +1,40 @@
 import * as React from "react";
+import { green } from "@mui/material/colors";
 import Button from "@mui/material/Button";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
+import Chip from "@mui/material/Chip";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
+import Title from "./titleBar";
+import GuestNumber from "./guestNumber";
+import SubstituteGuest from "./substituteGuest";
 import { GuestDataContext } from "../context/guestDataContext";
 import { assignGuestIfEmpty, generateEnvelopId } from "../utils/guestUtil";
 import { combineNames } from "../utils/stringUtil";
-import Title from "./titleBar";
-import GuestNumber from "./guestNumber";
 
 /*Input fields
-  Name entry (Search, if not found, add new)
-    Auto completion by names, or aliases
-    (Green mark if already checked in)
-  People count entry
-    Prefilled with saved value (0 if not exists)
-    Upon edit, show popup
-      Modify number of the same table
-        Show target table numbers (regular, children, vegetarian)
-        Show number of each (regular, children, vegetarian) in the party currently checking in and allow modifying the number
-      Add new party
-        Open Table management page in new tab & open add new party modal (prefill with data of current party)
   Gift received checkbox (auto ID assignment when gift received A1, A2…)
-  Is substituted checkbox
-    If checked, show substitute (代包) name entry field
-    Substitute will take bride cake (check box)
-  Check in notes
-Display fields
-  Side (Warning when side is different from what’s checked)
-  General notes
-  Table #
-  Relationships*/
-function GuestDetail(props) {
+  Substitute will take bride cake (check box) ??*/
+function GuestDetail({
+  id = "guest",
+  isReadOnly = false,
+  guest,
+  isSubstitute = false,
+  onSaveChange,
+}) {
   const { updateGuestData, guestData } = React.useContext(GuestDataContext);
   const [selectedGuest, setSelectedGuest] = React.useState(
-    assignGuestIfEmpty(props.guest)
+    assignGuestIfEmpty(guest)
   );
 
   /**
    * Reassign guest to state if prop changes
    */
   React.useEffect(() => {
-    setSelectedGuest(assignGuestIfEmpty(props.guest));
-  }, [props.guest]);
+    setSelectedGuest(assignGuestIfEmpty(guest));
+  }, [guest]);
 
   /**
    * Generate necessary values for the guest and save data
@@ -55,6 +46,7 @@ function GuestDetail(props) {
     let modifiedGuest = { ...selectedGuest };
 
     // Generate envelope Id if the guest checked in
+    // TODO: currently checkedin flag act as gift received as well. Do we still need gift received checkbox
     if (!selectedGuest.EnvelopId && selectedGuest.IsCheckedIn) {
       const envelopeId = generateEnvelopId(selectedGuest.Side, guestData);
       modifiedGuest.EnvelopId = envelopeId;
@@ -65,6 +57,8 @@ function GuestDetail(props) {
 
     // Update data
     updateGuestData(modifiedGuest);
+
+    onSaveChange && onSaveChange(selectedGuest.Id);
   };
 
   /**
@@ -75,27 +69,110 @@ function GuestDetail(props) {
     setSelectedGuest(modifiedGuest);
   };
 
+  const onNoteChange = (e) => {
+    const modifiedGuest = { ...selectedGuest, CheckinNote: e.target.value };
+    setSelectedGuest(modifiedGuest);
+  };
+
+  const onSubstituteChange = (value) => {
+    const modifiedGuest = { ...selectedGuest, SubstituteFor: value };
+    setSelectedGuest(modifiedGuest);
+  };
+
+  // TODO: Side (Warning when side is different from what’s checked)
+
   return (
     <>
-      <Title isSub={true}>{combineNames(selectedGuest.Name)}</Title>
+      <Box
+        sx={{
+          gap: "4px",
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <Title isSub={true}>{combineNames(selectedGuest.Name)}</Title>
+        <Chip
+          id={id + "-chip-checkin-side"}
+          label={selectedGuest.Side}
+          variant="filled"
+        />
+        {selectedGuest.Relationship.map((relationship) => {
+          return (
+            <Chip
+              key={id + "-chip-side-" + relationship}
+              label={relationship}
+              variant="outlined"
+            />
+          );
+        })}
+      </Box>
+      <Box
+        sx={{
+          mt: "4px",
+          mb: "8px",
+        }}
+      >
+        <Typography variant="body1" gutterBottom>
+          {"桌次: " + (selectedGuest.TableNo || "未指定")}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          {"備註: " + (selectedGuest.GeneralNote || "")}
+        </Typography>
+      </Box>
       <FormControlLabel
         label="已報到"
         control={
           <Checkbox
-            id="checkbox-checkin"
-            color={selectedGuest.IsCheckedIn ? "success" : "warning"}
+            disabled={isReadOnly}
+            id={id + "-checkbox-has-checkin"}
+            sx={{
+              "&.Mui-checked": {
+                color: green[600],
+              },
+            }}
             checked={selectedGuest.IsCheckedIn}
             onChange={onCheckedinChange}
           />
         }
       />
       <GuestNumber
+        id={id + "-number"}
         selectedGuest={selectedGuest}
         setSelectedGuest={setSelectedGuest}
+        isReadOnly={isReadOnly}
       />
-      <Button id="button-update-guest" onClick={onSaveClick}>
-        Save
-      </Button>
+      {!isReadOnly && (
+        <>
+          <TextField
+            id={id + "multiline-checkin-note"}
+            label="報到備註"
+            multiline
+            rows={3}
+            value={selectedGuest.CheckinNote || ""}
+            onChange={onNoteChange}
+          />
+
+          {!isSubstitute && (
+            <SubstituteGuest
+              guest={selectedGuest}
+              guestData={guestData}
+              substituteFor={selectedGuest.SubstituteFor}
+              guestSubstituteChangeHandler={onSubstituteChange}
+            ></SubstituteGuest>
+          )}
+
+          <Button
+            id={id + "-button-checkin-guest-save"}
+            onClick={onSaveClick}
+            variant="outlined"
+            sx={{
+              mt: "8px",
+            }}
+          >
+            儲存
+          </Button>
+        </>
+      )}
     </>
   );
 }

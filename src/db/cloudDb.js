@@ -1,42 +1,71 @@
+import React from "react";
 import GuestData from "./mockData/MockGuestData.json";
 import {
   collection,
   doc,
-  getDocs,
   addDoc,
   updateDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
 const GUEST_DATA_DB_NAME = "GuestData";
-const isUseMock = true;
+const isUseMock = false;
 
-/**
- *
- * @returns
- */
-export const getFullGuestList = async () => {
-  if (isUseMock) {
-    return GuestData;
-  }
+export const useCloudDB = () => {
+  const [data, setData] = React.useState();
 
-  try {
-    const fullGuestData = await getDocs(
-      collection(db, GUEST_DATA_DB_NAME)
-    ).then((querySnapshot) => {
-      const newData = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        Id: doc.id,
-        Status: "",
-      }));
+  React.useEffect(() => {
+    if (isUseMock || process.env.REACT_APP_ENVIRONMENT === "Mock") {
+      setData(GuestData);
+      return;
+    }
 
-      return newData;
-    });
+    try {
+      const unsubscribe = onSnapshot(
+        collection(db, GUEST_DATA_DB_NAME),
+        (snapshot) => {
+          if (snapshot.size) {
+            let myDataArray = [];
+            snapshot.forEach((doc) => {
+              var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
+              console.log(source, " data: ", doc.data());
 
-    return fullGuestData;
-  } catch (e) {
-    console.error("Error fetching document: ", e);
-  }
+              myDataArray.push({
+                ...doc.data(),
+                Id: doc.id,
+                Status: "",
+              });
+            });
+
+            snapshot.docChanges().forEach((change) => {
+              if (change.type === "added") {
+                console.log("New city: ", change.doc.data());
+              }
+              if (change.type === "modified") {
+                console.log("Modified city: ", change.doc.data());
+              }
+              if (change.type === "removed") {
+                console.log("Removed city: ", change.doc.data());
+              }
+            });
+            setData(myDataArray);
+            console.log("updated snapshot");
+          } else {
+            // it's empty
+          }
+        }
+      );
+
+      return () => {
+        unsubscribe();
+      };
+    } catch (e) {
+      console.error("Error fetching document: ", e);
+    }
+  }, []);
+
+  return data;
 };
 
 /**
@@ -72,10 +101,10 @@ export const updateGuestData = async (partialGuestData) => {
       saveGuestData
     );
     console.info("Document update with ID: ", partialGuestData.Id);
+    return { ...partialGuestData, Status: "" };
   } catch (e) {
     console.error("Error updating document: ", e);
 
-    // TODO: if there's error, set flag to retry updating localStorage to DB every 5 min.
     return { ...partialGuestData, Status: "Retry" };
   }
 };
