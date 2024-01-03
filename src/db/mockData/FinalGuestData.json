@@ -7,7 +7,7 @@
     "NoOfVegetarian": 1,
     "NoOfChildren": 0,
     "Relationship": ["男女方共同友人", "男方同學"],
-    "TableNo": 2,
+    "TableNo": "2",
     "Side": "共同",
     "NeedCake": true,
     "IsCheckedIn": false,
@@ -16,6 +16,7 @@
     "EnvelopId": "A1",
     "GeneralNote": "一開始就有了，例如: 不收禮金",
     "CheckinNote": "簽到人員的紀錄",
-    "CakeNote": "發餅人員的紀錄"
+    "CakeNote": "發餅人員的紀錄",
+    "LastModifiedTime": { "seconds": 1704285594, "nanoseconds": 559000000 }
   }
 ]

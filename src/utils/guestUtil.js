@@ -4,8 +4,12 @@ export const findGuestById = (guestDataList, id) => {
   return guestDataList.find((data) => data.Id === id);
 };
 
+export const isGuestEmpty = (guest) => {
+  return !(!!guest && Object.keys(guest).length > 0);
+};
+
 export const assignGuestIfEmpty = (guest) => {
-  const isNotEmptyGuest = !!guest && Object.keys(guest).length > 0;
+  const isNotEmptyGuest = !isGuestEmpty(guest);
   return isNotEmptyGuest ? guest : defaultGuestData;
 };
 

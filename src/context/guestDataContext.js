@@ -1,11 +1,13 @@
 import React from "react";
 import { defaultGuestData } from "../data/guestData";
 import {
-  useCloudDB,
+  useGuestData,
   updateGuestData as updateGuestCloudData,
+  dateToTimestamp,
 } from "../db/cloudDb";
 import { useGuestDataStore, useConfirmGuestStore } from "../db/localStorage";
 import { sides } from "../data/sideData";
+import { isGuestEmpty } from "../utils/guestUtil";
 
 export const GuestDataContext = React.createContext({
   guestData: [defaultGuestData],
@@ -18,7 +20,7 @@ export const GuestDataContext = React.createContext({
 });
 
 export const GuestDataProvider = ({ children }) => {
-  const guestCloud = useCloudDB();
+  const guestCloud = useGuestData();
   const [guestStore, setGuestDataStore] = useGuestDataStore();
   // current confirming guest data stored in local storage
   const [confirmGuestStore, setConfirmGuestStore] =
@@ -45,10 +47,10 @@ export const GuestDataProvider = ({ children }) => {
    */
   // TODO: need to combine list from both cloud & localStorage
   React.useEffect(() => {
-    console.log("Changes in guestCloud: ", guestCloud);
+    console.log("Changes in guestCloud: ", guestCloud, guestStore);
     guestCloud && setFullGuestDataList(guestCloud);
 
-    if (!guestStore) setGuestDataStore(guestCloud);
+    if (isGuestEmpty(guestStore) && guestCloud) setGuestDataStore(guestCloud);
   }, [guestCloud, guestStore]);
 
   /**
@@ -78,12 +80,15 @@ export const GuestDataProvider = ({ children }) => {
     updatedGuestDataList[updatedDataIdx] = {
       ...updatedGuestDataList[updatedDataIdx],
       ...partialGuestData,
+      LastModifiedTime: dateToTimestamp(new Date()),
     };
     setFullGuestDataList(updatedGuestDataList);
 
     // Update to cloud
     // TODO: if Status = "retry", need to retry updating localStorage or context data to DB every 5 min.
-    const updatedGuestDataFromCloud = updateGuestCloudData(partialGuestData);
+    const updatedGuestDataFromCloud = updateGuestCloudData(
+      updatedGuestDataList[updatedDataIdx]
+    );
 
     // Update to LocalStorage
     setGuestDataStore(updatedGuestDataList);

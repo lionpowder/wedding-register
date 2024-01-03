@@ -4,7 +4,7 @@
     "Name": ["Henry", "Chelsea"],
     "Alias": ["testing"],
     "Relationship": ["男女方共同友人", "multiple"],
-    "TableNo": 2,
+    "TableNo": "2",
     "NoOfVegetarian": 1,
     "NoOfChildren": 0,
     "CheckinNote": "Check in note",
@@ -17,7 +17,8 @@
     "IsEnvelopeReceived": false,
     "GeneralNote": "Test",
     "Id": "LtUXGfweyv0BtWH49eV3",
-    "Status": ""
+    "Status": "",
+    "LastModifiedTime": { "seconds": 1704285594, "nanoseconds": 559000000 }
   },
   {
     "GeneralNote": "",
@@ -30,12 +31,13 @@
     "NoOfChildren": 0,
     "CakeNote": "",
     "Side": "共同",
-    "TableNo": 4,
+    "TableNo": "4",
     "IsCakeGiven": false,
     "EnvelopId": "C2",
     "Alias": [""],
     "NoOfRegular": 1,
     "Id": "ehQbW5vYB34CEsL6Pxnk",
-    "Status": ""
+    "Status": "",
+    "LastModifiedTime": ""
   }
 ]

@@ -1,4 +1,5 @@
 import { determineNeedCake } from "../utils/guestUtil";
+import { dateToTimestamp } from "../db/cloudDb";
 
 export const defaultGuestData = {
   Name: [""],
@@ -12,12 +13,14 @@ export const defaultGuestData = {
   NeedCake: true,
   IsCheckedIn: false,
   IsCakeGiven: false,
+  IsEnvelopeReceived: false,
   EnvelopId: "",
   GeneralNote: "",
   CheckinNote: "",
   CakeNote: "",
   Status: "", // "", "New", "Update", "Retry"
   SubstituteFor: [],
+  LastModifiedTime: dateToTimestamp(new Date()),
 };
 
 export const generateNewGuestData = (

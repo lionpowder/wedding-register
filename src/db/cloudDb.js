@@ -6,13 +6,24 @@ import {
   addDoc,
   updateDoc,
   onSnapshot,
+  Timestamp,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
 const GUEST_DATA_DB_NAME = "GuestData";
+const SEATING_DATA_DB_NAME = "SeatData";
 const isUseMock = false;
 
-export const useCloudDB = () => {
+export const dateToTimestamp = (date) => {
+  console.log(date);
+  return Timestamp.fromDate(date);
+};
+
+export const timestampToDate = (timeStamp) => {
+  return timeStamp.toDate();
+};
+
+const useCloudDB = (path) => {
   const [data, setData] = React.useState();
 
   React.useEffect(() => {
@@ -22,40 +33,37 @@ export const useCloudDB = () => {
     }
 
     try {
-      const unsubscribe = onSnapshot(
-        collection(db, GUEST_DATA_DB_NAME),
-        (snapshot) => {
-          if (snapshot.size) {
-            let myDataArray = [];
-            snapshot.forEach((doc) => {
-              var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
-              console.log(source, " data: ", doc.data());
+      const unsubscribe = onSnapshot(collection(db, path), (snapshot) => {
+        if (snapshot.size) {
+          let myDataArray = [];
+          snapshot.forEach((doc) => {
+            var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
+            console.log(source, " data: ", doc.data());
 
-              myDataArray.push({
-                ...doc.data(),
-                Id: doc.id,
-                Status: "",
-              });
+            myDataArray.push({
+              ...doc.data(),
+              Id: doc.id,
+              Status: "",
             });
+          });
 
-            snapshot.docChanges().forEach((change) => {
-              if (change.type === "added") {
-                console.log("New city: ", change.doc.data());
-              }
-              if (change.type === "modified") {
-                console.log("Modified city: ", change.doc.data());
-              }
-              if (change.type === "removed") {
-                console.log("Removed city: ", change.doc.data());
-              }
-            });
-            setData(myDataArray);
-            console.log("updated snapshot");
-          } else {
-            // it's empty
-          }
+          snapshot.docChanges().forEach((change) => {
+            if (change.type === "added") {
+              console.log("New city: ", change.doc.data());
+            }
+            if (change.type === "modified") {
+              console.log("Modified city: ", change.doc.data());
+            }
+            if (change.type === "removed") {
+              console.log("Removed city: ", change.doc.data());
+            }
+          });
+          setData(myDataArray);
+          console.log("updated snapshot");
+        } else {
+          // it's empty
         }
-      );
+      });
 
       return () => {
         unsubscribe();
@@ -66,6 +74,10 @@ export const useCloudDB = () => {
   }, []);
 
   return data;
+};
+
+export const useGuestData = () => {
+  return useCloudDB(GUEST_DATA_DB_NAME);
 };
 
 /**
@@ -107,4 +119,8 @@ export const updateGuestData = async (partialGuestData) => {
 
     return { ...partialGuestData, Status: "Retry" };
   }
+};
+
+export const useSeatingData = () => {
+  return useCloudDB(SEATING_DATA_DB_NAME);
 };
