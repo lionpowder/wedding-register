@@ -1,54 +1,41 @@
 [
-    {
-        "Side": "共同",
-        "Name": [
-            "Henry",
-            "Chelsea"
-        ],
-        "Alias": [
-            "testing"
-        ],
-        "Relationship": [
-            "男女方共同友人",
-            "multiple"
-        ],
-        "TableNo": 2,
-        "NoOfVegetarian": 1,
-        "NoOfChildren": 0,
-        "CheckinNote": "Check in note",
-        "IsCheckedIn": false,
-        "EnvelopId": "C1",
-        "CakeNote": "Cake note",
-        "NoOfRegular": 1,
-        "NeedCake": true,
-        "IsCakeGiven": false,
-        "GeneralNote": "Test",
-        "Id": "LtUXGfweyv0BtWH49eV3",
-        "Status": ""
-    },
-    {
-        "GeneralNote": "",
-        "Name": [
-            "TBD"
-        ],
-        "NeedCake": true,
-        "CheckinNote": "",
-        "NoOfVegetarian": 0,
-        "Relationship": [
-            "男女方共同友人"
-        ],
-        "IsCheckedIn": true,
-        "NoOfChildren": 0,
-        "CakeNote": "",
-        "Side": "共同",
-        "TableNo": 4,
-        "IsCakeGiven": false,
-        "EnvelopId": "C2",
-        "Alias": [
-            ""
-        ],
-        "NoOfRegular": 1,
-        "Id": "ehQbW5vYB34CEsL6Pxnk",
-        "Status": ""
-    }
+  {
+    "Side": "共同",
+    "Name": ["Henry", "Chelsea"],
+    "Alias": ["testing"],
+    "Relationship": ["男女方共同友人", "multiple"],
+    "TableNo": 2,
+    "NoOfVegetarian": 1,
+    "NoOfChildren": 0,
+    "CheckinNote": "Check in note",
+    "IsCheckedIn": false,
+    "EnvelopId": "C1",
+    "CakeNote": "Cake note",
+    "NoOfRegular": 1,
+    "NeedCake": true,
+    "IsCakeGiven": false,
+    "IsEnvelopeReceived": false,
+    "GeneralNote": "Test",
+    "Id": "LtUXGfweyv0BtWH49eV3",
+    "Status": ""
+  },
+  {
+    "GeneralNote": "",
+    "Name": ["TBD"],
+    "NeedCake": true,
+    "CheckinNote": "",
+    "NoOfVegetarian": 0,
+    "Relationship": ["男女方共同友人"],
+    "IsCheckedIn": true,
+    "NoOfChildren": 0,
+    "CakeNote": "",
+    "Side": "共同",
+    "TableNo": 4,
+    "IsCakeGiven": false,
+    "EnvelopId": "C2",
+    "Alias": [""],
+    "NoOfRegular": 1,
+    "Id": "ehQbW5vYB34CEsL6Pxnk",
+    "Status": ""
+  }
 ]

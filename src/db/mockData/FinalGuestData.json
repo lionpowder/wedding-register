@@ -12,6 +12,7 @@
     "NeedCake": true,
     "IsCheckedIn": false,
     "IsCakeGiven": false,
+    "IsEnvelopeReceived": false,
     "EnvelopId": "A1",
     "GeneralNote": "一開始就有了，例如: 不收禮金",
     "CheckinNote": "簽到人員的紀錄",

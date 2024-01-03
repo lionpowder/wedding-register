@@ -14,9 +14,6 @@ import { GuestDataContext } from "../context/guestDataContext";
 import { assignGuestIfEmpty, generateEnvelopId } from "../utils/guestUtil";
 import { combineNames } from "../utils/stringUtil";
 
-/*Input fields
-  Gift received checkbox (auto ID assignment when gift received A1, A2…)
-  Substitute will take bride cake (check box) ??*/
 function GuestDetail({
   id = "guest",
   isReadOnly = false,
@@ -39,18 +36,9 @@ function GuestDetail({
   /**
    * Generate necessary values for the guest and save data
    */
-  const onSaveClick = () => {
+  const onSave = (modifiedGuest) => {
     // Should not save/update if the guest data doesn't include any Id
-    if (!selectedGuest.Id) return;
-
-    let modifiedGuest = { ...selectedGuest };
-
-    // Generate envelope Id if the guest checked in
-    // TODO: currently checkedin flag act as gift received as well. Do we still need gift received checkbox
-    if (!selectedGuest.EnvelopId && selectedGuest.IsCheckedIn) {
-      const envelopeId = generateEnvelopId(selectedGuest.Side, guestData);
-      modifiedGuest.EnvelopId = envelopeId;
-    }
+    if (!modifiedGuest.Id) return;
 
     // Update local state
     setSelectedGuest(modifiedGuest);
@@ -58,7 +46,18 @@ function GuestDetail({
     // Update data
     updateGuestData(modifiedGuest);
 
-    onSaveChange && onSaveChange(selectedGuest.Id);
+    onSaveChange && onSaveChange(modifiedGuest.Id);
+  };
+
+  const onCheckInClick = () => {
+    const modifiedGuest = { ...selectedGuest };
+
+    // If was checked in but then modified to not checkin, do not automatic update checkin flag
+    if (!guest.IsCheckedIn) {
+      modifiedGuest.IsCheckedIn = true;
+    }
+
+    onSave(modifiedGuest);
   };
 
   /**
@@ -66,6 +65,22 @@ function GuestDetail({
    */
   const onCheckedinChange = (e) => {
     const modifiedGuest = { ...selectedGuest, IsCheckedIn: e.target.checked };
+    setSelectedGuest(modifiedGuest);
+  };
+
+  const onEnvelopReceivedChange = (e) => {
+    const isEnvelopeReceived = e.target.checked;
+    const modifiedGuest = {
+      ...selectedGuest,
+      IsEnvelopeReceived: isEnvelopeReceived,
+    };
+
+    // Generate envelope Id if receive envelope
+    if (!selectedGuest.EnvelopId && isEnvelopeReceived) {
+      const envelopeId = generateEnvelopId(selectedGuest.Side, guestData);
+      modifiedGuest.EnvelopId = envelopeId;
+    }
+
     setSelectedGuest(modifiedGuest);
   };
 
@@ -91,7 +106,7 @@ function GuestDetail({
         }}
       >
         <Title isSub={true}>
-          {"目前賓客:" + combineNames(selectedGuest.Name)}
+          {"目前賓客: " + combineNames(selectedGuest.Name)}
         </Title>
         {/* <Chip
           id={id + "-chip-checkin-side"}
@@ -121,22 +136,57 @@ function GuestDetail({
           {"備註: " + (selectedGuest.GeneralNote || "")}
         </Typography>
       </Box>
-      <FormControlLabel
-        label="已報到"
-        control={
-          <Checkbox
-            disabled={isReadOnly}
-            id={id + "-checkbox-has-checkin"}
-            sx={{
-              "&.Mui-checked": {
-                color: green[600],
-              },
-            }}
-            checked={selectedGuest.IsCheckedIn}
-            onChange={onCheckedinChange}
+      <Box
+        sx={{
+          gap: "4px",
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <FormControlLabel
+          label="已收到紅包"
+          control={
+            <Checkbox
+              disabled={isReadOnly}
+              id={id + "-checkbox-has-checkin"}
+              sx={{
+                "&.Mui-checked": {
+                  color: green[600],
+                },
+              }}
+              checked={selectedGuest.IsEnvelopeReceived}
+              onChange={onEnvelopReceivedChange}
+            />
+          }
+        />
+
+        {selectedGuest.EnvelopId && (
+          <Chip
+            id={id + "-chip-checkin-envelopeId"}
+            label={selectedGuest.EnvelopId}
+            variant="filled"
           />
-        }
-      />
+        )}
+      </Box>
+
+      {!isSubstitute && (
+        <FormControlLabel
+          label="已報到"
+          control={
+            <Checkbox
+              disabled={isReadOnly || !selectedGuest.IsCheckedIn}
+              id={id + "-checkbox-has-checkin"}
+              sx={{
+                "&.Mui-checked": {
+                  color: green[600],
+                },
+              }}
+              checked={selectedGuest.IsCheckedIn}
+              onChange={onCheckedinChange}
+            />
+          }
+        />
+      )}
       <GuestNumber
         id={id + "-number"}
         selectedGuest={selectedGuest}
@@ -163,16 +213,29 @@ function GuestDetail({
             ></SubstituteGuest>
           )}
 
-          <Button
-            id={id + "-button-checkin-guest-save"}
-            onClick={onSaveClick}
-            variant="outlined"
-            sx={{
-              mt: "8px",
-            }}
-          >
-            儲存
-          </Button>
+          {isSubstitute ? (
+            <Button
+              id={id + "-button-checkin-guest-save"}
+              onClick={() => onSave(selectedGuest)}
+              variant="outlined"
+              sx={{
+                mt: "8px",
+              }}
+            >
+              儲存
+            </Button>
+          ) : (
+            <Button
+              id={id + "-button-checkin-guest-checkin"}
+              onClick={onCheckInClick}
+              variant="outlined"
+              sx={{
+                mt: "8px",
+              }}
+            >
+              {guest.IsCheckedIn ? "儲存" : "報到"}
+            </Button>
+          )}
         </>
       )}
     </>

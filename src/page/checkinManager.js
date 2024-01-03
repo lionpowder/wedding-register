@@ -22,8 +22,12 @@ function CheckInManager() {
 
   // clear selection if the can't find the selected guest in the guest list anymore
   React.useEffect(() => {
-    if (!guestData.find((guest) => selectedGuest.Id === guest.Id)) {
+    const guestFound = guestData.find((guest) => selectedGuest.Id === guest.Id);
+    if (!guestFound) {
       setSelectedGuest({});
+    } else {
+      // If guestData changes, update the selected guest data as well
+      setSelectedGuest(guestFound);
     }
   }, [guestData, selectedGuest.Id]);
 

@@ -15,17 +15,12 @@ import AppBarContent from "./component/appBarContent";
 import Drawer from "./component/drawer";
 import { pages } from "./utils/pageUtil";
 import { MainListItems, backendListItems } from "./utils/listItems";
-import {
-  BrowserRouter,
-  Outlet,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import "./App.css";
 
 export default function MainApp() {
+  const DRAWER_WIDTH = 240;
   const [open, setOpen] = React.useState(true);
   const location = useLocation();
 
@@ -40,14 +35,14 @@ export default function MainApp() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="absolute" open={open}>
+      <AppBar position="absolute" open={open} drawerWidth={DRAWER_WIDTH}>
         <AppBarContent
           toggleDrawer={toggleDrawer}
           open={open}
           currentPageTitle={getPageTitle()}
         ></AppBarContent>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={open} drawerWidth={DRAWER_WIDTH}>
         <Toolbar
           sx={{
             display: "flex",
@@ -62,8 +57,8 @@ export default function MainApp() {
         </Toolbar>
         <List component="nav">
           <MainListItems />
-          <Divider sx={{ my: 1 }} />
-          {backendListItems}
+          {/* <Divider sx={{ my: 1 }} />
+          {backendListItems} */}
         </List>
       </Drawer>
       <Box
