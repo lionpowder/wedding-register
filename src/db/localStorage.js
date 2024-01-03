@@ -5,6 +5,7 @@ import React from "react";
 
 const GUESTLIST_STORE_KEY = "guestDataList";
 const LASTGUEST_STORE_KEY = "lastGuest";
+const CONFIRM_GUEST_STORE = "confirm-guest-store";
 
 // TODO: cleaning up localstorage (?) https://blog.logrocket.com/localstorage-javascript-complete-guide/
 
@@ -46,6 +47,15 @@ export const useGuestDataStore = (fallbackState) => {
 export const useLastGuestStore = (fallbackState) => {
   const [lastGuestStore, setLastGuestStore] = useLocalStorage(
     LASTGUEST_STORE_KEY,
+    fallbackState
+  );
+
+  return [JSON.parse(lastGuestStore || "{}"), setLastGuestStore];
+};
+
+export const useConfirmGuestStore = (fallbackState) => {
+  const [lastGuestStore, setLastGuestStore] = useLocalStorage(
+    CONFIRM_GUEST_STORE,
     fallbackState
   );
 

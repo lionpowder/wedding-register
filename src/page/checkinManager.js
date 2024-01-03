@@ -5,10 +5,6 @@ import GuestRawTable from "../component/guestRawTable";
 import GuestDetail from "../component/guestDetail";
 import GuestSelect from "../component/guestSelect";
 import { GuestDataContext } from "../context/guestDataContext";
-import { combineNames } from "../utils/stringUtil";
-import { useLocalStorage } from "usehooks-ts";
-import { CONFIRM_GUEST_STORE } from "../confirmScreen";
-import { useLocation } from "react-router-dom";
 
 /*
 List of past checked in parties
@@ -16,12 +12,9 @@ List of past checked in parties
 */
 
 function CheckInManager() {
-  const { guestData } = React.useContext(GuestDataContext);
+  const { guestData, setConfirmGuestStore } =
+    React.useContext(GuestDataContext);
   const [selectedGuest, setSelectedGuest] = React.useState({});
-  const [confirmGuestStore, setConfirmGuestStore] = useLocalStorage(
-    CONFIRM_GUEST_STORE,
-    {}
-  );
 
   const guestNameChangeHandler = (e, value) => {
     setSelectedGuest(value ?? {});

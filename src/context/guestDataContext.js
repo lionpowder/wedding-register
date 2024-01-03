@@ -2,17 +2,17 @@ import React from "react";
 import { defaultGuestData } from "../data/guestData";
 import {
   useCloudDB,
-  getFullGuestList,
   updateGuestData as updateGuestCloudData,
 } from "../db/cloudDb";
-import { useGuestDataStore, useLastGuestStore } from "../db/localStorage";
+import { useGuestDataStore, useConfirmGuestStore } from "../db/localStorage";
 import { sides } from "../data/sideData";
 
 export const GuestDataContext = React.createContext({
   guestData: [defaultGuestData],
   updateGuestData: null,
-  setLastCheckinGuest: null,
-  lastCheckinGuest: defaultGuestData,
+  setConfirmGuest: null,
+  confirmGuestStore: defaultGuestData,
+  setConfirmGuestStore: null,
   sideFilter: sides,
   setSideFilter: null,
 });
@@ -20,9 +20,9 @@ export const GuestDataContext = React.createContext({
 export const GuestDataProvider = ({ children }) => {
   const guestCloud = useCloudDB();
   const [guestStore, setGuestDataStore] = useGuestDataStore();
-  // last guest data stored in local storage
-  const [lastGuestStore, setLastGuestStore] =
-    useLastGuestStore(defaultGuestData);
+  // current confirming guest data stored in local storage
+  const [confirmGuestStore, setConfirmGuestStore] =
+    useConfirmGuestStore(defaultGuestData);
   // Full list of data based on cloud db, local storage, & current state
   const [fullGuestDataList, setFullGuestDataList] = React.useState(
     guestCloud || [defaultGuestData]
@@ -87,13 +87,13 @@ export const GuestDataProvider = ({ children }) => {
 
     // Update to LocalStorage
     setGuestDataStore(updatedGuestDataList);
-    setLastGuestStore(partialGuestData); // TODO: should only save the last guest if checked in is change from false to true (?)
   };
 
   const value = {
     guestData: guestDataList,
     updateGuestData,
-    lastCheckinGuest: lastGuestStore,
+    confirmGuestStore: confirmGuestStore,
+    setConfirmGuestStore,
     sideFilter,
     setSideFilter,
   };

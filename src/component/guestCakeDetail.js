@@ -39,9 +39,6 @@ function GuestCakeDetail({
 
     let modifiedGuest = { ...selectedGuest };
 
-    // // Update local state
-    // setSelectedGuest(modifiedGuest);
-
     // Update data
     updateGuestData(modifiedGuest);
 

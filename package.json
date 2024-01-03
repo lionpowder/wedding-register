@@ -26,6 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start-mock": "set REACT_APP_ENVIRONMENT=Mock& npm start",
+    "start-mock-mac": "set REACT_APP_ENVIRONMENT=Mock npm start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

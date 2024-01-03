@@ -90,12 +90,14 @@ function GuestDetail({
           flexDirection: "row",
         }}
       >
-        <Title isSub={true}>{combineNames(selectedGuest.Name)}</Title>
-        <Chip
+        <Title isSub={true}>
+          {"目前賓客:" + combineNames(selectedGuest.Name)}
+        </Title>
+        {/* <Chip
           id={id + "-chip-checkin-side"}
           label={selectedGuest.Side}
           variant="filled"
-        />
+        /> */}
         {selectedGuest.Relationship.map((relationship) => {
           return (
             <Chip

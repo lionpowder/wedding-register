@@ -9,7 +9,7 @@ import GuestDetail from "../component/guestDetail";
 import { GuestDataContext } from "../context/guestDataContext";
 
 function MainPage() {
-  const { lastCheckinGuest } = React.useContext(GuestDataContext);
+  const { confirmGuestStore } = React.useContext(GuestDataContext);
 
   return (
     <>
@@ -24,7 +24,10 @@ function MainPage() {
           }}
         >
           目前報到賓客:
-          <GuestDetail guest={lastCheckinGuest} isReadOnly={true}></GuestDetail>
+          <GuestDetail
+            guest={confirmGuestStore}
+            isReadOnly={true}
+          ></GuestDetail>
         </Paper>
       </Grid>
       {/* Recent Orders */}

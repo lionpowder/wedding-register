@@ -10,16 +10,17 @@ import { GuestDataContext } from "../context/guestDataContext";
 import { assignGuestIfEmpty } from "../utils/guestUtil";
 
 function CakeManager() {
-  /*
-TODO: also show substitutes in need of a cake
-    Show substitute receiver
- */
-  const [isFilterGuest, setIsFilterGuest] = React.useState(true);
+  const [isIncludeCakeGiven, setIsIncludeCakeGiven] = React.useState(false);
   const { guestData } = React.useContext(GuestDataContext);
   const getUnprocessedList = React.useMemo(
     () =>
-      guestData.filter((data) => (isFilterGuest ? !data.IsCakeGiven : true)),
-    [guestData, isFilterGuest]
+      guestData.filter(
+        (data) =>
+          data.NeedCake &&
+          data.IsCheckedIn &&
+          (isIncludeCakeGiven ? true : !data.IsCakeGiven)
+      ),
+    [guestData, isIncludeCakeGiven]
   );
   const [selectedGuest, setSelectedGuest] = React.useState(
     assignGuestIfEmpty({})
@@ -61,11 +62,13 @@ TODO: also show substitutes in need of a cake
           <FormControlLabel
             control={
               <Switch
-                checked={isFilterGuest}
-                onChange={(e) => setIsFilterGuest(e.target.checked)}
+                checked={isIncludeCakeGiven}
+                onChange={(e) => {
+                  setIsIncludeCakeGiven(e.target.checked);
+                }}
               />
             }
-            label="篩選"
+            label="包含已領餅"
           />
         </Paper>
         <Paper

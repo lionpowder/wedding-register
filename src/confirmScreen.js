@@ -1,10 +1,8 @@
 import * as React from "react";
-import { useReadLocalStorage } from "usehooks-ts";
-
-export const CONFIRM_GUEST_STORE = "confirm-guest-store";
+import { GuestDataContext } from "./context/guestDataContext";
 
 const ConfirmScreen = () => {
-  const confirmGuestStore = useReadLocalStorage(CONFIRM_GUEST_STORE);
+  const { confirmGuestStore } = React.useContext(GuestDataContext);
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
   React.useEffect(() => {

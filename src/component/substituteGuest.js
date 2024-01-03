@@ -62,7 +62,7 @@ function SubstituteGuest({
           expandIcon={<ExpandMoreIcon />}
           id="accordion-substitute"
         >
-          <Typography>為以下人員代領</Typography>
+          <Typography>代理以下人員:</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {substituteFor &&

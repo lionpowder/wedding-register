@@ -24,7 +24,6 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
-import ConfirmScreen from "./confirmScreen";
 
 export default function MainApp() {
   const [open, setOpen] = React.useState(true);
