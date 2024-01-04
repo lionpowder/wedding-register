@@ -27,7 +27,7 @@ function CheckInManager() {
       setSelectedGuest({});
     } else {
       // If guestData changes, update the selected guest data as well
-      setSelectedGuest(guestFound);
+      //setSelectedGuest(guestFound);
     }
   }, [guestData, selectedGuest?.Id]);
 

@@ -11,7 +11,7 @@ import GuestDetail from "./guestDetail";
 import GuestSelect from "./guestSelect";
 import GuestCakeDetail from "./guestCakeDetail";
 import { assignGuestIfEmpty, findGuestById } from "../utils/guestUtil";
-import { generateNewGuestData } from "../data/guestData";
+import { defaultGuestData, generateNewGuestData } from "../data/guestData";
 import { addGuestData } from "../db/cloudDb";
 import { GuestDataContext } from "../context/guestDataContext";
 
@@ -38,6 +38,12 @@ function SubstituteDetail({
   React.useEffect(() => {
     setSubstituteData(findGuestById(guestData, selectedSubstituteId));
   }, [guestData, selectedSubstituteId]);
+
+  React.useEffect(() => {
+    if (!open) {
+      setSubstituteData(undefined);
+    }
+  }, [open]);
 
   const handleSave = (id) => {
     // TODO: 自動將代領人員名字加入備註
@@ -104,6 +110,7 @@ function SubstituteDetail({
             <GuestDetail
               id="substitute-guest-detail"
               guest={substituteData}
+              parentGuest={guest}
               isSubstitute={true}
               onSaveChange={handleSave}
             />

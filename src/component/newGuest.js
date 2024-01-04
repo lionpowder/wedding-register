@@ -29,6 +29,8 @@ function NewGuest({ open, onChange, onClose }) {
     // Saving to cloud
     addGuestData(finalSavedData);
 
+    setNewGuest(defaultGuestData);
+
     onChange && onChange(finalSavedData);
     onClose && onClose();
   };

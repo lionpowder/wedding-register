@@ -28,13 +28,17 @@ export const determineNeedCake = (side) => {
  * @param {*} side which party the guest belongs to
  * @returns Envelop Id in the format of A1, A2,... B1, B2,... C1, C2, ...
  */
-export const generateEnvelopId = (side, guestDataList) => {
+export const generateEnvelopId = (side, guestDataList, selectedGuest) => {
   const sidePrefix = generateEnvelopIdPrefix(side);
   const currentEnvIdList = guestDataList
     .filter((data) => data.Side === side)
     .map((data) => {
       return data.EnvelopId.replace(sidePrefix, "");
     });
+
+  if (selectedGuest?.Side === side) {
+    currentEnvIdList.push(selectedGuest.EnvelopId.replace(sidePrefix, ""));
+  }
 
   const maxCurrentId = currentEnvIdList ? Math.max(...currentEnvIdList) : 0;
 

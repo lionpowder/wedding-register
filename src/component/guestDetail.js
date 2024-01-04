@@ -18,6 +18,7 @@ function GuestDetail({
   guest,
   isSubstitute = false,
   onSaveChange,
+  parentGuest,
 }) {
   const { updateGuestData, guestData } = React.useContext(GuestDataContext);
   const [selectedGuest, setSelectedGuest] = React.useState(
@@ -34,9 +35,15 @@ function GuestDetail({
       currentGuest.IsEnvelopeReceived = true;
       // Generate envelope Id automatically
       if (!guest.EnvelopId) {
-        const envelopeId = generateEnvelopId(guest.Side, guestData);
+        const envelopeId = generateEnvelopId(
+          guest.Side,
+          guestData,
+          parentGuest
+        );
         currentGuest.EnvelopId = envelopeId;
       }
+
+      console.log("guest: ", currentGuest);
     }
 
     setSelectedGuest(currentGuest);
@@ -204,7 +211,7 @@ function GuestDetail({
         )}
       </Box>
 
-      {(!isSubstitute || !(isReadOnly || !selectedGuest.IsCheckedIn)) && (
+      {!isSubstitute && !(isReadOnly || !selectedGuest.IsCheckedIn) && (
         <FormControlLabel
           label="已報到"
           control={
