@@ -55,7 +55,7 @@ function GuestRawTable() {
                   {row.NoOfRegular + row.NoOfVegetarian + row.NoOfChildren}
                 </TableCell>
                 <TableCell>{row.Side}</TableCell>
-                <TableCell>{row.TableNo}</TableCell>
+                <TableCell>{row.TableNo.join(", ")}</TableCell>
                 <TableCell>{row.EnvelopId}</TableCell>
                 <TableCell>
                   {row.IsCheckedIn && (

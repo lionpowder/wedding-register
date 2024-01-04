@@ -64,7 +64,7 @@ function GuestSelect({
           {combineNames(option.Name) +
             " " +
             (option.Alias?.length > 0
-              ? "(" + combineNames(option.Alias) + ")"
+              ? `(${combineNames(option.Alias)})`
               : "") +
             " "}
           - {option.Side}

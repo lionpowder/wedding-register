@@ -29,7 +29,12 @@ const GuestCSVParser = () => {
       return headers.reduce((acc, header, index) => {
         let value;
 
-        if (header === "Name" || header === "Alias" || header === "TableNo") {
+        if (
+          header === "Name" ||
+          header === "Alias" ||
+          header === "TableNo" ||
+          header === "Relationship"
+        ) {
           value = columns[index].split(" ").filter(Boolean);
         } else if (
           header === "NoOfVegetarian" ||
