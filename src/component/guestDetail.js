@@ -41,7 +41,7 @@ function GuestDetail({
   /**
    * Generate necessary values for the guest and save data
    */
-  const onSave = (modifiedGuest) => {
+  const onSave = async (modifiedGuest) => {
     // Should not save/update if the guest data doesn't include any Id
     if (!modifiedGuest.Id) return;
 
@@ -49,7 +49,7 @@ function GuestDetail({
     setSelectedGuest(modifiedGuest);
 
     // Update data
-    updateGuestData(modifiedGuest);
+    await updateGuestData(modifiedGuest);
 
     onSaveChange && onSaveChange(modifiedGuest.Id);
   };
@@ -95,6 +95,7 @@ function GuestDetail({
   };
 
   const onSubstituteChange = (value) => {
+    console.log("substituteChange:", value);
     const modifiedGuest = { ...selectedGuest, SubstituteFor: value };
     setSelectedGuest(modifiedGuest);
   };

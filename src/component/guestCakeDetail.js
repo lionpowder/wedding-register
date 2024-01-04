@@ -33,14 +33,14 @@ function GuestCakeDetail({
   /**
    * Generate necessary values for the guest and save data
    */
-  const onSaveClick = () => {
+  const onSaveClick = async () => {
     // Should not save/update if the guest data doesn't include any Id
     if (!selectedGuest.Id) return;
 
     let modifiedGuest = { ...selectedGuest };
 
     // Update data
-    updateGuestData(modifiedGuest);
+    await updateGuestData(modifiedGuest);
 
     onSaveChange && onSaveChange(selectedGuest.Id);
   };

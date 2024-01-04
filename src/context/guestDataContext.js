@@ -70,7 +70,7 @@ export const GuestDataProvider = ({ children }) => {
    */
   // Use partial guest data here to minimize chances of race condition for write op
   // TODO: prevent race condition (set flag that someone is currenting editing field or user? Need to pull before updating)
-  const updateGuestData = (partialGuestData) => {
+  const updateGuestData = async (partialGuestData) => {
     // Update full list within data context
     let updatedGuestDataList = [...fullGuestDataList];
     const updatedDataIdx = updatedGuestDataList.findIndex(
@@ -86,12 +86,12 @@ export const GuestDataProvider = ({ children }) => {
 
     // Update to cloud
     // TODO: if Status = "retry", need to retry updating localStorage or context data to DB every 5 min.
-    const updatedGuestDataFromCloud = updateGuestCloudData(
+    const updatedGuestDataFromCloud = await updateGuestCloudData(
       updatedGuestDataList[updatedDataIdx]
     );
 
     // Update to LocalStorage
-    setGuestDataStore(updatedGuestDataList);
+    await setGuestDataStore(updatedGuestDataList);
   };
 
   const value = {
