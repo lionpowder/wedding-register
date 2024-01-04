@@ -12,6 +12,7 @@ import { addGuestData } from "../db/cloudDb";
 import { combineNames } from "../utils/stringUtil";
 import Title from "./titleBar";
 import { defaultGuestData } from "../data/guestData";
+import GuestCSVParser from "../data/guestCSVParser";
 
 // function preventDefault(event) {
 //   event.preventDefault();
@@ -29,6 +30,7 @@ function GuestRawTable() {
     <>
       <Title>賓客名單</Title>
       <Button onClick={addClickHandler}>新增賓客</Button>
+      <GuestCSVParser />
       <Table size="small">
         <TableHead>
           <TableRow>

@@ -15,7 +15,6 @@ const SEATING_DATA_DB_NAME = "SeatData";
 const isUseMock = false;
 
 export const dateToTimestamp = (date) => {
-  console.log(date);
   return Timestamp.fromDate(date);
 };
 

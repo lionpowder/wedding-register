@@ -2,13 +2,13 @@ import { determineNeedCake } from "../utils/guestUtil";
 import { dateToTimestamp } from "../db/cloudDb";
 
 export const defaultGuestData = {
-  Name: [""],
-  Alias: [""],
+  Name: [],
+  Alias: [],
   NoOfRegular: 1,
   NoOfVegetarian: 0,
   NoOfChildren: 0,
   Relationship: [],
-  TableNo: 2,
+  TableNo: [],
   Side: "共同", // "女方", "男方"
   NeedCake: true,
   IsCheckedIn: false,
@@ -23,21 +23,22 @@ export const defaultGuestData = {
   LastModifiedTime: dateToTimestamp(new Date()),
 };
 
-export const generateNewGuestData = (
-  name,
-  alias,
-  noOfRegular,
-  relationship,
-  side
-) => {
-  return {
-    ...defaultGuestData,
-    Name: name,
-    Alias: alias,
-    NoOfRegular: noOfRegular, // TODO: put as regular first, modify if need vegetarian or have children
-    Relationship: relationship,
-    TableNo: 2, // TODO: auto generated based on the rule?
-    Side: side,
-    NeedCake: determineNeedCake(side),
-  };
+// required fields: Name, NoOfRegular, Side
+export const generateNewGuestData = (partialGuestData) => {
+  const newGuestData = { ...partialGuestData };
+  Object.keys(defaultGuestData).forEach((key) => {
+    if (partialGuestData[key] === undefined) {
+      switch (key) {
+        case "NeedCake":
+          newGuestData[key] = determineNeedCake(partialGuestData.Side);
+          return;
+        case "LastModifiedTime":
+          newGuestData[key] = dateToTimestamp(new Date());
+          return;
+        default:
+      }
+      newGuestData[key] = defaultGuestData[key];
+    }
+  });
+  return newGuestData;
 };
