@@ -112,14 +112,15 @@ function GuestDetail({
               flexDirection: "row",
             }}
           >
-            <Title isSub={true}>
+            {/* <Title isSub={true}>
               {"目前賓客: " + combineNames(selectedGuest.Name)}
-            </Title>
+            </Title> */}
             <Box
               sx={{
                 gap: "4px",
                 display: "flex",
                 flexDirection: "row",
+                mt: "8px",
               }}
             >
               {/* <Chip

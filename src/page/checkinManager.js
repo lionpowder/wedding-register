@@ -42,7 +42,6 @@ function CheckInManager() {
         <Paper
           sx={{
             p: 2,
-            pb: 1,
             display: "flex",
             flexDirection: "column",
           }}
@@ -52,15 +51,7 @@ function CheckInManager() {
             selectedGuest={selectedGuest}
             guestNameChangeHandler={guestNameChangeHandler}
           />
-        </Paper>
-        <Paper
-          sx={{
-            p: 2,
-            display: "flex",
-            flexDirection: "column",
-            minHeight: "200px",
-          }}
-        >
+
           {selectedGuest?.Id && (
             <GuestDetail
               guest={selectedGuest}
@@ -70,8 +61,9 @@ function CheckInManager() {
         </Paper>
       </Grid>
       {/* Guest Data */}
+      <br />
       <Grid item xs={12}>
-        <Paper sx={{ p: 2, pt: 5, display: "flex", flexDirection: "column" }}>
+        <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
           <GuestRawTable />
         </Paper>
       </Grid>
