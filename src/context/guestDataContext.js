@@ -10,10 +10,10 @@ import { sides } from "../data/sideData";
 import { isGuestEmpty } from "../utils/guestUtil";
 
 export const GuestDataContext = React.createContext({
-  guestData: [defaultGuestData],
+  guestData: [],
   updateGuestData: null,
   setConfirmGuest: null,
-  confirmGuestStore: defaultGuestData,
+  confirmGuestStore: null,
   setConfirmGuestStore: null,
   sideFilter: sides,
   setSideFilter: null,
@@ -27,10 +27,10 @@ export const GuestDataProvider = ({ children }) => {
     useConfirmGuestStore(defaultGuestData);
   // Full list of data based on cloud db, local storage, & current state
   const [fullGuestDataList, setFullGuestDataList] = React.useState(
-    guestCloud || [defaultGuestData]
+    guestCloud || []
   );
   // Filtered guest data used to show on every page
-  const [guestDataList, setGuestDataList] = React.useState([defaultGuestData]);
+  const [guestDataList, setGuestDataList] = React.useState([]);
   // Guest's side filtering criteria
   const [sideFilter, setSideFilter] = React.useState(sides);
 

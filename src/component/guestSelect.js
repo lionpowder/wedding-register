@@ -62,8 +62,9 @@ function GuestSelect({
         >
           {combineNames(option.Name) +
             " " +
-            (option.Alias?.length > 0 &&
-              "(" + combineNames(option.Alias) + ")") +
+            (option.Alias?.length > 0
+              ? `(${combineNames(option.Alias)})`
+              : "") +
             " "}
           - {option.Side}
           {option.IsCheckedIn && (
