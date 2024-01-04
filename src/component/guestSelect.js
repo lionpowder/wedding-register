@@ -52,10 +52,7 @@ function GuestSelect({
           return value === option.Id || value === null;
         } else {
           return (
-            value === null ||
-            value === undefined ||
-            value.Id === option.Id ||
-            Object.keys(value).length === 0
+            value === null || value === undefined || value.Id === option.Id
           );
         }
       }}
