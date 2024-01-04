@@ -112,6 +112,7 @@ function GuestCakeDetail({
           substituteFor={selectedGuest.SubstituteFor}
           guestSubstituteChangeHandler={onSubstituteChange}
           isGuestCake={true}
+          title="代領"
         ></SubstituteGuest>
       )}
 

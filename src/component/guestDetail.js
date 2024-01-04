@@ -227,6 +227,7 @@ function GuestDetail({
               guestData={guestData}
               substituteFor={selectedGuest.SubstituteFor}
               guestSubstituteChangeHandler={onSubstituteChange}
+              title="代包紅包"
             ></SubstituteGuest>
           )}
 

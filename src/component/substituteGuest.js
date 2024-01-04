@@ -21,6 +21,7 @@ function SubstituteGuest({
   substituteFor,
   guestSubstituteChangeHandler,
   isGuestCake,
+  title,
 }) {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const [selectedSubstitute, setSelectedSubstitute] = React.useState(null);
@@ -62,7 +63,7 @@ function SubstituteGuest({
           expandIcon={<ExpandMoreIcon />}
           id="accordion-substitute"
         >
-          <Typography>代理以下人員:</Typography>
+          <Typography>{title}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {substituteFor &&
