@@ -35,8 +35,8 @@ function GuestSelect({
             : option;
         return Object.keys(currentGuest).length !== 0
           ? combineNames(currentGuest.Name) +
-              (option.Alias?.length > 0
-                ? `(${combineNames(option.Alias)})`
+              (currentGuest.Alias?.length > 0
+                ? "(" + combineNames(currentGuest.Alias) + ")"
                 : "")
           : "";
       }}

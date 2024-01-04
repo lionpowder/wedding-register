@@ -10,6 +10,7 @@ export const PageContext = React.createContext({
 });
 
 // TODO: Add user info to the app later
+// TODO: Whenever there's new update in data from cloud/localstorage, send notification to current user
 export const PageProvider = ({ children }) => {
   const [currentPageName, setCurrentPageName] = React.useState(entryPage);
 

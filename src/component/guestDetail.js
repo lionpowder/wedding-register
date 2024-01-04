@@ -98,63 +98,67 @@ function GuestDetail({
 
   return (
     <>
-      <Box
-        sx={{
-          gap: "16px",
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        <Title isSub={true}>
-          {"目前賓客: " + combineNames(selectedGuest.Name)}
-        </Title>
-        <Box
-          sx={{
-            gap: "4px",
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          {/* <Chip
-          id={id + "-chip-checkin-side"}
-          label={selectedGuest.Side}
-          variant="filled"
-        /> */}
-          {selectedGuest.Relationship.map((relationship) => {
-            return (
+      {!isSubstitute && (
+        <>
+          <Box
+            sx={{
+              gap: "16px",
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Title isSub={true}>
+              {"目前賓客: " + combineNames(selectedGuest.Name)}
+            </Title>
+            <Box
+              sx={{
+                gap: "4px",
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              {/* <Chip
+                id={id + "-chip-checkin-side"}
+                label={selectedGuest.Side}
+                variant="filled"
+              /> */}
+              {selectedGuest.Relationship.map((relationship) => {
+                return (
+                  <Chip
+                    key={id + "-chip-side-" + relationship}
+                    label={relationship}
+                    variant="outlined"
+                  />
+                );
+              })}
               <Chip
-                key={id + "-chip-side-" + relationship}
-                label={relationship}
+                id={id + "chip-cake-side"}
+                label={"桌次: " + (selectedGuest.TableNo || "未指定")}
                 variant="outlined"
               />
-            );
-          })}
-          <Chip
-            id={id + "chip-cake-side"}
-            label={"桌次: " + (selectedGuest.TableNo.join(", ") || "未指定")}
-            variant="outlined"
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              mt: "4px",
+              mb: "8px",
+            }}
+          >
+            {/* <Typography variant="body1" gutterBottom>
+              {"桌次: " + (selectedGuest.TableNo || "未指定")}
+            </Typography> */}
+            <Typography variant="body1" gutterBottom>
+              {"備註: " + (selectedGuest.GeneralNote || "")}
+            </Typography>
+          </Box>
+          <GuestNumber
+            id={id + "-number"}
+            selectedGuest={selectedGuest}
+            setSelectedGuest={setSelectedGuest}
+            isReadOnly={isReadOnly}
           />
-        </Box>
-      </Box>
-      <Box
-        sx={{
-          mt: "4px",
-          mb: "8px",
-        }}
-      >
-        {/* <Typography variant="body1" gutterBottom>
-          {"桌次: " + (selectedGuest.TableNo.join(', ') || "未指定")}
-        </Typography> */}
-        <Typography variant="body1" gutterBottom>
-          {"備註: " + (selectedGuest.GeneralNote || "")}
-        </Typography>
-      </Box>
-      <GuestNumber
-        id={id + "-number"}
-        selectedGuest={selectedGuest}
-        setSelectedGuest={setSelectedGuest}
-        isReadOnly={isReadOnly}
-      />
+        </>
+      )}
       <Box
         sx={{
           gap: "4px",
