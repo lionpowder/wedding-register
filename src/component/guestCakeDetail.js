@@ -108,7 +108,6 @@ function GuestCakeDetail({
       {!isSubstitute && (
         <SubstituteGuest
           guest={selectedGuest}
-          guestData={guestData}
           substituteFor={selectedGuest.SubstituteFor}
           guestSubstituteChangeHandler={onSubstituteChange}
           isGuestCake={true}

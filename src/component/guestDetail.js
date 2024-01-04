@@ -7,12 +7,10 @@ import Chip from "@mui/material/Chip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import Title from "./titleBar";
 import GuestNumber from "./guestNumber";
 import SubstituteGuest from "./substituteGuest";
 import { GuestDataContext } from "../context/guestDataContext";
 import { assignGuestIfEmpty, generateEnvelopId } from "../utils/guestUtil";
-import { combineNames } from "../utils/stringUtil";
 
 function GuestDetail({
   id = "guest",
@@ -21,8 +19,7 @@ function GuestDetail({
   isSubstitute = false,
   onSaveChange,
 }) {
-  const { updateGuestData, guestData, setConfirmGuestStore } =
-    React.useContext(GuestDataContext);
+  const { updateGuestData, guestData } = React.useContext(GuestDataContext);
   const [selectedGuest, setSelectedGuest] = React.useState(
     assignGuestIfEmpty(guest)
   );
@@ -31,12 +28,18 @@ function GuestDetail({
    * Reassign guest to state if prop changes
    */
   React.useEffect(() => {
-    setSelectedGuest(assignGuestIfEmpty(guest));
-  }, [guest]);
+    const currentGuest = assignGuestIfEmpty(guest);
 
-  React.useEffect(() => {
-    setConfirmGuestStore(selectedGuest);
-  }, [selectedGuest]);
+    if (isSubstitute) {
+      currentGuest.IsEnvelopeReceived = true;
+      // Generate envelope Id automatically
+      if (!guest.EnvelopId) {
+        const envelopeId = generateEnvelopId(guest.Side, guestData);
+        currentGuest.EnvelopId = envelopeId;
+      }
+    }
+    setSelectedGuest(currentGuest);
+  }, [guest, isSubstitute, guestData]);
 
   /**
    * Generate necessary values for the guest and save data
@@ -236,7 +239,6 @@ function GuestDetail({
           {!isSubstitute && (
             <SubstituteGuest
               guest={selectedGuest}
-              guestData={guestData}
               substituteFor={selectedGuest.SubstituteFor}
               guestSubstituteChangeHandler={onSubstituteChange}
               title="代包紅包"

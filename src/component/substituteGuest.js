@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import GuestSelect from "./guestSelect";
 import SubstituteDetail from "./substituteDetail";
+import { GuestDataContext } from "../context/guestDataContext";
 
 /**
  *
@@ -17,12 +18,13 @@ import SubstituteDetail from "./substituteDetail";
  * @returns
  */
 function SubstituteGuest({
-  guestData,
+  guest,
   substituteFor,
   guestSubstituteChangeHandler,
-  isGuestCake,
+  isGuestCake = false,
   title,
 }) {
+  const { guestData } = React.useContext(GuestDataContext);
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const [selectedSubstitute, setSelectedSubstitute] = React.useState(null);
 
@@ -125,6 +127,7 @@ function SubstituteGuest({
             onChange={substituteOnChange}
             onClose={onClose}
             guestData={guestData}
+            guest={guest}
             isGuestCake={isGuestCake}
           ></SubstituteDetail>
         </AccordionDetails>

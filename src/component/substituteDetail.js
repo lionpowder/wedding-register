@@ -21,6 +21,7 @@ import { addGuestData } from "../db/cloudDb";
 function SubstituteDetail({
   open,
   guestData,
+  guest,
   selectedSubstitute,
   onChange,
   onClose,
@@ -56,6 +57,7 @@ function SubstituteDetail({
     if (newGuestInput.current && newGuestInput.current.length > 0) {
       const newGuest = generateNewGuestData({
         Name: [newGuestInput.current],
+        Side: guest.Side,
       });
 
       // Saving to cloud
