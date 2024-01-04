@@ -35,8 +35,9 @@ function GuestSelect({
             : option;
         return Object.keys(currentGuest).length !== 0
           ? combineNames(currentGuest.Name) +
-              (currentGuest.Alias?.length > 0 &&
-                "(" + combineNames(currentGuest.Alias) + ")")
+              (currentGuest.Alias?.length > 0
+                ? "(" + combineNames(currentGuest.Alias) + ")"
+                : "")
           : "";
       }}
       renderInput={(params) => (
@@ -62,8 +63,9 @@ function GuestSelect({
         >
           {combineNames(option.Name) +
             " " +
-            (option.Alias?.length > 0 &&
-              "(" + combineNames(option.Alias) + ")") +
+            (option.Alias?.length > 0
+              ? "(" + combineNames(option.Alias) + ")"
+              : "") +
             " "}
           - {option.Side}
           {option.IsCheckedIn && (

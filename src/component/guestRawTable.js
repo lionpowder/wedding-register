@@ -7,11 +7,10 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
-import { GuestDataContext } from "../context/guestDataContext";
-import { addGuestData } from "../db/cloudDb";
-import { combineNames } from "../utils/stringUtil";
+import NewGuest from "./newGuest";
 import Title from "./titleBar";
-import { defaultGuestData } from "../data/guestData";
+import { GuestDataContext } from "../context/guestDataContext";
+import { combineNames } from "../utils/stringUtil";
 import GuestCSVParser from "../data/guestCSVParser";
 
 // function preventDefault(event) {
@@ -20,10 +19,14 @@ import GuestCSVParser from "../data/guestCSVParser";
 
 function GuestRawTable() {
   const { guestData } = React.useContext(GuestDataContext);
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
   const addClickHandler = (e) => {
-    // TODO: use generateNewGuestData to generate new data
-    addGuestData(defaultGuestData);
+    setIsDialogOpen(true);
+  };
+
+  const closeHandler = () => {
+    setIsDialogOpen(false);
   };
 
   return (
@@ -69,6 +72,7 @@ function GuestRawTable() {
             ))}
         </TableBody>
       </Table>
+      <NewGuest open={isDialogOpen} onClose={closeHandler} />
       {/* <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
         See more orders
       </Link> */}

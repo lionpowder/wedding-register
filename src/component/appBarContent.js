@@ -37,10 +37,10 @@ function AppBarContent(props) {
         {props.currentPageTitle ?? "Title"}
       </Typography>
       <SideSelectionBar />
-      <IconButton color="inherit">
-        <Badge badgeContent={4} color="secondary">
+      <IconButton color="inherit" disabled>
+        {/* <Badge badgeContent={4} color="secondary">
           <NotificationsIcon />
-        </Badge>
+        </Badge> */}
       </IconButton>
     </Toolbar>
   );
