@@ -37,21 +37,58 @@ const ConfirmScreen = () => {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              backgroundColor: "rgba(255, 255, 255, 0.7)",
-              padding: "20px",
+              backgroundColor: "rgba(255, 255, 255, 0.85)",
+              padding: "48px",
               borderRadius: "10px",
+              fontSize: "48px",
             }}
           >
-            <h2>{confirmGuestStore.Name.join(", ")}</h2>
-            <p>Table: {confirmGuestStore.TableNo}</p>
-            <p>
-              Total Attendees:{" "}
-              {confirmGuestStore.NoOfRegular +
-                confirmGuestStore.NoOfVegetarian +
-                confirmGuestStore.NoOfChildren}
-            </p>
-            <p>Vegetarians: {confirmGuestStore.NoOfVegetarian}</p>
-            <p>Children Chairs: {confirmGuestStore.NoOfChildren}</p>
+            <h2
+              style={{
+                textAlign: "center",
+                fontSize: "64px",
+                margin: 0,
+              }}
+            >
+              {confirmGuestStore.Name.join(", ")}
+            </h2>
+            <div
+              style={{
+                marginTop: "48px",
+              }}
+            >
+              <p
+                style={{
+                  margin: "24px 0 0 0 ",
+                }}
+              >
+                桌號: {confirmGuestStore.TableNo.join(", ")}
+              </p>
+              <p
+                style={{
+                  margin: "24px 0 0 0 ",
+                }}
+              >
+                總人數:{" "}
+                {confirmGuestStore.NoOfRegular +
+                  confirmGuestStore.NoOfVegetarian +
+                  confirmGuestStore.NoOfChildren}
+              </p>
+              <p
+                style={{
+                  margin: "24px 0 0 0 ",
+                }}
+              >
+                素食人數: {confirmGuestStore.NoOfVegetarian}
+              </p>
+              <p
+                style={{
+                  margin: "24px 0 0 0 ",
+                }}
+              >
+                兒童椅: {confirmGuestStore.NoOfChildren}
+              </p>
+            </div>
           </div>
         )}
       </div>

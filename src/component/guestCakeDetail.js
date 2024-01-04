@@ -77,7 +77,7 @@ function GuestCakeDetail({
         <Title isSub={true}>{combineNames(selectedGuest.Name)}</Title>
         <Chip
           id={id + "chip-cake-side"}
-          label={"桌次: " + (selectedGuest.TableNo || "未指定")}
+          label={"桌次: " + (selectedGuest.TableNo.join(", ") || "未指定")}
           variant="filled"
         />
       </Box>

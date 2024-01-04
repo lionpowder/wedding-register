@@ -35,8 +35,9 @@ function GuestSelect({
             : option;
         return Object.keys(currentGuest).length !== 0
           ? combineNames(currentGuest.Name) +
-              (currentGuest.Alias?.length > 0 &&
-                "(" + combineNames(currentGuest.Alias) + ")")
+              (option.Alias?.length > 0
+                ? `(${combineNames(option.Alias)})`
+                : "")
           : "";
       }}
       renderInput={(params) => (

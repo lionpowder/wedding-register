@@ -131,7 +131,7 @@ function GuestDetail({
           })}
           <Chip
             id={id + "chip-cake-side"}
-            label={"桌次: " + (selectedGuest.TableNo || "未指定")}
+            label={"桌次: " + (selectedGuest.TableNo.join(", ") || "未指定")}
             variant="outlined"
           />
         </Box>
@@ -143,7 +143,7 @@ function GuestDetail({
         }}
       >
         {/* <Typography variant="body1" gutterBottom>
-          {"桌次: " + (selectedGuest.TableNo || "未指定")}
+          {"桌次: " + (selectedGuest.TableNo.join(', ') || "未指定")}
         </Typography> */}
         <Typography variant="body1" gutterBottom>
           {"備註: " + (selectedGuest.GeneralNote || "")}
