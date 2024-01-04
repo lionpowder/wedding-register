@@ -62,7 +62,10 @@ function CheckInManager() {
           }}
         >
           {selectedGuest?.Id && (
-            <GuestDetail guest={selectedGuest}></GuestDetail>
+            <GuestDetail
+              guest={selectedGuest}
+              onSaveChange={() => setSelectedGuest({})}
+            ></GuestDetail>
           )}
         </Paper>
       </Grid>

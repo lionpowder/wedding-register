@@ -21,7 +21,8 @@ function GuestDetail({
   isSubstitute = false,
   onSaveChange,
 }) {
-  const { updateGuestData, guestData } = React.useContext(GuestDataContext);
+  const { updateGuestData, guestData, setConfirmGuestStore } =
+    React.useContext(GuestDataContext);
   const [selectedGuest, setSelectedGuest] = React.useState(
     assignGuestIfEmpty(guest)
   );
@@ -32,6 +33,10 @@ function GuestDetail({
   React.useEffect(() => {
     setSelectedGuest(assignGuestIfEmpty(guest));
   }, [guest]);
+
+  React.useEffect(() => {
+    setConfirmGuestStore(selectedGuest);
+  }, [selectedGuest]);
 
   /**
    * Generate necessary values for the guest and save data
@@ -133,7 +138,9 @@ function GuestDetail({
               })}
               <Chip
                 id={id + "chip-cake-side"}
-                label={"桌次: " + (selectedGuest.TableNo || "未指定")}
+                label={
+                  "桌次: " + (selectedGuest.TableNo.join(", ") || "未指定")
+                }
                 variant="outlined"
               />
             </Box>
@@ -144,12 +151,11 @@ function GuestDetail({
               mb: "8px",
             }}
           >
-            {/* <Typography variant="body1" gutterBottom>
-              {"桌次: " + (selectedGuest.TableNo || "未指定")}
-            </Typography> */}
-            <Typography variant="body1" gutterBottom>
-              {"備註: " + (selectedGuest.GeneralNote || "")}
-            </Typography>
+            {selectedGuest.GeneralNote && (
+              <Typography variant="body1" gutterBottom>
+                {"備註: " + (selectedGuest.GeneralNote || "")}
+              </Typography>
+            )}
           </Box>
           <GuestNumber
             id={id + "-number"}
@@ -250,12 +256,12 @@ function GuestDetail({
             <Button
               id={id + "-button-checkin-guest-checkin"}
               onClick={onCheckInClick}
-              variant="outlined"
+              variant="contained"
               sx={{
                 mt: "8px",
               }}
             >
-              {guest.IsCheckedIn ? "儲存" : "報到"}
+              {guest.IsCheckedIn ? "完成編輯" : "完成報到"}
             </Button>
           )}
         </>
