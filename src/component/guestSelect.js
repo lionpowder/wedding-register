@@ -16,11 +16,14 @@ function GuestSelect({
   guestData,
   selectedGuest,
   guestNameChangeHandler,
+  inputChangeHandler,
   id = "guest-select",
   disabled = false,
+  freeSolo = false,
 }) {
   return (
     <Autocomplete
+      freeSolo={freeSolo}
       disabled={disabled}
       sx={{
         "min-width": "300px",
@@ -31,9 +34,10 @@ function GuestSelect({
       getOptionLabel={(option) => {
         const currentGuest =
           typeof option === "string"
-            ? findGuestById(guestData, option)
+            ? findGuestById(guestData, option) ?? option
             : option;
-        return Object.keys(currentGuest).length !== 0
+
+        return currentGuest && Object.keys(currentGuest).length !== 0
           ? combineNames(currentGuest.Name) +
               (currentGuest.Alias?.length > 0
                 ? "(" + combineNames(currentGuest.Alias) + ")"
@@ -77,6 +81,7 @@ function GuestSelect({
       )}
       value={selectedGuest}
       onChange={guestNameChangeHandler}
+      onInputChange={inputChangeHandler}
     />
   );
 }

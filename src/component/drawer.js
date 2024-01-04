@@ -19,9 +19,7 @@ const Drawer = styled(MuiDrawer, {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      [theme.breakpoints.up("sm")]: {
-        width: 56,
-      },
+      width: 56,
     }),
   },
 }));

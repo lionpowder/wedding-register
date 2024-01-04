@@ -1,18 +1,18 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import { assignGuestIfEmpty, findGuestById } from "../utils/guestUtil";
 import GuestDetail from "./guestDetail";
 import GuestSelect from "./guestSelect";
 import GuestCakeDetail from "./guestCakeDetail";
+import { assignGuestIfEmpty, findGuestById } from "../utils/guestUtil";
+import { generateNewGuestData } from "../data/guestData";
+import { addGuestData } from "../db/cloudDb";
 
 /**
  *
@@ -31,6 +31,8 @@ function SubstituteDetail({
   const [substituteData, setSubstituteData] = React.useState(
     findGuestById(guestData, selectedSubstitute)
   );
+  const newGuestInput = React.useRef(null);
+  // const [newGuestName, setNewGuestName] = React.useState("");
 
   React.useEffect(() => {
     setSubstituteData(findGuestById(guestData, selectedSubstitute));
@@ -42,6 +44,26 @@ function SubstituteDetail({
     onClose();
   };
 
+  const handleSelectionChange = (e, value) => {
+    setSubstituteData(value);
+  };
+
+  const handleSearchChange = (e, value) => {
+    newGuestInput.current = value;
+  };
+
+  const handleAddNewGuest = async () => {
+    if (newGuestInput.current && newGuestInput.current.length > 0) {
+      const newGuest = generateNewGuestData({
+        Name: [newGuestInput.current],
+      });
+
+      // Saving to cloud
+      const savedGuestData = await addGuestData(newGuest);
+      setSubstituteData(savedGuestData);
+    }
+  };
+
   return (
     <Dialog open={open} onClose={onClose} fullScreen={fullScreen}>
       <DialogTitle>賓客資料</DialogTitle>
@@ -51,14 +73,29 @@ function SubstituteDetail({
           will send updates occasionally.
         </DialogContentText> */}
         {!selectedSubstitute && (
-          <GuestSelect
-            id={"substitute-guest-dialog"}
-            guestData={guestData}
-            selectedGuest={assignGuestIfEmpty(substituteData)}
-            guestNameChangeHandler={(e, value) => {
-              setSubstituteData(value);
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "4px",
             }}
-          />
+          >
+            <GuestSelect
+              sx={{
+                mt: "8px",
+                "&.MuiAutocomplete-root": {
+                  flexGrow: 1,
+                },
+              }}
+              freeSolo={true}
+              id={"substitute-guest-dialog"}
+              guestData={guestData}
+              selectedGuest={assignGuestIfEmpty(substituteData)}
+              guestNameChangeHandler={handleSelectionChange}
+              inputChangeHandler={handleSearchChange}
+            />
+            <Button onClick={handleAddNewGuest}>新增賓客</Button>
+          </Box>
         )}
         {substituteData &&
           (!isGuestCake ? (
