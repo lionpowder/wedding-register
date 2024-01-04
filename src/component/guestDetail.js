@@ -100,7 +100,7 @@ function GuestDetail({
     <>
       <Box
         sx={{
-          gap: "4px",
+          gap: "16px",
           display: "flex",
           flexDirection: "row",
         }}
@@ -108,20 +108,33 @@ function GuestDetail({
         <Title isSub={true}>
           {"目前賓客: " + combineNames(selectedGuest.Name)}
         </Title>
-        {/* <Chip
+        <Box
+          sx={{
+            gap: "4px",
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          {/* <Chip
           id={id + "-chip-checkin-side"}
           label={selectedGuest.Side}
           variant="filled"
         /> */}
-        {selectedGuest.Relationship.map((relationship) => {
-          return (
-            <Chip
-              key={id + "-chip-side-" + relationship}
-              label={relationship}
-              variant="outlined"
-            />
-          );
-        })}
+          {selectedGuest.Relationship.map((relationship) => {
+            return (
+              <Chip
+                key={id + "-chip-side-" + relationship}
+                label={relationship}
+                variant="outlined"
+              />
+            );
+          })}
+          <Chip
+            id={id + "chip-cake-side"}
+            label={"桌次: " + (selectedGuest.TableNo || "未指定")}
+            variant="outlined"
+          />
+        </Box>
       </Box>
       <Box
         sx={{
@@ -129,18 +142,25 @@ function GuestDetail({
           mb: "8px",
         }}
       >
-        <Typography variant="body1" gutterBottom>
+        {/* <Typography variant="body1" gutterBottom>
           {"桌次: " + (selectedGuest.TableNo || "未指定")}
-        </Typography>
+        </Typography> */}
         <Typography variant="body1" gutterBottom>
           {"備註: " + (selectedGuest.GeneralNote || "")}
         </Typography>
       </Box>
+      <GuestNumber
+        id={id + "-number"}
+        selectedGuest={selectedGuest}
+        setSelectedGuest={setSelectedGuest}
+        isReadOnly={isReadOnly}
+      />
       <Box
         sx={{
           gap: "4px",
           display: "flex",
           flexDirection: "row",
+          alignItems: "center",
         }}
       >
         <FormControlLabel
@@ -163,7 +183,7 @@ function GuestDetail({
         {selectedGuest.EnvelopId && (
           <Chip
             id={id + "-chip-checkin-envelopeId"}
-            label={selectedGuest.EnvelopId}
+            label={"紅包號: " + selectedGuest.EnvelopId}
             variant="filled"
           />
         )}
@@ -187,12 +207,6 @@ function GuestDetail({
           }
         />
       )}
-      <GuestNumber
-        id={id + "-number"}
-        selectedGuest={selectedGuest}
-        setSelectedGuest={setSelectedGuest}
-        isReadOnly={isReadOnly}
-      />
       {!isReadOnly && (
         <>
           <TextField
@@ -202,6 +216,9 @@ function GuestDetail({
             rows={3}
             value={selectedGuest.CheckinNote || ""}
             onChange={onNoteChange}
+            sx={{
+              mt: "4px",
+            }}
           />
 
           {!isSubstitute && (

@@ -29,7 +29,7 @@ function CheckInManager() {
       // If guestData changes, update the selected guest data as well
       setSelectedGuest(guestFound);
     }
-  }, [guestData, selectedGuest.Id]);
+  }, [guestData, selectedGuest?.Id]);
 
   React.useEffect(() => {
     setConfirmGuestStore(selectedGuest);
@@ -58,9 +58,12 @@ function CheckInManager() {
             p: 2,
             display: "flex",
             flexDirection: "column",
+            minHeight: "200px",
           }}
         >
-          <GuestDetail guest={selectedGuest}></GuestDetail>
+          {selectedGuest?.Id && (
+            <GuestDetail guest={selectedGuest}></GuestDetail>
+          )}
         </Paper>
       </Grid>
       {/* Guest Data */}

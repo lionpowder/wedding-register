@@ -14,16 +14,18 @@ function CakeManager() {
   const { guestData } = React.useContext(GuestDataContext);
   const getUnprocessedList = React.useMemo(
     () =>
-      guestData.filter(
-        (data) =>
-          data.NeedCake &&
-          data.IsCheckedIn &&
-          (isIncludeCakeGiven ? true : !data.IsCakeGiven)
-      ),
+      guestData
+        .filter(
+          (data) =>
+            data.NeedCake &&
+            data.IsCheckedIn &&
+            (isIncludeCakeGiven ? true : !data.IsCakeGiven)
+        )
+        .sort((a, b) => b?.LastModifiedTime - a?.LastModifiedTime),
     [guestData, isIncludeCakeGiven]
   );
   const [selectedGuest, setSelectedGuest] = React.useState(
-    assignGuestIfEmpty({})
+    assignGuestIfEmpty(getUnprocessedList[0])
   );
 
   const guestNameChangeHandler = (e, value) => {
@@ -32,10 +34,10 @@ function CakeManager() {
 
   // clear selection if the can't find the selected guest in the guest list anymore
   React.useEffect(() => {
-    if (!getUnprocessedList.find((guest) => selectedGuest.Id === guest.Id)) {
-      setSelectedGuest(assignGuestIfEmpty({}));
+    if (!getUnprocessedList.find((guest) => selectedGuest?.Id === guest.Id)) {
+      setSelectedGuest(getUnprocessedList[0]);
     }
-  }, [getUnprocessedList, selectedGuest.Id]);
+  }, [getUnprocessedList, selectedGuest?.Id]);
 
   return (
     <>
@@ -76,9 +78,12 @@ function CakeManager() {
             p: 2,
             display: "flex",
             flexDirection: "column",
+            minHeight: "200px",
           }}
         >
-          <GuestCakeDetail guest={selectedGuest}></GuestCakeDetail>
+          {selectedGuest?.Id && (
+            <GuestCakeDetail guest={selectedGuest}></GuestCakeDetail>
+          )}
         </Paper>
       </Grid>
       {/* Guest Data */}

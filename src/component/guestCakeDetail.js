@@ -116,7 +116,7 @@ function GuestCakeDetail({
       )}
 
       <Button id="button-checkin-guest-save" onClick={onSaveClick}>
-        Save
+        儲存
       </Button>
     </>
   );

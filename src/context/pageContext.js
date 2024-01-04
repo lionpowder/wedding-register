@@ -7,19 +7,15 @@ export const PageContext = React.createContext({
   // eslint-disable-next-line no-undef
   currentPageName: entryPage,
   setCurrentPageName: null,
-  app: null,
-  setApp: null,
 });
 
+// TODO: Add user info to the app later
 export const PageProvider = ({ children }) => {
   const [currentPageName, setCurrentPageName] = React.useState(entryPage);
-  const [app, setApp] = React.useState(null); // TODO: what is set app....
 
   const value = {
     currentPageName,
     setCurrentPageName,
-    app,
-    setApp,
   };
 
   return (

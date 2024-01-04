@@ -47,8 +47,9 @@ function GuestSelect({
           return value === option.Id || value === null;
         } else {
           return (
-            value.Id === option.Id ||
             value === null ||
+            value === undefined ||
+            value.Id === option.Id ||
             Object.keys(value).length === 0
           );
         }
