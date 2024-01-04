@@ -38,7 +38,7 @@ export const GuestDataProvider = ({ children }) => {
    * This function will trigger every time there's an update in Local Storage
    */
   React.useEffect(() => {
-    console.log("Changes in guestStore: ", guestStore);
+    // console.log("Changes in guestStore: ", guestStore);
   }, [guestStore]);
 
   /**
@@ -47,7 +47,7 @@ export const GuestDataProvider = ({ children }) => {
    */
   // TODO: need to combine list from both cloud & localStorage
   React.useEffect(() => {
-    console.log("Changes in guestCloud: ", guestCloud, guestStore);
+    // console.log("Changes in guestCloud: ", guestCloud, guestStore);
     guestCloud && setFullGuestDataList(guestCloud);
 
     if (isGuestEmpty(guestStore) && guestCloud) setGuestDataStore(guestCloud);

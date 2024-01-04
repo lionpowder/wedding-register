@@ -59,7 +59,6 @@ function GuestCakeDetail({
   };
 
   const onSubstituteChange = (value) => {
-    console.log("onSubstituteChange", value);
     const modifiedGuest = { ...selectedGuest, SubstituteFor: value };
     setSelectedGuest(modifiedGuest);
   };

@@ -13,6 +13,7 @@ import GuestCakeDetail from "./guestCakeDetail";
 import { assignGuestIfEmpty, findGuestById } from "../utils/guestUtil";
 import { generateNewGuestData } from "../data/guestData";
 import { addGuestData } from "../db/cloudDb";
+import { GuestDataContext } from "../context/guestDataContext";
 
 /**
  *
@@ -20,24 +21,23 @@ import { addGuestData } from "../db/cloudDb";
  */
 function SubstituteDetail({
   open,
-  guestData,
   guest,
-  selectedSubstitute,
+  selectedSubstitute: selectedSubstituteId,
   onChange,
   onClose,
   isGuestCake = false,
 }) {
+  const { guestData } = React.useContext(GuestDataContext);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [substituteData, setSubstituteData] = React.useState(
-    findGuestById(guestData, selectedSubstitute)
+    findGuestById(guestData, selectedSubstituteId)
   );
   const newGuestInput = React.useRef(null);
-  // const [newGuestName, setNewGuestName] = React.useState("");
 
   React.useEffect(() => {
-    setSubstituteData(findGuestById(guestData, selectedSubstitute));
-  }, [guestData, selectedSubstitute]);
+    setSubstituteData(findGuestById(guestData, selectedSubstituteId));
+  }, [guestData, selectedSubstituteId]);
 
   const handleSave = (id) => {
     // TODO: 自動將代領人員名字加入備註
@@ -74,7 +74,7 @@ function SubstituteDetail({
           To subscribe to this website, please enter your email address here. We
           will send updates occasionally.
         </DialogContentText> */}
-        {!selectedSubstitute && (
+        {!selectedSubstituteId && (
           <Box
             sx={{
               display: "flex",

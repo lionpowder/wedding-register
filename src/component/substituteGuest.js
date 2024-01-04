@@ -126,7 +126,6 @@ function SubstituteGuest({
             selectedSubstitute={selectedSubstitute}
             onChange={substituteOnChange}
             onClose={onClose}
-            guestData={guestData}
             guest={guest}
             isGuestCake={isGuestCake}
           ></SubstituteDetail>

@@ -37,7 +37,7 @@ const useCloudDB = (path) => {
           let myDataArray = [];
           snapshot.forEach((doc) => {
             var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
-            console.log(source, " data: ", doc.data());
+            // console.log(source, " data: ", doc.data());
 
             myDataArray.push({
               ...doc.data(),
@@ -46,19 +46,19 @@ const useCloudDB = (path) => {
             });
           });
 
-          snapshot.docChanges().forEach((change) => {
-            if (change.type === "added") {
-              console.log("New city: ", change.doc.data());
-            }
-            if (change.type === "modified") {
-              console.log("Modified city: ", change.doc.data());
-            }
-            if (change.type === "removed") {
-              console.log("Removed city: ", change.doc.data());
-            }
-          });
+          // snapshot.docChanges().forEach((change) => {
+          //   if (change.type === "added") {
+          //     console.log("New city: ", change.doc.data());
+          //   }
+          //   if (change.type === "modified") {
+          //     console.log("Modified city: ", change.doc.data());
+          //   }
+          //   if (change.type === "removed") {
+          //     console.log("Removed city: ", change.doc.data());
+          //   }
+          // });
           setData(myDataArray);
-          console.log("updated snapshot");
+          console.log("updated snapshot", myDataArray);
         } else {
           // it's empty
         }

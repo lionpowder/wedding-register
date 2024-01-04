@@ -38,8 +38,9 @@ function GuestDetail({
         currentGuest.EnvelopId = envelopeId;
       }
     }
+
     setSelectedGuest(currentGuest);
-  }, [guest, isSubstitute, guestData]);
+  }, [guest]); // TODO: might encounter issue because guestData is not updated
 
   /**
    * Generate necessary values for the guest and save data
@@ -98,7 +99,6 @@ function GuestDetail({
   };
 
   const onSubstituteChange = (value) => {
-    console.log("substituteChange:", value);
     const modifiedGuest = { ...selectedGuest, SubstituteFor: value };
     setSelectedGuest(modifiedGuest);
   };
@@ -204,12 +204,12 @@ function GuestDetail({
         )}
       </Box>
 
-      {!isSubstitute && (
+      {(!isSubstitute || !(isReadOnly || !selectedGuest.IsCheckedIn)) && (
         <FormControlLabel
           label="已報到"
           control={
             <Checkbox
-              disabled={isReadOnly || !selectedGuest.IsCheckedIn}
+              // disabled={isReadOnly || !selectedGuest.IsCheckedIn}
               id={id + "-checkbox-has-checkin"}
               sx={{
                 "&.Mui-checked": {
