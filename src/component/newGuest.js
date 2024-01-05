@@ -52,7 +52,12 @@ function NewGuest({ open, onChange, onClose }) {
   };
 
   const onTableChange = (e, value) => {
-    const modifiedGuest = { ...newGuest, TableNo: value };
+    const modifiedGuest = {
+      ...newGuest,
+      TableNo: value?.map((data) => {
+        return data.tableCode;
+      }),
+    };
     setNewGuest(modifiedGuest);
   };
 
@@ -115,21 +120,37 @@ function NewGuest({ open, onChange, onClose }) {
           id="multi-select-new-guest-table"
           options={defaultTables}
           getOptionLabel={(option) => option.tableCode}
-          value={newGuest.TableNo}
+          getOptionKey={(option) => option.tableCode}
+          value={newGuest.TableNo.map((data) => {
+            return defaultTables.find((table) => table.tableCode === data);
+          })}
           onChange={onTableChange}
           sx={{
             width: 300,
           }}
           renderInput={(params) => <TextField {...params} label="桌次" />}
-          renderOption={(props, option) => (
-            <Box
-              component="li"
-              sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-              {...props}
-            >
-              {option.tableCode + " " + option.tableName}
-            </Box>
-          )}
+          renderOption={(props, option) => {
+            return (
+              <Box
+                component="li"
+                sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                {...props}
+              >
+                {option.tableCode + " " + option.tableName}
+              </Box>
+            );
+          }}
+          isOptionEqualToValue={(option, value) => {
+            if (typeof value === "string") {
+              return value === option.tableCode || value === null;
+            } else {
+              return (
+                value === null ||
+                value === undefined ||
+                value.tableCode === option.tableCode
+              );
+            }
+          }}
         />
       </DialogContent>
       <DialogActions>
