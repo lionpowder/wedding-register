@@ -690,7 +690,7 @@ export const defaultTables = [
       regular: {
         actual: 0,
         assigned: 0,
-        target: 2,
+        target: 0,
       },
       vegetarian: {
         actual: 0,
@@ -707,7 +707,7 @@ export const defaultTables = [
       regular: {
         actual: 0,
         assigned: 0,
-        target: 9,
+        target: 10,
       },
       vegetarian: {
         actual: 0,
