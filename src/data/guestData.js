@@ -4,13 +4,13 @@ import { dateToTimestamp } from "../db/cloudDb";
 export const defaultGuestData = {
   Name: [],
   Alias: [],
-  NoOfRegular: 1,
+  NoOfRegular: 0,
   NoOfVegetarian: 0,
   NoOfChildren: 0,
   Relationship: [],
   TableNo: [],
   Side: "共同", // "女方", "男方"
-  NeedCake: true,
+  NeedCake: false,
   IsCheckedIn: false,
   IsCakeGiven: false,
   IsEnvelopeReceived: false,
