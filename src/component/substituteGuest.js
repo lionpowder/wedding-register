@@ -117,7 +117,7 @@ function SubstituteGuest({
             })}
           <Button
             id={"button-substitute-add"}
-            onClick={() => onEditClick("new")}
+            onClick={() => onEditClick("new", "")}
           >
             新增
           </Button>

@@ -38,14 +38,9 @@ function SubstituteDetail({
   const newGuestInput = React.useRef(null);
 
   React.useEffect(() => {
+    console.log(selectedSubstituteId);
     setSubstituteData(findGuestById(guestData, selectedSubstituteId));
   }, [guestData, selectedSubstituteId]);
-
-  React.useEffect(() => {
-    if (!open) {
-      setSubstituteData(undefined);
-    }
-  }, [open]);
 
   const handleSave = (id) => {
     // TODO: 自動將代領人員名字加入備註
@@ -76,7 +71,11 @@ function SubstituteDetail({
 
   return (
     <Dialog open={open} onClose={onClose} fullScreen={fullScreen}>
-      <DialogActions>
+      <DialogActions
+        sx={{
+          "&.MuiDialogActions-root ": { bgcolor: "rgba(136, 0, 0, 0.08)" },
+        }}
+      >
         <IconButton aria-label="close" color="primary" onClick={onClose}>
           <CloseIcon />
         </IconButton>

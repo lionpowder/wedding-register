@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import Chip from "@mui/material/Chip";
+import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import Title from "../component/titleBar";
@@ -79,6 +80,18 @@ function GuestCakeDetail({
           label={"桌次: " + (selectedGuest.TableNo.join(", ") || "未指定")}
           variant="filled"
         />
+      </Box>
+      <Box
+        sx={{
+          mt: "4px",
+          mb: "8px",
+        }}
+      >
+        {selectedGuest.GeneralNote && (
+          <Typography variant="body1" gutterBottom>
+            {"備註: " + (selectedGuest.GeneralNote || "")}
+          </Typography>
+        )}
       </Box>
       <FormControlLabel
         label="已領喜餅"
