@@ -42,7 +42,9 @@ const GuestCSVParser = () => {
           header === "NoOfRegular" ||
           header === "TotalPeople"
         ) {
-          value = parseInt(columns[index], 10) || undefined;
+          value = Number.isNaN(parseInt(columns[index], 10))
+            ? undefined
+            : parseInt(columns[index], 10);
         } else if (header === "NeedCake") {
           value = columns[index].toLowerCase() === "true";
         } else {
