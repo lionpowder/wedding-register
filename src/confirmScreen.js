@@ -1,5 +1,6 @@
 import * as React from "react";
 import { GuestDataContext } from "./context/guestDataContext";
+import Divider from "@mui/material/Divider";
 
 const ConfirmScreen = () => {
   const { confirmGuestStore } = React.useContext(GuestDataContext);
@@ -48,10 +49,34 @@ const ConfirmScreen = () => {
                 textAlign: "center",
                 fontSize: "64px",
                 margin: 0,
+                marginBottom: "16px",
               }}
             >
               {confirmGuestStore.Name.join(", ")}
             </h2>
+            <Divider />
+            <div
+              style={{
+                marginTop: "48px",
+                textAlign: "center",
+              }}
+            >
+              <p
+                style={{
+                  margin: "24px 0 0 0 ",
+                }}
+              >
+                {confirmGuestStore.TableNo.join(", ")}
+              </p>
+              <p
+                style={{
+                  margin: "8px 0 0 0 ",
+                  color: "#333",
+                }}
+              >
+                桌號
+              </p>
+            </div>
             <div
               style={{
                 marginTop: "48px",
@@ -60,13 +85,7 @@ const ConfirmScreen = () => {
               <p
                 style={{
                   margin: "24px 0 0 0 ",
-                }}
-              >
-                桌號: {confirmGuestStore.TableNo.join(", ")}
-              </p>
-              <p
-                style={{
-                  margin: "24px 0 0 0 ",
+                  textAlign: "center",
                 }}
               >
                 總人數:{" "}
@@ -74,20 +93,31 @@ const ConfirmScreen = () => {
                   confirmGuestStore.NoOfVegetarian +
                   confirmGuestStore.NoOfChildren}
               </p>
-              <p
+
+              <div
                 style={{
-                  margin: "24px 0 0 0 ",
+                  display: "flex",
+                  gap: "36px",
+                  justifyContent: "center",
+                  fontSize: "36px",
+                  color: "#333",
                 }}
               >
-                素食人數: {confirmGuestStore.NoOfVegetarian}
-              </p>
-              <p
-                style={{
-                  margin: "24px 0 0 0 ",
-                }}
-              >
-                兒童椅: {confirmGuestStore.NoOfChildren}
-              </p>
+                <p
+                  style={{
+                    margin: "24px 0 0 0 ",
+                  }}
+                >
+                  素食人數: {confirmGuestStore.NoOfVegetarian}
+                </p>
+                <p
+                  style={{
+                    margin: "24px 0 0 0 ",
+                  }}
+                >
+                  兒童椅: {confirmGuestStore.NoOfChildren}
+                </p>
+              </div>
             </div>
           </div>
         )}

@@ -12,6 +12,10 @@
     margin-bottom: 8px;
   }
 
+  .light {
+    color: #888;
+  }
+  
   .subtitle{
     color: #888;
   }

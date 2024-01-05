@@ -100,7 +100,7 @@ const TableInfo = ({
             {unoccupiedAssigned}/{remainingAssignable}
           </strong>
         </p>
-        <ul>
+        <ul className={styles.light}>
           <li>{`(已入座/已指定/總座數)`}</li>
           <li>
             一般: {reservedSeats.regular.actual}/

@@ -2,10 +2,10 @@
  * Util for page mapping
  */
 
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PeopleIcon from "@mui/icons-material/People";
-import AssignmentIcon from "@mui/icons-material/Assignment";
+import HomeIcon from "@mui/icons-material/Home";
+import DomainVerificationIcon from "@mui/icons-material/DomainVerification";
+import TableBarIcon from "@mui/icons-material/TableBar";
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 
 import MainPage from "../page/main";
 import CakeManager from "../page/cakeManager";
@@ -19,25 +19,25 @@ import GuestTableManager from "../page/guestTableManager";
 export const pages = [
   {
     content: <MainPage></MainPage>,
-    icon: <DashboardIcon></DashboardIcon>,
+    icon: <HomeIcon></HomeIcon>,
     title: "首頁",
     path: "/",
   },
   {
     content: <CheckInManager></CheckInManager>,
-    icon: <ShoppingCartIcon></ShoppingCartIcon>,
+    icon: <DomainVerificationIcon></DomainVerificationIcon>,
     title: "報到管理",
     path: "/checkin",
   },
   {
     content: <GuestTableManager></GuestTableManager>, // Table Management
-    icon: <PeopleIcon></PeopleIcon>,
+    icon: <TableBarIcon></TableBarIcon>,
     title: "桌次管理",
     path: "/table",
   },
   {
     content: <CakeManager></CakeManager>, // Cake Management
-    icon: <AssignmentIcon></AssignmentIcon>,
+    icon: <CardGiftcardIcon></CardGiftcardIcon>,
     title: "領餅管理",
     path: "/cake",
   },

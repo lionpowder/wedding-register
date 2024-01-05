@@ -12,6 +12,7 @@ import Title from "./titleBar";
 import { GuestDataContext } from "../context/guestDataContext";
 import { combineNames } from "../utils/stringUtil";
 import GuestCSVParser from "../data/guestCSVParser";
+import { useLocation } from "react-router-dom";
 
 // function preventDefault(event) {
 //   event.preventDefault();
@@ -20,6 +21,7 @@ import GuestCSVParser from "../data/guestCSVParser";
 function GuestRawTable() {
   const { guestData } = React.useContext(GuestDataContext);
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const location = useLocation();
 
   const addClickHandler = (e) => {
     setIsDialogOpen(true);
@@ -33,7 +35,7 @@ function GuestRawTable() {
     <>
       <Title>賓客名單</Title>
       <Button onClick={addClickHandler}>新增賓客</Button>
-      <GuestCSVParser />
+      {location.pathname === "/backend" && <GuestCSVParser />}
       <Table size="small">
         <TableHead>
           <TableRow>

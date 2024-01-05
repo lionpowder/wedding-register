@@ -36,10 +36,13 @@
     margin-top: 20px;
   }
   
+  .light {
+    color: #888;
+  }
+
   ul {
     list-style: none;
     padding: 0;
-    color: #888;
   }
   
   li {
