@@ -78,7 +78,11 @@ function GuestDetail({
 
     // Generate envelope Id if receive envelope
     if (!selectedGuest.EnvelopId && isEnvelopeReceived) {
-      const envelopeId = generateEnvelopId(selectedGuest.Side, guestData);
+      const envelopeId = generateEnvelopId(
+        selectedGuest.Side,
+        guestData,
+        parentGuest
+      );
       modifiedGuest.EnvelopId = envelopeId;
     }
 
