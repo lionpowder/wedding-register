@@ -11,7 +11,7 @@ const CONFIRM_GUEST_STORE = "confirm-guest-store";
 
 const useLocalStorage = (storageKey, fallbackState) => {
   const setDataStore = (guestDataList) => {
-    console.log("Saving local storage with data: ", guestDataList);
+    // console.log("Saving local storage with data: ", guestDataList);
     const storageData = JSON.stringify(guestDataList);
     window.localStorage.setItem(storageKey, storageData);
     // On localStoage.setItem, the storage event is only triggered on other tabs and windows.

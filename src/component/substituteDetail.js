@@ -69,6 +69,7 @@ function SubstituteDetail({
       const newGuest = generateNewGuestData({
         Name: [newGuestInput.current],
         Side: guest.Side,
+        NoOfRegular: 0,
       });
 
       // Saving to cloud

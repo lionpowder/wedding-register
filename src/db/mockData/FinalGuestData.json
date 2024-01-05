@@ -7,7 +7,7 @@
     "NoOfVegetarian": 1,
     "NoOfChildren": 0,
     "Relationship": ["男女方共同友人", "男方同學"],
-    "TableNo": "2",
+    "TableNo": ["2"],
     "Side": "共同",
     "NeedCake": true,
     "IsCheckedIn": false,
