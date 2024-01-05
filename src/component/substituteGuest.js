@@ -5,10 +5,12 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import GuestSelect from "./guestSelect";
 import SubstituteDetail from "./substituteDetail";
 import { GuestDataContext } from "../context/guestDataContext";
+import { findGuestById } from "../utils/guestUtil";
+import { combineNames } from "../utils/stringUtil";
 
 /**
  *
@@ -54,6 +56,21 @@ function SubstituteGuest({
     setIsDialogOpen(false);
   };
 
+  const Substitute = (id) => {
+    const currentSub = findGuestById(guestData, id);
+    return (
+      <Box
+        sx={{
+          flexGrow: 1,
+        }}
+      >
+        <Typography>{combineNames(currentSub.Name)}</Typography>
+        <Typography>{currentSub.CheckinNote}</Typography>
+        <Typography>{currentSub.CakeNote}</Typography>
+      </Box>
+    );
+  };
+
   return (
     <>
       <Accordion
@@ -83,24 +100,7 @@ function SubstituteGuest({
                   key={"substitute-guest-" + idx}
                 >
                   <Typography>{idx + 1 + ". "}</Typography>
-                  <GuestSelect
-                    sx={{
-                      "&.MuiAutocomplete-root": {
-                        flexGrow: 1,
-                      },
-                      "& label.Mui-disabled": {
-                        color: "rgba(0, 0, 0, 0.6)",
-                      },
-                      "& input.Mui-disabled": {
-                        color: "rgba(0, 0, 0, 0.8)",
-                        WebkitTextFillColor: "rgba(0, 0, 0, 0.8)",
-                      },
-                    }}
-                    id={"substitute-guest-" + idx}
-                    guestData={guestData}
-                    selectedGuest={id}
-                    disabled={true}
-                  />
+                  {Substitute(id)}
                   <Button
                     id={"button-substitute-edit-" + idx}
                     onClick={() => onEditClick("modify", id, idx)}

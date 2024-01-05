@@ -36,11 +36,15 @@ function SubstituteDetail({
     findGuestById(guestData, selectedSubstituteId)
   );
   const newGuestInput = React.useRef(null);
+  const [isButtonDisabled, setButtonDisabled] = React.useState(true);
 
   React.useEffect(() => {
-    console.log(selectedSubstituteId);
     setSubstituteData(findGuestById(guestData, selectedSubstituteId));
   }, [guestData, selectedSubstituteId]);
+
+  React.useEffect(() => {
+    if (substituteData) setButtonDisabled(true);
+  }, [substituteData]);
 
   const handleSave = (id) => {
     // TODO: 自動將代領人員名字加入備註
@@ -54,6 +58,10 @@ function SubstituteDetail({
 
   const handleSearchChange = (e, value) => {
     newGuestInput.current = value;
+
+    const shouldDisabled = !(value && value.length > 0);
+
+    if (isButtonDisabled !== shouldDisabled) setButtonDisabled(shouldDisabled);
   };
 
   const handleAddNewGuest = async () => {
@@ -114,7 +122,9 @@ function SubstituteDetail({
               guestNameChangeHandler={handleSelectionChange}
               inputChangeHandler={handleSearchChange}
             />
-            <Button onClick={handleAddNewGuest}>新增賓客</Button>
+            <Button disabled={isButtonDisabled} onClick={handleAddNewGuest}>
+              新增賓客
+            </Button>
           </Box>
         )}
         {substituteData &&

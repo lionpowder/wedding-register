@@ -31,21 +31,6 @@ function GuestDetail({
   React.useEffect(() => {
     const currentGuest = assignGuestIfEmpty(guest);
 
-    if (isSubstitute) {
-      currentGuest.IsEnvelopeReceived = true;
-      // Generate envelope Id automatically
-      if (!guest.EnvelopId) {
-        const envelopeId = generateEnvelopId(
-          guest.Side,
-          guestData,
-          parentGuest
-        );
-        currentGuest.EnvelopId = envelopeId;
-      }
-
-      console.log("guest: ", currentGuest);
-    }
-
     setSelectedGuest(currentGuest);
   }, [guest]); // TODO: might encounter issue because guestData is not updated
 
