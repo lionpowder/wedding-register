@@ -11,6 +11,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { useTheme } from "@mui/material/styles";
 import { sides } from "../data/sideData";
 import { relationships } from "../data/relationshipData";
+import { tables } from "../data/tableData";
 import GuestNumber from "./guestNumber";
 import { defaultGuestData, generateNewGuestData } from "../data/guestData";
 import { addGuestData } from "../db/cloudDb";
@@ -50,7 +51,10 @@ function NewGuest({ open, onChange, onClose }) {
     setNewGuest(modifiedGuest);
   };
 
-  // TODO: Table Number Selection
+  const onTableChange = (e, value) => {
+    const modifiedGuest = { ...newGuest, TableNo: value };
+    setNewGuest(modifiedGuest);
+  };
 
   return (
     <Dialog open={open} onClose={onClose} fullScreen={fullScreen}>
@@ -104,6 +108,19 @@ function NewGuest({ open, onChange, onClose }) {
             width: 300,
           }}
           renderInput={(params) => <TextField {...params} label="關係" />}
+        />
+        <Autocomplete
+          multiple
+          limitTags={6}
+          id="multi-select-new-guest-table"
+          options={tables}
+          // getOptionLabel={(option) => option.title}
+          value={newGuest.TableNo}
+          onChange={onTableChange}
+          sx={{
+            width: 300,
+          }}
+          renderInput={(params) => <TextField {...params} label="桌次" />}
         />
       </DialogContent>
       <DialogActions>

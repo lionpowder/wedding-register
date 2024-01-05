@@ -1,7 +1,7 @@
 /**
  *TODO: Move this to become a collection in DB
  */
-export const table = [
+export const tables = [
   "主",
   "1-1",
   "1-2",
