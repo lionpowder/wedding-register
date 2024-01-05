@@ -1,5 +1,2 @@
 TotalPeople,Name,Alias,TableNo,Side,Relationship,NoOfVegetarian,NoOfChildren,NoOfRegular,NeedCake,GeneralNote
-2,陳動德 劉奕慈,,主,男方,,,,2,,
-2,黃芋家,,6-5,男方,男方爸爸親友,,,2,,
-2,黃順進,,5-1 5-2 5-3 6-2 6-3 6-5 3-3 7-3,男方,男方爸爸親友,,,2,,
-4,黃銘陸,,6-2,男方,男方爸爸親友,,1,3,,
+1,蔡明蓉,Angel,3-5,女方,男女方共同友人,,,1,TRUE,

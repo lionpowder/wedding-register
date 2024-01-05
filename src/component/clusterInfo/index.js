@@ -44,7 +44,7 @@ const ClusterInfo = ({ tableCodes, tableNames, nonreservedSeats }) => {
       {
         data: [nonreservedActualSum, unoccupiedAssigned, remainingAssignable],
         backgroundColor: [
-          "rgba(30,144,255,0.8)",
+          "rgba(30,144,255,1)",
           "rgba(30,144,255,0.5)",
           "rgba(100,200,100,0.7)",
         ],

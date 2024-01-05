@@ -70,7 +70,7 @@ const TableInfo = ({
           nonreservedTargetSum,
         ],
         backgroundColor: [
-          "rgba(30,144,255,0.8)",
+          "rgba(30,144,255,1)",
           "rgba(30,144,255,0.5)",
           "rgba(100,200,100,0.7)",
           "rgba(169,169,169,0.7)",
