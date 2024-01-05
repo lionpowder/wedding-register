@@ -18,6 +18,13 @@ const ConfirmScreen = () => {
     "https://lh3.googleusercontent.com/drive-viewer/AEYmBYRo7dSNI61lxR3eWJV54iigGEXNcdf7ctlDhXrgCz0Br2lavYUGwkRPvFpwKxOpWnooK9kFqvdHSAT2P2HzModJyruL2g=s1600",
     "https://lh3.googleusercontent.com/drive-viewer/AEYmBYRMOQiALxaWt9YFZ5lCGf0lLpy-hp5a-E8TT4JS2ezrbLe4ZBu9AxubYMQuK7TnBhYWDaZx9lp7_nOW7yf1kfRNHuU6kg=s1600",
     "https://lh3.googleusercontent.com/drive-viewer/AEYmBYQ53bCrD_FLxVniVAxIozfIRoeCH_MG0NjtR9Ker5Wuow3ZE82BC7QDVqeaFNTfLPYP2rZ8DSDwqdqNmtteCFAEyOGGmg=s1600",
+    "https://lh3.googleusercontent.com/drive-viewer/AEYmBYTySSkmO_ej2ORRTVNyZIjv4azJx9h0sPjWxT88QtRYt9ISxmdLDl7VJjVOoQmaNb2Rl4A75gyAnvKlghrn6DVgsXPezw=s1600",
+    "https://lh3.googleusercontent.com/drive-viewer/AEYmBYTaKUNVXr_ExxpJt6c-Qaywm0uckXXSF8zUlbxgbr-A1xcuhbhItpWlFHgSdl9fFrQWzry5bPN71xjosdtR-VkJIIYoLg=s1600",
+    "https://lh3.googleusercontent.com/drive-viewer/AEYmBYR8C_cidZjwaH4SgjeWiwCxGQadr4xxQPWvw-u00gOVgvrSBvp_GRefTTiLFuP1SIQdbzOVlkCbk3DFXDkkfnCioHSE=s1600",
+    "https://lh3.googleusercontent.com/drive-viewer/AEYmBYTgpseGpujtu3vQNb-lbbdwNRBjuJbDQ3cnQv8WIvUgV1k23CrSJ3aCt0QkNsfgFVr-cJZsauemlVKatRT_-8JAjKGS=s1600",
+    "https://lh3.googleusercontent.com/drive-viewer/AEYmBYTAcxhMPeO2s__rTyZ4ymhgvY8XbomMRMocdNbf2Amq0kP_bRJSiU6R3-P5wxxVEX8DYaI84l9yi3qiZyzz5jtrVGdM=s1600",
+    "https://lh3.googleusercontent.com/drive-viewer/AEYmBYRyRKHv2nSjI50c6LZKATfo-8BWj9339IuEGIyjF3MaOM5oe5Zd4FmMCeug9j0xU_eFuXf9W2SzvFRpqugsH0s5Dg1Vig=s1600",
+    "https://lh3.googleusercontent.com/drive-viewer/AEYmBYRsbvgGBBK36kCNtcl2dQNH-Hd6BhoVx4VYiVAVlwln9-F9jDAp0qC2MzFKBOX0kUT5l5J4bK3j8hQLsH_yj2cuzmoW=s1600",
   ]; // Add your image URLs
 
   return (
