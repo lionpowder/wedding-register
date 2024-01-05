@@ -93,6 +93,7 @@ function SubstituteGuest({
                   sx={{
                     p: 2,
                     pb: 1,
+                    mb: 0.5,
                     display: "flex",
                     flexDirection: "row",
                     gap: "4px",

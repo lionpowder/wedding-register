@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
+import Box from "@mui/material/Box";
 import DialogActions from "@mui/material/DialogActions";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import TextField from "@mui/material/TextField";
@@ -11,7 +11,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { useTheme } from "@mui/material/styles";
 import { sides } from "../data/sideData";
 import { relationships } from "../data/relationshipData";
-import { tables } from "../data/tableData";
+import { defaultTables } from "../data/defaultTables";
 import GuestNumber from "./guestNumber";
 import { defaultGuestData, generateNewGuestData } from "../data/guestData";
 import { addGuestData } from "../db/cloudDb";
@@ -113,14 +113,23 @@ function NewGuest({ open, onChange, onClose }) {
           multiple
           limitTags={6}
           id="multi-select-new-guest-table"
-          options={tables}
-          // getOptionLabel={(option) => option.title}
+          options={defaultTables}
+          getOptionLabel={(option) => option.tableCode}
           value={newGuest.TableNo}
           onChange={onTableChange}
           sx={{
             width: 300,
           }}
           renderInput={(params) => <TextField {...params} label="桌次" />}
+          renderOption={(props, option) => (
+            <Box
+              component="li"
+              sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+              {...props}
+            >
+              {option.tableCode + " " + option.tableName}
+            </Box>
+          )}
         />
       </DialogContent>
       <DialogActions>

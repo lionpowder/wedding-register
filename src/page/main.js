@@ -14,7 +14,7 @@ function MainPage() {
   return (
     <>
       {/* Current Guest */}
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Paper
           sx={{
             p: 2,
@@ -29,7 +29,7 @@ function MainPage() {
             isReadOnly={true}
           ></GuestDetail>
         </Paper>
-      </Grid>
+      </Grid> */}
       {/* Recent Orders */}
       <Grid item xs={12}>
         <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
