@@ -13,6 +13,8 @@ import Paper from "@mui/material/Paper";
 import GuestRawTable from "../component/guestRawTable";
 import GuestSelect from "../component/guestSelect";
 import { GuestDataContext } from "../context/guestDataContext";
+import TableInfo from "../component/tableInfo";
+import { defaultTables } from "../data/defaultTables";
 
 function GuestTableManager() {
   const { guestData } = React.useContext(GuestDataContext);
@@ -32,25 +34,42 @@ function GuestTableManager() {
   return (
     <>
       <Grid item xs={12}>
-        <GuestSelect
-          guestData={guestData}
-          selectedGuest={selectedGuest}
-          guestNameChangeHandler={guestNameChangeHandler}
-        />
         <Paper
           sx={{
             p: 2,
             display: "flex",
             flexDirection: "column",
-            height: 400,
           }}
         >
+          {/* <GuestSelect
+            guestData={guestData}
+            selectedGuest={selectedGuest}
+            guestNameChangeHandler={guestNameChangeHandler}
+          /> */}
           {/* <GuestDetail guest={selectedGuest}></GuestDetail> */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+              gap: "20px",
+              flexWrap: "wrap",
+              // marginTop: "20px",
+            }}
+          >
+            {defaultTables.map((table) => (
+              <TableInfo
+                tableCode={table.tableCode}
+                tableName={table.tableName}
+                reservedSeats={table.reservedSeats}
+                nonreservedSeats={table.nonreservedSeats}
+              />
+            ))}
+          </div>
         </Paper>
       </Grid>
       {/* Guest Data */}
       <Grid item xs={12}>
-        <Paper sx={{ p: 2, pt: 5, display: "flex", flexDirection: "column" }}>
+        <Paper sx={{ p: 2, mt: 2, display: "flex", flexDirection: "column" }}>
           <GuestRawTable />
         </Paper>
       </Grid>

@@ -1,0 +1,47 @@
+.container {
+    width: 200px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+
+  h3, h4 {
+    margin: 8px 0;
+  }
+  
+  .chart {
+    position: relative;
+    display: inline;
+    div {
+        position: absolute;
+        top: 0;
+        left: 8px;
+        transform: translateY(-0%);
+        height: 40px;
+    }
+  }
+
+  .section {
+    margin-top: 20px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 5px;
+  }
+  
+  canvas {
+    border-radius: 8px;
+  }
+  

@@ -61,9 +61,8 @@ function CheckInManager() {
         </Paper>
       </Grid>
       {/* Guest Data */}
-      <br />
       <Grid item xs={12}>
-        <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+        <Paper sx={{ p: 2, mt: 2, display: "flex", flexDirection: "column" }}>
           <GuestRawTable />
         </Paper>
       </Grid>
