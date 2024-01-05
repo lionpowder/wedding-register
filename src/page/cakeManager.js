@@ -46,49 +46,48 @@ function CakeManager() {
           sx={{
             p: 2,
             pb: 1,
-            display: "flex",
-            flexDirection: "row",
-            gap: "4px",
           }}
         >
-          <GuestSelect
-            sx={{
-              "&.MuiAutocomplete-root": {
-                flexGrow: 1,
-              },
+          <div style={{ display: "flex", flexDirection: "row", gap: "4px" }}>
+            <GuestSelect
+              sx={{
+                "&.MuiAutocomplete-root": {
+                  flexGrow: 1,
+                },
+              }}
+              guestData={getUnprocessedList}
+              selectedGuest={selectedGuest}
+              guestNameChangeHandler={guestNameChangeHandler}
+            />
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={isIncludeCakeGiven}
+                  onChange={(e) => {
+                    setIsIncludeCakeGiven(e.target.checked);
+                  }}
+                />
+              }
+              label="包含已領餅"
+            />
+          </div>
+          <div
+            style={{
+              padding: 2,
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "200px",
             }}
-            guestData={getUnprocessedList}
-            selectedGuest={selectedGuest}
-            guestNameChangeHandler={guestNameChangeHandler}
-          />
-          <FormControlLabel
-            control={
-              <Switch
-                checked={isIncludeCakeGiven}
-                onChange={(e) => {
-                  setIsIncludeCakeGiven(e.target.checked);
-                }}
-              />
-            }
-            label="包含已領餅"
-          />
-        </Paper>
-        <Paper
-          sx={{
-            p: 2,
-            display: "flex",
-            flexDirection: "column",
-            minHeight: "200px",
-          }}
-        >
-          {selectedGuest?.Id && (
-            <GuestCakeDetail guest={selectedGuest}></GuestCakeDetail>
-          )}
+          >
+            {selectedGuest?.Id && (
+              <GuestCakeDetail guest={selectedGuest}></GuestCakeDetail>
+            )}
+          </div>
         </Paper>
       </Grid>
       {/* Guest Data */}
       <Grid item xs={12}>
-        <Paper sx={{ p: 2, pt: 5, display: "flex", flexDirection: "column" }}>
+        <Paper sx={{ p: 2, mt: 2, display: "flex", flexDirection: "column" }}>
           <GuestRawTable />
         </Paper>
       </Grid>
