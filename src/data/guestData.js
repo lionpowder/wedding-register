@@ -23,7 +23,6 @@ export const defaultGuestData = {
   LastModifiedTime: dateToTimestamp(new Date()),
 };
 
-// required fields: Name, NoOfRegular, Side
 export const generateNewGuestData = (partialGuestData) => {
   const newGuestData = { ...partialGuestData };
   Object.keys(defaultGuestData).forEach((key) => {
@@ -40,5 +39,14 @@ export const generateNewGuestData = (partialGuestData) => {
       newGuestData[key] = defaultGuestData[key];
     }
   });
+  return newGuestData;
+};
+
+export const calculateNewGuestValue = (partialGuestData) => {
+  const newGuestData = { ...partialGuestData };
+
+  newGuestData.NeedCake = determineNeedCake(partialGuestData.Side);
+  newGuestData.LastModifiedTime = dateToTimestamp(new Date());
+
   return newGuestData;
 };

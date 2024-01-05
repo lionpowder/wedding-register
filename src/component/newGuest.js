@@ -13,7 +13,7 @@ import { sides } from "../data/sideData";
 import { relationships } from "../data/relationshipData";
 import { defaultTables } from "../data/defaultTables";
 import GuestNumber from "./guestNumber";
-import { defaultGuestData, generateNewGuestData } from "../data/guestData";
+import { defaultGuestData, calculateNewGuestValue } from "../data/guestData";
 import { addGuestData } from "../db/cloudDb";
 
 /**
@@ -26,7 +26,7 @@ function NewGuest({ open, onChange, onClose }) {
   const [newGuest, setNewGuest] = React.useState(defaultGuestData);
 
   const onSave = (e) => {
-    const finalSavedData = generateNewGuestData(newGuest);
+    const finalSavedData = calculateNewGuestValue(newGuest);
     // Saving to cloud
     addGuestData(finalSavedData);
 
