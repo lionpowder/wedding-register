@@ -114,9 +114,6 @@ function GuestTableManager() {
       // Process tables
       if (data.TableNo.length === 1) {
         const tableCode = data.TableNo[0];
-        if (!tables[tableCode]) {
-          return;
-        }
         if (tables[tableCode]) {
           tables[tableCode].reservedSeats.regular.actual += data.IsCheckedIn
             ? data.NoOfRegular
@@ -138,6 +135,9 @@ function GuestTableManager() {
             return defaultTables.find((table) => tableCode === table.tableCode);
           };
           const defaultTable = getDefaultTable(tableCode);
+          if (!defaultTable) {
+            return;
+          }
           tables[tableCode] = {
             ...defaultTable,
             reservedSeats: {
