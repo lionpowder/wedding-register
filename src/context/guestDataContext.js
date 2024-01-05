@@ -11,6 +11,7 @@ import { isGuestEmpty } from "../utils/guestUtil";
 
 export const GuestDataContext = React.createContext({
   guestData: [],
+  fullGuestData: [],
   updateGuestData: null,
   setConfirmGuest: null,
   confirmGuestStore: null,
@@ -96,6 +97,7 @@ export const GuestDataProvider = ({ children }) => {
 
   const value = {
     guestData: guestDataList,
+    fullGuestData: fullGuestDataList,
     updateGuestData,
     confirmGuestStore: confirmGuestStore,
     setConfirmGuestStore,

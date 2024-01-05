@@ -1,16 +1,11 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
-import styles from "./tableInfo.module.css"; // Create a CSS module for styling
+import styles from "./clusterInfo.module.css"; // Create a CSS module for styling
 import { Chart, ArcElement } from "chart.js";
 
 Chart.register(ArcElement);
 
-const TableInfo = ({
-  tableCode,
-  tableName,
-  reservedSeats,
-  nonreservedSeats,
-}) => {
+const ClusterInfo = ({ tableCodes, tableNames, nonreservedSeats }) => {
   const calculateDifference = (seats) => {
     const actualSum = seats.reduce((sum, seat) => sum + seat.actual, 0);
     const targetSum = seats.reduce((sum, seat) => sum + seat.target, 0);
@@ -25,16 +20,6 @@ const TableInfo = ({
   };
 
   const {
-    actualSum: reservedActualSum,
-    assignedSum: reservedAssignedSum,
-    targetSum: reservedTargetSum,
-  } = calculateSum([
-    reservedSeats.regular,
-    reservedSeats.vegetarian,
-    reservedSeats.childSeat,
-  ]);
-
-  const {
     actualSum: nonreservedActualSum,
     assignedSum: nonreservedAssignedSum,
     targetSum: nonreservedTargetSum,
@@ -44,36 +29,24 @@ const TableInfo = ({
     nonreservedSeats.childSeat,
   ]);
 
-  const reservedDifference = calculateDifference([
-    reservedSeats.regular,
-    reservedSeats.vegetarian,
-    reservedSeats.childSeat,
-  ]);
-
   const nonReservedDifference = calculateDifference([
     nonreservedSeats.regular,
     nonreservedSeats.vegetarian,
     nonreservedSeats.childSeat,
   ]);
 
-  const remainingAssignable = reservedTargetSum - reservedAssignedSum;
-  const unoccupiedAssigned = reservedAssignedSum - reservedActualSum;
+  const remainingAssignable = nonreservedTargetSum - nonreservedAssignedSum;
+  const unoccupiedAssigned = nonreservedAssignedSum - nonreservedActualSum;
 
   const pieChartData = {
-    labels: ["已到 - 指定座", "未到 - 指定座", "可指定 - 指定座", "自由座"],
+    labels: ["已到 - 自由座", "空位 - 自由座", "可指定 - 自由座"],
     datasets: [
       {
-        data: [
-          reservedActualSum,
-          unoccupiedAssigned,
-          remainingAssignable,
-          nonreservedTargetSum,
-        ],
+        data: [nonreservedActualSum, unoccupiedAssigned, remainingAssignable],
         backgroundColor: [
           "rgba(30,144,255,0.8)",
           "rgba(30,144,255,0.5)",
           "rgba(100,200,100,0.7)",
-          "rgba(169,169,169,0.7)",
         ],
       },
     ],
@@ -82,18 +55,18 @@ const TableInfo = ({
   return (
     <div className={styles.container}>
       <h1>
-        {tableCode}
+        {tableCodes.join(", ")}
         <div className={styles.chart}>
           <div>
             <Doughnut data={pieChartData} />
           </div>
         </div>
       </h1>
-      <p className={styles.subtitle}>{tableName}</p>
+      <p className={styles.subtitle}>{tableNames.join(", ")}</p>
 
       {/* Reserved Seats Section */}
       <div className={styles.section}>
-        <h4>{`預定位: ${reservedTargetSum}`}</h4>
+        <h4>{`自由座: ${nonreservedTargetSum}`}</h4>
         <p>
           未入席/可指定:{" "}
           <strong>
@@ -103,27 +76,24 @@ const TableInfo = ({
         <ul>
           <li>{`(已入座/已指定/總座數)`}</li>
           <li>
-            一般: {reservedSeats.regular.actual}/
-            {reservedSeats.regular.assigned}/{reservedSeats.regular.target}
+            一般: {nonreservedSeats.regular.actual}/
+            {nonreservedSeats.regular.assigned}/
+            {nonreservedSeats.regular.target}
           </li>
           <li>
-            素食: {reservedSeats.vegetarian.actual}/
-            {reservedSeats.vegetarian.assigned}/
-            {reservedSeats.vegetarian.target}
+            素食: {nonreservedSeats.vegetarian.actual}/
+            {nonreservedSeats.vegetarian.assigned}/
+            {nonreservedSeats.vegetarian.target}
           </li>
           <li>
-            兒童座: {reservedSeats.childSeat.actual}/
-            {reservedSeats.childSeat.assigned}/{reservedSeats.childSeat.target}
+            兒童座: {nonreservedSeats.childSeat.actual}/
+            {nonreservedSeats.childSeat.assigned}/
+            {nonreservedSeats.childSeat.target}
           </li>
         </ul>
-      </div>
-
-      {/* Non-Reserved Seats Section */}
-      <div className={styles.section}>
-        <h4>{`自由座: ${nonreservedTargetSum}`}</h4>
       </div>
     </div>
   );
 };
 
-export default TableInfo;
+export default ClusterInfo;

@@ -5,28 +5,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -37,28 +43,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -69,28 +81,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -101,28 +119,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -133,28 +157,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 1,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -165,28 +195,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -197,28 +233,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -229,28 +271,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 1,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -261,28 +309,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -293,28 +347,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 6,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 4,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -325,28 +385,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -357,28 +423,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -389,28 +461,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -421,28 +499,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
-        target: 10,
+        assigned: 0,
+        target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 1,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -453,28 +537,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
-        target: 0,
+        assigned: 0,
+        target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 1,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
-        target: 10,
+        assigned: 0,
+        target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -485,28 +575,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -517,28 +613,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 3,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 1,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 7,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -549,28 +651,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 3,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 8,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -581,28 +689,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 2,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 9,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -613,28 +727,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -645,28 +765,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 1,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 1,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 9,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -677,28 +803,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -709,28 +841,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
-        target: 0,
+        assigned: 0,
+        target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
@@ -741,28 +879,34 @@ export const defaultTables = [
     reservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 10,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },
     nonreservedSeats: {
       regular: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       vegetarian: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
       childSeat: {
         actual: 0,
+        assigned: 0,
         target: 0,
       },
     },

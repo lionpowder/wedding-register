@@ -1,5 +1,5 @@
 .container {
-    width: 220px;
+    width: 460px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -7,13 +7,13 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
+  .subtitle{
+    color: #888;
+  }
+
   h1 {
     margin-top: 0;
     margin-bottom: 8px;
-  }
-
-  .subtitle{
-    color: #888;
   }
 
   h3, h4 {
@@ -39,6 +39,7 @@
   ul {
     list-style: none;
     padding: 0;
+    color: #888;
   }
   
   li {
