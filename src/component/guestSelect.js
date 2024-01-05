@@ -26,7 +26,7 @@ function GuestSelect({
       freeSolo={freeSolo}
       disabled={disabled}
       sx={{
-        "min-width": "300px",
+        minWidth: "300px",
         ...sx,
       }}
       id={id + "-combo-guestselect-search"}

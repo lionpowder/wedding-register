@@ -5,8 +5,10 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
+import IconButton from "@mui/material/IconButton";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import CloseIcon from "@mui/icons-material/Close";
 import GuestDetail from "./guestDetail";
 import GuestSelect from "./guestSelect";
 import GuestCakeDetail from "./guestCakeDetail";
@@ -74,8 +76,19 @@ function SubstituteDetail({
 
   return (
     <Dialog open={open} onClose={onClose} fullScreen={fullScreen}>
+      <DialogActions>
+        <IconButton aria-label="close" color="primary" onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      </DialogActions>
       <DialogTitle>賓客資料</DialogTitle>
-      <DialogContent>
+      <DialogContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "4px",
+        }}
+      >
         {/* <DialogContentText>
           To subscribe to this website, please enter your email address here. We
           will send updates occasionally.
@@ -123,9 +136,6 @@ function SubstituteDetail({
             ></GuestCakeDetail>
           ))}
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>取消</Button>
-      </DialogActions>
     </Dialog>
   );
 }

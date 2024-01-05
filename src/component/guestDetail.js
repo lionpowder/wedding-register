@@ -256,12 +256,12 @@ function GuestDetail({
             <Button
               id={id + "-button-checkin-guest-save"}
               onClick={() => onSave(selectedGuest)}
-              variant="outlined"
+              variant="contained"
               sx={{
                 mt: "8px",
               }}
             >
-              儲存
+              更新
             </Button>
           ) : (
             <Button
