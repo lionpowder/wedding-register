@@ -48,28 +48,30 @@ function GuestRawTable() {
         </TableHead>
         <TableBody>
           {guestData &&
-            guestData.map((row, idx) => (
-              <TableRow key={idx}>
-                <TableCell>{combineNames(row.Name)}</TableCell>
-                <TableCell>
-                  {row.NoOfRegular + row.NoOfVegetarian + row.NoOfChildren}
-                </TableCell>
-                <TableCell>{row.Side}</TableCell>
-                <TableCell>{row.TableNo.join(", ")}</TableCell>
-                <TableCell>{row.EnvelopId}</TableCell>
-                <TableCell>
-                  {row.IsCheckedIn && (
-                    <CheckBoxOutlinedIcon></CheckBoxOutlinedIcon>
-                  )}
-                </TableCell>
-                <TableCell>
-                  {row.IsCakeGiven && (
-                    <CheckBoxOutlinedIcon></CheckBoxOutlinedIcon>
-                  )}
-                </TableCell>
-                {/* <TableCell align="right">{`$${row.amount}`}</TableCell> */}
-              </TableRow>
-            ))}
+            guestData
+              .sort((a, b) => b?.LastModifiedTime - a?.LastModifiedTime)
+              .map((row, idx) => (
+                <TableRow key={idx}>
+                  <TableCell>{combineNames(row.Name)}</TableCell>
+                  <TableCell>
+                    {row.NoOfRegular + row.NoOfVegetarian + row.NoOfChildren}
+                  </TableCell>
+                  <TableCell>{row.Side}</TableCell>
+                  <TableCell>{row.TableNo.join(", ")}</TableCell>
+                  <TableCell>{row.EnvelopId}</TableCell>
+                  <TableCell>
+                    {row.IsCheckedIn && (
+                      <CheckBoxOutlinedIcon></CheckBoxOutlinedIcon>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {row.IsCakeGiven && (
+                      <CheckBoxOutlinedIcon></CheckBoxOutlinedIcon>
+                    )}
+                  </TableCell>
+                  {/* <TableCell align="right">{`$${row.amount}`}</TableCell> */}
+                </TableRow>
+              ))}
         </TableBody>
       </Table>
       <NewGuest open={isDialogOpen} onClose={closeHandler} />

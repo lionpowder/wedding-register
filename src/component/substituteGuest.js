@@ -57,6 +57,7 @@ function SubstituteGuest({
   return (
     <>
       <Accordion
+        expanded={!!substituteFor}
         sx={{
           "&.MuiAccordion-root ": { bgcolor: "#EEEEEE", mt: "8px" },
         }}

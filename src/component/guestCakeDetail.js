@@ -74,7 +74,7 @@ function GuestCakeDetail({
           flexDirection: "row",
         }}
       >
-        <Title isSub={true}>{combineNames(selectedGuest.Name)}</Title>
+        {/* <Title isSub={true}>{combineNames(selectedGuest.Name)}</Title> */}
         <Chip
           id={id + "chip-cake-side"}
           label={"桌次: " + (selectedGuest.TableNo.join(", ") || "未指定")}
