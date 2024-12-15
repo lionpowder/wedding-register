@@ -10,8 +10,8 @@ import {
 } from "firebase/firestore";
 import { db } from "./firebase";
 
-const GUEST_DATA_DB_NAME = "GuestData";
-const SEATING_DATA_DB_NAME = "SeatData";
+const GUEST_DATA_DB_NAME = "GuestData_Jess";
+const SEATING_DATA_DB_NAME = "SeatData_Jess";
 const isUseMock = false;
 
 export const dateToTimestamp = (date) => {
