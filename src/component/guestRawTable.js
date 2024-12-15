@@ -1,6 +1,5 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -13,6 +12,9 @@ import { GuestDataContext } from "../context/guestDataContext";
 import { combineNames } from "../utils/stringUtil";
 import GuestCSVParser from "../data/guestCSVParser";
 import { useLocation } from "react-router-dom";
+import { Delete } from "@mui/icons-material";
+import { deleteGuestData } from "../db/cloudDb";
+import { IconButton } from "@mui/material";
 
 // function preventDefault(event) {
 //   event.preventDefault();
@@ -46,6 +48,7 @@ function GuestRawTable() {
             <TableCell>紅包</TableCell>
             <TableCell>已報到</TableCell>
             <TableCell>已領餅</TableCell>
+            <TableCell>操作</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -70,6 +73,19 @@ function GuestRawTable() {
                     {row.IsCakeGiven && (
                       <CheckBoxOutlinedIcon></CheckBoxOutlinedIcon>
                     )}
+                  </TableCell>
+                  <TableCell>
+                    {
+                      <IconButton
+                        aria-label="delete"
+                        size="small"
+                        onClick={() => {
+                          deleteGuestData(row);
+                        }}
+                      >
+                        <Delete fontSize="inherit" />
+                      </IconButton>
+                    }
                   </TableCell>
                   {/* <TableCell align="right">{`$${row.amount}`}</TableCell> */}
                 </TableRow>

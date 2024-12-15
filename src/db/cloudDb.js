@@ -5,6 +5,7 @@ import {
   doc,
   addDoc,
   updateDoc,
+  deleteDoc,
   onSnapshot,
   Timestamp,
 } from "firebase/firestore";
@@ -36,7 +37,7 @@ const useCloudDB = (path) => {
         if (snapshot.size) {
           let myDataArray = [];
           snapshot.forEach((doc) => {
-            var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
+            // var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
             // console.log(source, " data: ", doc.data());
 
             myDataArray.push({
@@ -61,6 +62,7 @@ const useCloudDB = (path) => {
           console.log("updated snapshot", myDataArray);
         } else {
           // it's empty
+          setData([]);
         }
       });
 
@@ -70,7 +72,7 @@ const useCloudDB = (path) => {
     } catch (e) {
       console.error("Error fetching document: ", e);
     }
-  }, []);
+  }, [path]);
 
   return data;
 };
@@ -115,6 +117,23 @@ export const updateGuestData = async (partialGuestData) => {
     return { ...partialGuestData, Status: "" };
   } catch (e) {
     console.error("Error updating document: ", e);
+
+    return { ...partialGuestData, Status: "Retry" };
+  }
+};
+
+/**
+ * Updating existing data to cloud DB
+ * @param {*} partialGuestData must contain Id
+ */
+export const deleteGuestData = async (partialGuestData) => {
+  const { Id } = partialGuestData;
+  try {
+    await deleteDoc(doc(db, GUEST_DATA_DB_NAME, Id));
+    console.info("Document delete with ID: ", Id);
+    return { ...partialGuestData, Status: "" };
+  } catch (e) {
+    console.error("Error deleting document: ", e);
 
     return { ...partialGuestData, Status: "Retry" };
   }

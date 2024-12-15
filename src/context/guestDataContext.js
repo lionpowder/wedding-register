@@ -48,11 +48,11 @@ export const GuestDataProvider = ({ children }) => {
    */
   // TODO: need to combine list from both cloud & localStorage
   React.useEffect(() => {
-    // console.log("Changes in guestCloud: ", guestCloud, guestStore);
-    guestCloud && setFullGuestDataList(guestCloud);
+    console.log("Changes in guestCloud: ", guestCloud, guestStore);
+    setFullGuestDataList(guestCloud || []);
 
     if (isGuestEmpty(guestStore) && guestCloud) setGuestDataStore(guestCloud);
-  }, [guestCloud, guestStore]);
+  }, [guestCloud]);
 
   /**
    * Filtered data based on guest's side
