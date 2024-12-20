@@ -21,6 +21,7 @@ function GuestSelect({
   disabled = false,
   freeSolo = false,
 }) {
+  const [inputValue, setInputValue] = React.useState("");
   return (
     <Autocomplete
       freeSolo={freeSolo}
@@ -78,7 +79,12 @@ function GuestSelect({
       )}
       value={selectedGuest}
       onChange={guestNameChangeHandler}
-      onInputChange={inputChangeHandler}
+      inputValue={inputValue}
+      onInputChange={(e, value) => {
+        // e will be null if external updates caused the input change event
+        e && inputChangeHandler && inputChangeHandler(e, value);
+        e && setInputValue(value);
+      }}
     />
   );
 }
