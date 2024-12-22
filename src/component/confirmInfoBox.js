@@ -6,7 +6,7 @@ import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
 import SpaOutlinedIcon from "@mui/icons-material/SpaOutlined";
 import StrollerOutlinedIcon from "@mui/icons-material/StrollerOutlined";
 
-export default function ConfirmInfoBox(zoom) {
+export default function ConfirmInfoBox({ zoom }) {
   const { confirmGuestStore } = React.useContext(GuestDataContext);
   return (
     <div style={{ zoom: zoom ? zoom : "100%" }}>
@@ -20,6 +20,8 @@ export default function ConfirmInfoBox(zoom) {
           padding: "48px",
           borderRadius: "10px",
           fontSize: "48px",
+          boxShadow:
+            "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
         }}
       >
         <h2

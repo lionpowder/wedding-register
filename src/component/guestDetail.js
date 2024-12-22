@@ -11,6 +11,9 @@ import GuestNumber from "./guestNumber";
 import SubstituteGuest from "./substituteGuest";
 import { GuestDataContext } from "../context/guestDataContext";
 import { assignGuestIfEmpty, generateEnvelopId } from "../utils/guestUtil";
+import ConfirmInfoBox from "./confirmInfoBox";
+import OpenInNewOutlinedIcon from "@mui/icons-material/OpenInNewOutlined";
+import { IconButton } from "@mui/material";
 
 function GuestDetail({
   id = "guest",
@@ -20,7 +23,8 @@ function GuestDetail({
   onSaveChange,
   parentGuest,
 }) {
-  const { updateGuestData, guestData } = React.useContext(GuestDataContext);
+  const { updateGuestData, guestData, confirmGuestStore } =
+    React.useContext(GuestDataContext);
   const [selectedGuest, setSelectedGuest] = React.useState(
     assignGuestIfEmpty(guest)
   );
@@ -104,67 +108,98 @@ function GuestDetail({
   return (
     <>
       {!isSubstitute && (
-        <>
-          <Box
-            sx={{
-              gap: "16px",
-              display: "flex",
-              flexDirection: "row",
-            }}
-          >
-            {/* <Title isSub={true}>
-              {"目前賓客: " + combineNames(selectedGuest.Name)}
-            </Title> */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box>
             <Box
               sx={{
-                gap: "4px",
+                gap: "16px",
                 display: "flex",
                 flexDirection: "row",
-                mt: "8px",
               }}
             >
-              {/* <Chip
+              {/* <Title isSub={true}>
+              {"目前賓客: " + combineNames(selectedGuest.Name)}
+            </Title> */}
+              <Box
+                sx={{
+                  gap: "4px",
+                  display: "flex",
+                  flexDirection: "row",
+                  mt: "8px",
+                }}
+              >
+                {/* <Chip
                 id={id + "-chip-checkin-side"}
                 label={selectedGuest.Side}
                 variant="filled"
               /> */}
-              {selectedGuest.Relationship.map((relationship) => {
-                return (
-                  <Chip
-                    key={id + "-chip-side-" + relationship}
-                    label={relationship}
-                    variant="outlined"
-                  />
-                );
-              })}
-              <Chip
-                id={id + "chip-cake-side"}
-                label={
-                  "桌次: " + (selectedGuest.TableNo.join(", ") || "未指定")
-                }
-                variant="outlined"
-              />
+                {selectedGuest.Relationship.map((relationship) => {
+                  return (
+                    <Chip
+                      key={id + "-chip-side-" + relationship}
+                      label={relationship}
+                      variant="outlined"
+                    />
+                  );
+                })}
+                <Chip
+                  id={id + "chip-cake-side"}
+                  label={
+                    "桌次: " + (selectedGuest.TableNo.join(", ") || "未指定")
+                  }
+                  variant="outlined"
+                />
+              </Box>
             </Box>
+            <Box
+              sx={{
+                mt: "4px",
+                mb: "8px",
+              }}
+            >
+              {selectedGuest.GeneralNote && (
+                <Typography variant="body1" gutterBottom>
+                  {"備註: " + (selectedGuest.GeneralNote || "")}
+                </Typography>
+              )}
+            </Box>
+            <GuestNumber
+              id={id + "-number"}
+              selectedGuest={selectedGuest}
+              setSelectedGuest={setSelectedGuest}
+              isReadOnly={isReadOnly}
+            />
           </Box>
           <Box
             sx={{
-              mt: "4px",
-              mb: "8px",
+              // backgroundColor: "red",
+              width: "200px",
+              height: "200px",
+              position: "relative",
             }}
           >
-            {selectedGuest.GeneralNote && (
-              <Typography variant="body1" gutterBottom>
-                {"備註: " + (selectedGuest.GeneralNote || "")}
-              </Typography>
-            )}
+            <a href="/confirm" target="_blank">
+              <IconButton
+                aria-label="open confirm page"
+                style={{
+                  position: "absolute",
+                  top: "20px",
+                  right: "20px",
+                  zIndex: "1",
+                }}
+              >
+                <OpenInNewOutlinedIcon />
+              </IconButton>
+            </a>
+
+            {confirmGuestStore.Name && <ConfirmInfoBox zoom={"30%"} />}
           </Box>
-          <GuestNumber
-            id={id + "-number"}
-            selectedGuest={selectedGuest}
-            setSelectedGuest={setSelectedGuest}
-            isReadOnly={isReadOnly}
-          />
-        </>
+        </Box>
       )}
       <Box
         sx={{
