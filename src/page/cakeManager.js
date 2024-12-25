@@ -24,20 +24,15 @@ function CakeManager() {
         .sort((a, b) => b?.LastModifiedTime - a?.LastModifiedTime),
     [guestData, isIncludeCakeGiven]
   );
-  const [selectedGuest, setSelectedGuest] = React.useState(
-    assignGuestIfEmpty(getUnprocessedList[0])
-  );
+  const [selectedGuest, setSelectedGuest] = React.useState(null);
 
   const guestNameChangeHandler = (e, value) => {
     setSelectedGuest(value ?? {});
   };
 
-  // clear selection if the can't find the selected guest in the guest list anymore
-  React.useEffect(() => {
-    if (!getUnprocessedList.find((guest) => selectedGuest?.Id === guest.Id)) {
-      setSelectedGuest(getUnprocessedList[0]);
-    }
-  }, [getUnprocessedList, selectedGuest?.Id]);
+  const onSave = () => {
+    setSelectedGuest(null);
+  };
 
   return (
     <>
@@ -45,10 +40,9 @@ function CakeManager() {
         <Paper
           sx={{
             p: 2,
-            pb: 1,
           }}
         >
-          <div style={{ display: "flex", flexDirection: "row", gap: "4px" }}>
+          <div style={{ display: "flex", flexDirection: "row", gap: "32px" }}>
             <GuestSelect
               sx={{
                 "&.MuiAutocomplete-root": {
@@ -71,18 +65,22 @@ function CakeManager() {
               label="包含已領餅"
             />
           </div>
-          <div
-            style={{
-              padding: 2,
-              display: "flex",
-              flexDirection: "column",
-              minHeight: "200px",
-            }}
-          >
-            {selectedGuest?.Id && (
-              <GuestCakeDetail guest={selectedGuest}></GuestCakeDetail>
-            )}
-          </div>
+
+          {selectedGuest?.Id && (
+            <div
+              style={{
+                padding: 2,
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "200px",
+              }}
+            >
+              <GuestCakeDetail
+                guest={selectedGuest}
+                onSaveChange={onSave}
+              ></GuestCakeDetail>
+            </div>
+          )}
         </Paper>
       </Grid>
       {/* Guest Data */}

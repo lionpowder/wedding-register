@@ -22,6 +22,14 @@ function GuestSelect({
   freeSolo = false,
 }) {
   const [inputValue, setInputValue] = React.useState("");
+
+  React.useEffect(() => {
+    if (!selectedGuest) {
+      inputChangeHandler && inputChangeHandler(null, "");
+      setInputValue("");
+    }
+  }, [selectedGuest]);
+
   return (
     <Autocomplete
       freeSolo={freeSolo}
@@ -73,6 +81,7 @@ function GuestSelect({
           {option.IsCheckedIn && (
             <CheckCircleOutlinedIcon
               color={"success"}
+              sx={{ ml: 1 }}
             ></CheckCircleOutlinedIcon>
           )}
         </Box>

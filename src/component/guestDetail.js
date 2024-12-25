@@ -158,12 +158,12 @@ function GuestDetail({
             </Box>
             <Box
               sx={{
-                mt: "4px",
-                mb: "8px",
+                mt: "16px",
+                mb: "24px",
               }}
             >
               {selectedGuest.GeneralNote && (
-                <Typography variant="body1" gutterBottom>
+                <Typography sx={{ fontWeight: "600", color: "red" }}>
                   {"備註: " + (selectedGuest.GeneralNote || "")}
                 </Typography>
               )}

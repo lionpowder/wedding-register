@@ -10,7 +10,7 @@ export const defaultGuestData = {
   Relationship: [],
   TableNo: [],
   Side: "共同", // "女方", "男方"
-  NeedCake: false,
+  NeedCake: true,
   IsCheckedIn: false,
   IsCakeGiven: false,
   IsEnvelopeReceived: false,
@@ -39,14 +39,5 @@ export const generateNewGuestData = (partialGuestData) => {
       newGuestData[key] = defaultGuestData[key];
     }
   });
-  return newGuestData;
-};
-
-export const calculateNewGuestValue = (partialGuestData) => {
-  const newGuestData = { ...partialGuestData };
-
-  newGuestData.NeedCake = determineNeedCake(partialGuestData.Side);
-  newGuestData.LastModifiedTime = dateToTimestamp(new Date());
-
   return newGuestData;
 };

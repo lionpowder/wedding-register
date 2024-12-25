@@ -60,7 +60,7 @@ function GuestNumber({
           InputProps={{ inputProps: { min: 0, max: 10 } }}
           value={selectedGuest.NoOfRegular || 0}
           onChange={(e) => onChangeHandler(e, "NoOfRegular")}
-          helperText={" 原本: " + originalGuestNumbers.NoOfRegular}
+          // helperText={" 原本: " + originalGuestNumbers.NoOfRegular}
         />
         <TextField
           disabled={isReadOnly}
@@ -73,7 +73,7 @@ function GuestNumber({
           InputProps={{ inputProps: { min: 0, max: 10 } }}
           value={selectedGuest.NoOfVegetarian || 0}
           onChange={(e) => onChangeHandler(e, "NoOfVegetarian")}
-          helperText={" 原本: " + originalGuestNumbers.NoOfVegetarian}
+          // helperText={" 原本: " + originalGuestNumbers.NoOfVegetarian}
         />
         <TextField
           disabled={isReadOnly}
@@ -86,7 +86,7 @@ function GuestNumber({
           InputProps={{ inputProps: { min: 0, max: 10 } }}
           value={selectedGuest.NoOfChildren || 0}
           onChange={(e) => onChangeHandler(e, "NoOfChildren")}
-          helperText={" 原本: " + originalGuestNumbers.NoOfChildren}
+          // helperText={" 原本: " + originalGuestNumbers.NoOfChildren}
         />
       </div>
     </Box>

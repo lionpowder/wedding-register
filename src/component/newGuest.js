@@ -14,7 +14,10 @@ import { relationships } from "../data/relationshipData";
 import { defaultTables } from "../data/defaultTables";
 import GuestNumber from "./guestNumber";
 import { defaultGuestData, calculateNewGuestValue } from "../data/guestData";
-import { addGuestData } from "../db/cloudDb";
+import { addGuestData, dateToTimestamp } from "../db/cloudDb";
+import { Checkbox, FormControlLabel } from "@mui/material";
+import { green } from "@mui/material/colors";
+import { side } from "../utils/consts";
 
 /**
  *
@@ -25,15 +28,21 @@ function NewGuest({ open, onChange, onClose }) {
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [newGuest, setNewGuest] = React.useState(defaultGuestData);
 
+  const onFormClose = () => {
+    setNewGuest(defaultGuestData);
+    onClose && onClose();
+  };
+
   const onSave = (e) => {
-    const finalSavedData = calculateNewGuestValue(newGuest);
+    const finalSavedData = {
+      ...newGuest,
+      LastModifiedTime: dateToTimestamp(new Date()),
+    };
     // Saving to cloud
     addGuestData(finalSavedData);
 
-    setNewGuest(defaultGuestData);
-
     onChange && onChange(finalSavedData);
-    onClose && onClose();
+    onFormClose();
   };
 
   const onNameChange = (e) => {
@@ -41,13 +50,28 @@ function NewGuest({ open, onChange, onClose }) {
     setNewGuest(modifiedGuest);
   };
 
+  const onAliasChange = (e) => {
+    const modifiedGuest = { ...newGuest, Alias: [e.target.value] };
+    setNewGuest(modifiedGuest);
+  };
+
   const onSideChange = (e, value) => {
-    const modifiedGuest = { ...newGuest, Side: value };
+    let isNeedCake = false;
+    if (value !== side.groom) {
+      isNeedCake = true;
+    }
+    const modifiedGuest = { ...newGuest, Side: value, NeedCake: isNeedCake };
     setNewGuest(modifiedGuest);
   };
 
   const onRelationshipChange = (e, value) => {
     const modifiedGuest = { ...newGuest, Relationship: value };
+    setNewGuest(modifiedGuest);
+  };
+
+  const onNeedCakeChange = (e) => {
+    const isNeedCake = e.target.checked;
+    const modifiedGuest = { ...newGuest, NeedCake: isNeedCake };
     setNewGuest(modifiedGuest);
   };
 
@@ -58,6 +82,11 @@ function NewGuest({ open, onChange, onClose }) {
         return data.tableCode;
       }),
     };
+    setNewGuest(modifiedGuest);
+  };
+
+  const onGeneralNoteChange = (e) => {
+    const modifiedGuest = { ...newGuest, GeneralNote: [e.target.value] };
     setNewGuest(modifiedGuest);
   };
 
@@ -83,6 +112,23 @@ function NewGuest({ open, onChange, onClose }) {
           InputProps={{ inputProps: { min: 0, max: 10 } }}
           value={newGuest.Name[0]}
           onChange={onNameChange}
+          helperText={"可輸入該組人報到時可能使用的所有人名以利當天搜尋"}
+          placeholder={"王小明 孫悟空"}
+        />
+        <TextField
+          id={"textfield-new-guest-name"}
+          label="別名"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          sx={{
+            mt: "8px",
+          }}
+          InputProps={{ inputProps: { min: 0, max: 10 } }}
+          value={newGuest.Alias[0]}
+          onChange={onAliasChange}
+          helperText={"可輸入英文名或關係等以利當天搜尋"}
+          placeholder={"Jessica 三姨婆"}
         />
         <GuestNumber
           id={"new-guest-number"}
@@ -100,6 +146,21 @@ function NewGuest({ open, onChange, onClose }) {
             width: 300,
           }}
           renderInput={(params) => <TextField {...params} label="賓客種類" />}
+        />
+        <FormControlLabel
+          label="須發餅"
+          control={
+            <Checkbox
+              id={"checkbox-need-cake"}
+              sx={{
+                "&.Mui-checked": {
+                  color: green[600],
+                },
+              }}
+              checked={newGuest.NeedCake}
+              onChange={onNeedCakeChange}
+            />
+          }
         />
         <Autocomplete
           multiple
@@ -152,10 +213,20 @@ function NewGuest({ open, onChange, onClose }) {
             }
           }}
         />
+        <TextField
+          id={"multiline-general-note"}
+          label="備註"
+          multiline
+          rows={3}
+          value={newGuest.GeneralNote || ""}
+          onChange={onGeneralNoteChange}
+          placeholder={"不收禮金"}
+          helperText={"展示給報到工作人員"}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={onSave}>確定新增</Button>
-        <Button onClick={onClose}>取消</Button>
+        <Button onClick={onFormClose}>取消</Button>
       </DialogActions>
     </Dialog>
   );

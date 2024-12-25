@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import ConfirmScreen from "./confirmScreen";
 import MainApp from "./mainApp";
-import MainPage from "./page/main";
+import AdminPage from "./page/admin";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           ))}
         </Route>
         <Route path="/confirm" element={<ConfirmScreen />} />
-        <Route path="/backend" element={<MainPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   );

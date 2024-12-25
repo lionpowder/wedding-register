@@ -37,7 +37,6 @@ function GuestRawTable() {
     <>
       <Title>賓客名單</Title>
       <Button onClick={addClickHandler}>新增賓客</Button>
-      {location.pathname === "/backend" && <GuestCSVParser />}
       <Table size="small">
         <TableHead>
           <TableRow>
