@@ -11,7 +11,7 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import GuestRawTable from "../component/guestRawTable";
-import GuestSelect from "../component/guestSelect";
+// import GuestSelect from "../component/guestSelect";
 import { GuestDataContext } from "../context/guestDataContext";
 import TableInfo from "../component/tableInfo";
 import { defaultTables } from "../data/defaultTables";
@@ -28,9 +28,9 @@ function GuestTableManager() {
   const [tables, setTables] = React.useState({});
   const [selectedGuest, setSelectedGuest] = React.useState({});
 
-  const guestNameChangeHandler = (e, value) => {
-    setSelectedGuest(value ?? {});
-  };
+  // const guestNameChangeHandler = (e, value) => {
+  //   setSelectedGuest(value ?? {});
+  // };
 
   // clear selection if the can't find the selected guest in the guest list anymore
   React.useEffect(() => {

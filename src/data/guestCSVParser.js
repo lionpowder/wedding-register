@@ -31,7 +31,7 @@ const GuestCSVParser = () => {
 
         if (header === "Name" || header === "Alias") {
           // Use only the first of member for now for simplicity
-          value = [columns[index]];
+          value = columns[index] ? [columns[index]] : [];
         } else if (header === "TableNo" || header === "Relationship") {
           value = columns[index].split(" ").filter(Boolean);
         } else if (

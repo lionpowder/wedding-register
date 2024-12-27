@@ -13,46 +13,55 @@ import { sides } from "../data/sideData";
 import { relationships } from "../data/relationshipData";
 import { defaultTables } from "../data/defaultTables";
 import GuestNumber from "./guestNumber";
-import { defaultGuestData, calculateNewGuestValue } from "../data/guestData";
-import { addGuestData, dateToTimestamp } from "../db/cloudDb";
+import { defaultGuestData } from "../data/guestData";
+import { addGuestData, dateToTimestamp, updateGuestData } from "../db/cloudDb";
 import { Checkbox, FormControlLabel } from "@mui/material";
-import { green } from "@mui/material/colors";
 import { side } from "../utils/consts";
 
 /**
- *
+ * Provide guestInfo when modifying existing guest data
  * @returns
  */
-function NewGuest({ open, onChange, onClose }) {
+function GuestInfoForm({ open, onChange, onClose, guestInfo }) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const [newGuest, setNewGuest] = React.useState(defaultGuestData);
+  const [currentGuest, setCurrentGuest] = React.useState(defaultGuestData);
+
+  React.useEffect(() => {
+    if (guestInfo) {
+      setCurrentGuest(guestInfo);
+    }
+  }, [guestInfo]);
 
   const onFormClose = () => {
-    setNewGuest(defaultGuestData);
+    setCurrentGuest(defaultGuestData);
     onClose && onClose();
   };
 
   const onSave = (e) => {
     const finalSavedData = {
-      ...newGuest,
+      ...currentGuest,
       LastModifiedTime: dateToTimestamp(new Date()),
     };
-    // Saving to cloud
-    addGuestData(finalSavedData);
+
+    if (guestInfo) {
+      updateGuestData(finalSavedData);
+    } else {
+      addGuestData(finalSavedData);
+    }
 
     onChange && onChange(finalSavedData);
     onFormClose();
   };
 
   const onNameChange = (e) => {
-    const modifiedGuest = { ...newGuest, Name: [e.target.value] };
-    setNewGuest(modifiedGuest);
+    const modifiedGuest = { ...currentGuest, Name: [e.target.value] };
+    setCurrentGuest(modifiedGuest);
   };
 
   const onAliasChange = (e) => {
-    const modifiedGuest = { ...newGuest, Alias: [e.target.value] };
-    setNewGuest(modifiedGuest);
+    const modifiedGuest = { ...currentGuest, Alias: [e.target.value] };
+    setCurrentGuest(modifiedGuest);
   };
 
   const onSideChange = (e, value) => {
@@ -60,39 +69,43 @@ function NewGuest({ open, onChange, onClose }) {
     if (value !== side.groom) {
       isNeedCake = true;
     }
-    const modifiedGuest = { ...newGuest, Side: value, NeedCake: isNeedCake };
-    setNewGuest(modifiedGuest);
+    const modifiedGuest = {
+      ...currentGuest,
+      Side: value,
+      NeedCake: isNeedCake,
+    };
+    setCurrentGuest(modifiedGuest);
   };
 
   const onRelationshipChange = (e, value) => {
-    const modifiedGuest = { ...newGuest, Relationship: value };
-    setNewGuest(modifiedGuest);
+    const modifiedGuest = { ...currentGuest, Relationship: value };
+    setCurrentGuest(modifiedGuest);
   };
 
   const onNeedCakeChange = (e) => {
     const isNeedCake = e.target.checked;
-    const modifiedGuest = { ...newGuest, NeedCake: isNeedCake };
-    setNewGuest(modifiedGuest);
+    const modifiedGuest = { ...currentGuest, NeedCake: isNeedCake };
+    setCurrentGuest(modifiedGuest);
   };
 
   const onTableChange = (e, value) => {
     const modifiedGuest = {
-      ...newGuest,
+      ...currentGuest,
       TableNo: value?.map((data) => {
         return data.tableCode;
       }),
     };
-    setNewGuest(modifiedGuest);
+    setCurrentGuest(modifiedGuest);
   };
 
   const onGeneralNoteChange = (e) => {
-    const modifiedGuest = { ...newGuest, GeneralNote: [e.target.value] };
-    setNewGuest(modifiedGuest);
+    const modifiedGuest = { ...currentGuest, GeneralNote: [e.target.value] };
+    setCurrentGuest(modifiedGuest);
   };
 
   return (
     <Dialog open={open} onClose={onClose} fullScreen={fullScreen}>
-      <DialogTitle>新增賓客</DialogTitle>
+      <DialogTitle>{guestInfo ? "更改賓客資訊" : "新增賓客"}</DialogTitle>
       <DialogContent
         sx={{
           gap: "8px",
@@ -110,7 +123,7 @@ function NewGuest({ open, onChange, onClose }) {
             mt: "8px",
           }}
           InputProps={{ inputProps: { min: 0, max: 10 } }}
-          value={newGuest.Name[0]}
+          value={currentGuest.Name[0]}
           onChange={onNameChange}
           helperText={"可輸入該組人報到時可能使用的所有人名以利當天搜尋"}
           placeholder={"王小明 孫悟空"}
@@ -125,22 +138,22 @@ function NewGuest({ open, onChange, onClose }) {
             mt: "8px",
           }}
           InputProps={{ inputProps: { min: 0, max: 10 } }}
-          value={newGuest.Alias[0]}
+          value={currentGuest.Alias[0]}
           onChange={onAliasChange}
           helperText={"可輸入英文名或關係等以利當天搜尋"}
           placeholder={"Jessica 三姨婆"}
         />
         <GuestNumber
           id={"new-guest-number"}
-          selectedGuest={newGuest}
-          setSelectedGuest={setNewGuest}
+          selectedGuest={currentGuest}
+          setSelectedGuest={setCurrentGuest}
           isReadOnly={false}
         />
         <Autocomplete
           id="multi-select-new-guest-side"
           options={sides}
           // getOptionLabel={(option) => option.title}
-          value={newGuest.Side}
+          value={currentGuest.Side}
           onChange={onSideChange}
           sx={{
             width: 300,
@@ -152,12 +165,7 @@ function NewGuest({ open, onChange, onClose }) {
           control={
             <Checkbox
               id={"checkbox-need-cake"}
-              sx={{
-                "&.Mui-checked": {
-                  color: green[600],
-                },
-              }}
-              checked={newGuest.NeedCake}
+              checked={currentGuest.NeedCake}
               onChange={onNeedCakeChange}
             />
           }
@@ -168,7 +176,7 @@ function NewGuest({ open, onChange, onClose }) {
           id="multi-select-new-guest-relationship"
           options={relationships}
           // getOptionLabel={(option) => option.title}
-          value={newGuest.Relationship}
+          value={currentGuest.Relationship}
           onChange={onRelationshipChange}
           sx={{
             width: 300,
@@ -182,7 +190,7 @@ function NewGuest({ open, onChange, onClose }) {
           options={defaultTables}
           getOptionLabel={(option) => option.tableCode}
           getOptionKey={(option) => option.tableCode}
-          value={newGuest.TableNo.map((data) => {
+          value={currentGuest.TableNo.map((data) => {
             return defaultTables.find((table) => table.tableCode === data);
           })}
           onChange={onTableChange}
@@ -218,18 +226,20 @@ function NewGuest({ open, onChange, onClose }) {
           label="備註"
           multiline
           rows={3}
-          value={newGuest.GeneralNote || ""}
+          value={currentGuest.GeneralNote || ""}
           onChange={onGeneralNoteChange}
           placeholder={"不收禮金"}
           helperText={"展示給報到工作人員"}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onSave}>確定新增</Button>
         <Button onClick={onFormClose}>取消</Button>
+        <Button variant="contained" onClick={onSave}>
+          {guestInfo ? "更改" : "新增"}
+        </Button>
       </DialogActions>
     </Dialog>
   );
 }
 
-export default NewGuest;
+export default GuestInfoForm;

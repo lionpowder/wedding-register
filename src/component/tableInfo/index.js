@@ -11,13 +11,13 @@ const TableInfo = ({
   reservedSeats,
   nonreservedSeats,
 }) => {
-  const calculateDifference = (seats) => {
-    const actualSum =
-      seats?.reduce((sum, seat) => sum + seat?.actual || 0, 0) || 0;
-    const targetSum =
-      seats?.reduce((sum, seat) => sum + seat?.target || 0, 0) || 0;
-    return targetSum - actualSum;
-  };
+  // const calculateDifference = (seats) => {
+  //   const actualSum =
+  //     seats?.reduce((sum, seat) => sum + seat?.actual || 0, 0) || 0;
+  //   const targetSum =
+  //     seats?.reduce((sum, seat) => sum + seat?.target || 0, 0) || 0;
+  //   return targetSum - actualSum;
+  // };
 
   const calculateSum = (seats) => {
     const actualSum =
@@ -40,8 +40,8 @@ const TableInfo = ({
   ]);
 
   const {
-    actualSum: nonreservedActualSum,
-    assignedSum: nonreservedAssignedSum,
+    // actualSum: nonreservedActualSum,
+    // assignedSum: nonreservedAssignedSum,
     targetSum: nonreservedTargetSum,
   } = calculateSum([
     nonreservedSeats?.regular,
@@ -49,17 +49,17 @@ const TableInfo = ({
     nonreservedSeats?.childSeat,
   ]);
 
-  const reservedDifference = calculateDifference([
-    reservedSeats.regular,
-    reservedSeats.vegetarian,
-    reservedSeats.childSeat,
-  ]);
+  // const reservedDifference = calculateDifference([
+  //   reservedSeats.regular,
+  //   reservedSeats.vegetarian,
+  //   reservedSeats.childSeat,
+  // ]);
 
-  const nonReservedDifference = calculateDifference([
-    nonreservedSeats?.regular,
-    nonreservedSeats?.vegetarian,
-    nonreservedSeats?.childSeat,
-  ]);
+  // const nonReservedDifference = calculateDifference([
+  //   nonreservedSeats?.regular,
+  //   nonreservedSeats?.vegetarian,
+  //   nonreservedSeats?.childSeat,
+  // ]);
 
   const remainingAssignable = reservedTargetSum - reservedAssignedSum;
   const unoccupiedAssigned = reservedAssignedSum - reservedActualSum;
@@ -69,15 +69,15 @@ const TableInfo = ({
     datasets: [
       {
         data: [
-          reservedActualSum,
-          unoccupiedAssigned,
-          remainingAssignable,
-          nonreservedTargetSum,
+          Math.max(reservedActualSum, 0),
+          Math.max(unoccupiedAssigned, 0),
+          Math.max(remainingAssignable, 0),
+          Math.max(nonreservedTargetSum, 0),
         ],
         backgroundColor: [
           "rgba(30,144,255,1)",
           "rgba(30,144,255,0.5)",
-          "rgba(100,200,100,0.7)",
+          "rgba(200,200,200,0.1)",
           "rgba(169,169,169,0.7)",
         ],
       },
@@ -98,7 +98,14 @@ const TableInfo = ({
 
       {/* Reserved Seats Section */}
       <div className={styles.section}>
-        <h4>{`預定位: ${reservedTargetSum}`}</h4>
+        <h4>{`預定位: ${
+          (reservedSeats?.regular?.target || 0) +
+          (reservedSeats?.vegetarian?.target || 0)
+        }大${
+          reservedSeats?.childSeat?.target
+            ? ` ${reservedSeats?.childSeat?.target}小`
+            : ``
+        }`}</h4>
         <p>
           未入席/可指定:{" "}
           <strong>
@@ -124,9 +131,11 @@ const TableInfo = ({
       </div>
 
       {/* Non-Reserved Seats Section */}
-      <div className={styles.section}>
-        <h4>{`自由座: ${nonreservedTargetSum}`}</h4>
-      </div>
+      {Boolean(nonreservedTargetSum) && (
+        <div className={styles.section}>
+          <h4>{`自由座: ${nonreservedTargetSum}`}</h4>
+        </div>
+      )}
     </div>
   );
 };

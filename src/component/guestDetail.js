@@ -1,5 +1,4 @@
 import * as React from "react";
-import { green } from "@mui/material/colors";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
@@ -70,6 +69,11 @@ function GuestDetail({
    */
   const onCheckedinChange = (e) => {
     const modifiedGuest = { ...selectedGuest, IsCheckedIn: e.target.checked };
+    setSelectedGuest(modifiedGuest);
+  };
+
+  const onReceivedCakeChange = (e) => {
+    const modifiedGuest = { ...selectedGuest, IsCakeGiven: e.target.checked };
     setSelectedGuest(modifiedGuest);
   };
 
@@ -214,12 +218,7 @@ function GuestDetail({
           control={
             <Checkbox
               disabled={isReadOnly}
-              id={id + "-checkbox-has-checkin"}
-              sx={{
-                "&.Mui-checked": {
-                  color: green[600],
-                },
-              }}
+              id={id + "-checkbox-has-received-envelop"}
               checked={selectedGuest.IsEnvelopeReceived}
               onChange={onEnvelopReceivedChange}
             />
@@ -235,6 +234,20 @@ function GuestDetail({
         )}
       </Box>
 
+      {selectedGuest.NeedCake && (
+        <FormControlLabel
+          label="已領餅"
+          control={
+            <Checkbox
+              disabled={isReadOnly}
+              id={id + "-checkbox-has-received-cake"}
+              checked={selectedGuest.IsCakeGiven}
+              onChange={onReceivedCakeChange}
+            />
+          }
+        />
+      )}
+
       {!isSubstitute && !(isReadOnly || !selectedGuest.IsCheckedIn) && (
         <FormControlLabel
           label="已報到"
@@ -242,11 +255,6 @@ function GuestDetail({
             <Checkbox
               // disabled={isReadOnly || !selectedGuest.IsCheckedIn}
               id={id + "-checkbox-has-checkin"}
-              sx={{
-                "&.Mui-checked": {
-                  color: green[600],
-                },
-              }}
               checked={selectedGuest.IsCheckedIn}
               onChange={onCheckedinChange}
             />
