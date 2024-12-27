@@ -33,7 +33,7 @@ function CheckInManager() {
 
   React.useEffect(() => {
     setConfirmGuestStore(selectedGuest);
-  }, [selectedGuest]);
+  }, [selectedGuest, setConfirmGuestStore]);
 
   return (
     <>
