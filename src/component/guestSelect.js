@@ -24,8 +24,7 @@ function GuestSelect({
   const [inputValue, setInputValue] = React.useState("");
 
   React.useEffect(() => {
-    if (!selectedGuest) {
-      inputChangeHandler && inputChangeHandler(null, "");
+    if (!selectedGuest.Name) {
       setInputValue("");
     }
   }, [selectedGuest]);

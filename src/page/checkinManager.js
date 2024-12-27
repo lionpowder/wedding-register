@@ -55,7 +55,9 @@ function CheckInManager() {
           {selectedGuest?.Id && (
             <GuestDetail
               guest={selectedGuest}
-              onSaveChange={() => setSelectedGuest({})}
+              onSaveChange={() => {
+                setSelectedGuest({});
+              }}
             ></GuestDetail>
           )}
         </Paper>
