@@ -12,15 +12,20 @@ const TableInfo = ({
   nonreservedSeats,
 }) => {
   const calculateDifference = (seats) => {
-    const actualSum = seats.reduce((sum, seat) => sum + seat.actual, 0);
-    const targetSum = seats.reduce((sum, seat) => sum + seat.target, 0);
+    const actualSum =
+      seats?.reduce((sum, seat) => sum + seat?.actual || 0, 0) || 0;
+    const targetSum =
+      seats?.reduce((sum, seat) => sum + seat?.target || 0, 0) || 0;
     return targetSum - actualSum;
   };
 
   const calculateSum = (seats) => {
-    const actualSum = seats.reduce((sum, seat) => sum + seat.actual, 0);
-    const assignedSum = seats.reduce((sum, seat) => sum + seat.assigned, 0);
-    const targetSum = seats.reduce((sum, seat) => sum + seat.target, 0);
+    const actualSum =
+      seats?.reduce((sum, seat) => sum + seat?.actual || 0, 0) || 0;
+    const assignedSum =
+      seats?.reduce((sum, seat) => sum + seat?.assigned || 0, 0) || 0;
+    const targetSum =
+      seats?.reduce((sum, seat) => sum + seat?.target || 0, 0) || 0;
     return { actualSum, assignedSum, targetSum };
   };
 
@@ -39,9 +44,9 @@ const TableInfo = ({
     assignedSum: nonreservedAssignedSum,
     targetSum: nonreservedTargetSum,
   } = calculateSum([
-    nonreservedSeats.regular,
-    nonreservedSeats.vegetarian,
-    nonreservedSeats.childSeat,
+    nonreservedSeats?.regular,
+    nonreservedSeats?.vegetarian,
+    nonreservedSeats?.childSeat,
   ]);
 
   const reservedDifference = calculateDifference([
@@ -51,9 +56,9 @@ const TableInfo = ({
   ]);
 
   const nonReservedDifference = calculateDifference([
-    nonreservedSeats.regular,
-    nonreservedSeats.vegetarian,
-    nonreservedSeats.childSeat,
+    nonreservedSeats?.regular,
+    nonreservedSeats?.vegetarian,
+    nonreservedSeats?.childSeat,
   ]);
 
   const remainingAssignable = reservedTargetSum - reservedAssignedSum;

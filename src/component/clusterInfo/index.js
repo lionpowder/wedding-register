@@ -7,15 +7,20 @@ Chart.register(ArcElement);
 
 const ClusterInfo = ({ tableCodes, tableNames, nonreservedSeats }) => {
   const calculateDifference = (seats) => {
-    const actualSum = seats.reduce((sum, seat) => sum + seat.actual, 0);
-    const targetSum = seats.reduce((sum, seat) => sum + seat.target, 0);
+    const actualSum =
+      seats?.reduce((sum, seat) => sum + seat?.actual || 0, 0) || 0;
+    const targetSum =
+      seats?.reduce((sum, seat) => sum + seat?.target || 0, 0) || 0;
     return targetSum - actualSum;
   };
 
   const calculateSum = (seats) => {
-    const actualSum = seats.reduce((sum, seat) => sum + seat.actual, 0);
-    const assignedSum = seats.reduce((sum, seat) => sum + seat.assigned, 0);
-    const targetSum = seats.reduce((sum, seat) => sum + seat.target, 0);
+    const actualSum =
+      seats?.reduce((sum, seat) => sum + seat?.actual || 0, 0) || 0;
+    const assignedSum =
+      seats?.reduce((sum, seat) => sum + seat?.assigned || 0, 0) || 0;
+    const targetSum =
+      seats?.reduce((sum, seat) => sum + seat?.target || 0, 0) || 0;
     return { actualSum, assignedSum, targetSum };
   };
 
@@ -24,15 +29,15 @@ const ClusterInfo = ({ tableCodes, tableNames, nonreservedSeats }) => {
     assignedSum: nonreservedAssignedSum,
     targetSum: nonreservedTargetSum,
   } = calculateSum([
-    nonreservedSeats.regular,
-    nonreservedSeats.vegetarian,
-    nonreservedSeats.childSeat,
+    nonreservedSeats?.regular,
+    nonreservedSeats?.vegetarian,
+    nonreservedSeats?.childSeat,
   ]);
 
   const nonReservedDifference = calculateDifference([
-    nonreservedSeats.regular,
-    nonreservedSeats.vegetarian,
-    nonreservedSeats.childSeat,
+    nonreservedSeats?.regular,
+    nonreservedSeats?.vegetarian,
+    nonreservedSeats?.childSeat,
   ]);
 
   const remainingAssignable = nonreservedTargetSum - nonreservedAssignedSum;
@@ -76,19 +81,19 @@ const ClusterInfo = ({ tableCodes, tableNames, nonreservedSeats }) => {
         <ul className={styles.light}>
           <li>{`(已入座/已指定/總座數)`}</li>
           <li>
-            一般: {nonreservedSeats.regular.actual}/
-            {nonreservedSeats.regular.assigned}/
-            {nonreservedSeats.regular.target}
+            一般: {nonreservedSeats?.regular?.actual || 0}/
+            {nonreservedSeats?.regular?.assigned || 0}/
+            {nonreservedSeats?.regular?.target || 0}
           </li>
           <li>
-            素食: {nonreservedSeats.vegetarian.actual}/
-            {nonreservedSeats.vegetarian.assigned}/
-            {nonreservedSeats.vegetarian.target}
+            素食: {nonreservedSeats?.vegetarian?.actual || 0}/
+            {nonreservedSeats?.vegetarian?.assigned || 0}/
+            {nonreservedSeats?.vegetarian?.target || 0}
           </li>
           <li>
-            兒童座: {nonreservedSeats.childSeat.actual}/
-            {nonreservedSeats.childSeat.assigned}/
-            {nonreservedSeats.childSeat.target}
+            兒童座: {nonreservedSeats?.childSeat?.actual || 0}/
+            {nonreservedSeats?.childSeat?.assigned || 0}/
+            {nonreservedSeats?.childSeat?.target || 0}
           </li>
         </ul>
       </div>

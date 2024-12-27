@@ -203,14 +203,42 @@ function GuestTableManager() {
                 tableCodes={clusters[clusterKey].TableNo}
                 tableNames={clusters[clusterKey].tableNames}
                 nonreservedSeats={{
-                  regular: clusters[clusterKey].regular,
-                  vegetarian: clusters[clusterKey].vegetarian,
-                  childSeat: clusters[clusterKey].childSeat,
+                  regular: clusters[clusterKey]?.regular || 0,
+                  vegetarian: clusters[clusterKey]?.vegetarian || 0,
+                  childSeat: clusters[clusterKey]?.childSeat || 0,
                 }}
               />
             ))}
             {Object.keys(tables)
-              .sort()
+              .sort((a, b) => {
+                const regex = /(\d+)|(\D+)/g; // Match sequences of digits or non-digits
+                const tokensA = a.match(regex);
+                const tokensB = b.match(regex);
+
+                for (
+                  let i = 0;
+                  i < Math.max(tokensA.length, tokensB.length);
+                  i++
+                ) {
+                  const segmentA = tokensA[i] || ""; // Default to an empty string if out of bounds
+                  const segmentB = tokensB[i] || "";
+
+                  const isNumA = /^\d+$/.test(segmentA);
+                  const isNumB = /^\d+$/.test(segmentB);
+
+                  if (isNumA && isNumB) {
+                    // Compare as numbers
+                    const diff =
+                      parseInt(segmentA, 10) - parseInt(segmentB, 10);
+                    if (diff !== 0) return diff;
+                  } else if (segmentA !== segmentB) {
+                    // Compare as strings
+                    return segmentA.localeCompare(segmentB);
+                  }
+                }
+
+                return 0; // They are equal
+              })
               .map((tableCode) => {
                 return tables[tableCode];
               })
